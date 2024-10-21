@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SLOTS</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div>
+        <div class="slots">
+            <div class="reel"></div>
+            <div class="reel"></div>
+            <div class="reel"></div>
+        </div>
+        <!-- test -->
+        <img style="position:fixed; left: 0; top: 0; height: 100vh; width: auto;"
+            src="https://assets.codepen.io/439000/slotreel.webp">
+        <!-- prod -->
+        <img style="position:fixed; right: 0; top: 0; height: 100vh; width: auto;"
+            src="/images/rool.jpg">
+    </div>
+    <script src="compiled.js"></script>
+    <script>
+        let clicksLeft = 3; // Limitar a 3 giros
+        let outcomes = []; // Arreglo para almacenar los resultados aleatorios de ganar o no ganar
+        let hasWinner = false; // Variable para marcar si ya salió el ganador
+        let idWin; // Variable para almacenar el ID del premio ganador
+        // Al cargar la página, inicializa los rodillos con índices aleatorios y generar los resultados
+        window.onload = () => {
+            initRandom();
+            generateRandomOutcomes();
+        };
+        // Genera un orden aleatorio para ganar/perder en 3 giros
+        function generateRandomOutcomes() {
+            outcomes = [false, false, true]; // Dos perdedores y un ganador
+            for (let i = outcomes.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [outcomes[i], outcomes[j]] = [outcomes[j], outcomes[i]]; // Mezclar aleatoriamente los resultados
+            }
+        }
+
+        window.addEventListener('message', (event) => {
+            if (event.data.type === 'SPIN') {
+                spinReels();
+            }
+
+            if (event.data.type === 'SET_PRIZE_ID') {
+                idWin = event.data.id; // Guardar el ID del premio ganador
+                console.log('ID del premio ganador:', idWin); // Mostrar el ID en la consola
+            }
+        });
+
+        function spinReels() {
+            if (clicksLeft > 0 && !hasWinner) {
+                clicksLeft--;
+                /*  sendUpdateToReact(); */
+                const currentOutcome = outcomes[3 - clicksLeft - 1];
+                console.log('lorem valores a enviar en mi winIndexs')
+                if (currentOutcome) {
+                    console.log('id a mandar')
+                    const winIndexes = [idWin, idWin, idWin];
+                    rollAll(true, winIndexes);
+                    hasWinner = true;
+                    /*  sendUpdateToReact(); */
+                } else {
+                    const nonWinningIndexes = getNonRepeatingIndexes();
+                    console.log(nonWinningIndexes)
+                    rollAll(false, nonWinningIndexes);
+                }
+
+                if (clicksLeft === 0 && !hasWinner) {
+                    /*  sendUpdateToReact(); */
+                }
+            }
+        }
+        function getNonRepeatingIndexes() {
+            const maxIndex = 8; // Define el rango máximo de los índices (0 al 8)
+            const availableIndexes = Array.from({ length: maxIndex }, (_, i) => i); // Genera un arreglo de índices [0, 1, 2, ..., maxIndex - 1]
+            // Mezclar los índices para obtener una lista aleatoria
+            for (let i = availableIndexes.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [availableIndexes[i], availableIndexes[j]] = [availableIndexes[j], availableIndexes[i]];
+            }
+            console.log(availableIndexes)
+            return availableIndexes.slice(0, 3); // Retorna los primeros tres índices aleatorios y diferentes
+        }
+
+    </script>
+</body>
+
+</html>

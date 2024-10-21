@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SLOTS</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div>
+        <div class="slots">
+            <div class="reel"></div>
+            <div class="reel"></div>
+            <div class="reel"></div>
+        </div>
+
+        <!-- <button
+            style="display: flex; justify-items: center; justify-content: center; margin-left: auto; margin-right: auto; margin-top: 2rem; padding: 4px; background-color: aqua;"
+            id="spinButton">Girar</button>
+             -->
+        <button
+            style="width: 100%; color: black; background-color: #FFDE21; border: none; border-radius: 0.5rem; font-weight: 500; font-size: 0.875rem; padding: 10px 20px; text-align: center; display: block; margin: 2rem auto; box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); transition: box-shadow 0.2s ease-in-out;"
+            id="spinButton" onfocus="this.style.boxShadow = '0 0 0 4px rgba(252, 165, 165, 0.5)';"
+            onblur="this.style.boxShadow = '0 0 0 0 rgba(255, 255, 255, 0)';">
+            Girar
+        </button>
+    </div>
+
+    <script src="compiled.js"></script>
+    <script>
+        let clicksLeft = 3; // Limitar a 3 giros
+        let outcomes = []; // Arreglo para almacenar los resultados aleatorios de ganar o no ganar
+        let hasWinner = false; // Variable para marcar si ya salió el ganador
+
+        // Al cargar la página, inicializa los rodillos con índices aleatorios y generar los resultados
+        window.onload = () => {
+            initRandom();
+            generateRandomOutcomes();
+        };
+        //function que envia el estado actual de los valores a react
+        function sendUpdateToReact() {
+            window.parent.postMessage({
+                type: 'UPDATE_STATE',
+                data: { clicksLeft, outcomes, hasWinner }
+            }, '*')
+        }
+        // Genera un orden aleatorio para ganar/perder en 3 giros
+        function generateRandomOutcomes() {
+            outcomes = [false, false, true]; // Dos perdedores y un ganador
+            for (let i = outcomes.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [outcomes[i], outcomes[j]] = [outcomes[j], outcomes[i]]; // Mezclar aleatoriamente los resultados
+            }
+        }
+        //desactivar button
+        function disabledButton() {
+            // Desactivar el botón con múltiples efectos
+            const spinButton = document.getElementById('spinButton');
+            spinButton.disabled = true;         // Desactivar el botón
+            spinButton.style.opacity = '0.5';   // Hacer que el botón sea más transparente
+            spinButton.style.cursor = 'not-allowed'; // Cambiar el cursor
+            /*  spinButton.innerText = '¡Ganaste!'; */ // Cambiar el texto del botón
+        }
+
+        // Evento para manejar el giro de los rodillos
+        document.getElementById('spinButton').addEventListener('click', () => {
+            if (clicksLeft > 0 && !hasWinner) { // Evitar giros después de ganar
+                clicksLeft--; // Reducir el número de clics restantes
+                sendUpdateToReact(); // Enviar la actualización a React
+
+                const currentOutcome = outcomes[3 - clicksLeft - 1]; // Verificar el giro actual
+
+                if (currentOutcome) { // Si el giro es ganador
+                    const spinButton = document.getElementById('spinButton');
+                    const winIndexes = [6, 6, 6]; // Índices para ganar
+                    rollAll(true, winIndexes); // Mostrar el giro ganador
+                    hasWinner = true; // Marcar que ya ganó
+                    sendUpdateToReact(); // Actualizar React con el estado ganador
+                    spinButton.disabled = true;
+                    /*   disabledButton(); */ // Desactivar el botón inmediatamente al ganar
+                    /*    setTimeout(() => alert("¡Ganaste!"), 500); */ // Mostrar alerta al ganar
+                } else {
+                    const nonWinningIndexes = getNonRepeatingIndexes(); // Índices aleatorios que no ganan
+                    rollAll(false, nonWinningIndexes); // Mostrar un giro que no gana
+                }
+
+                // Desactivar el botón después de 3 clics si no hubo ganador
+                if (clicksLeft === 0 && !hasWinner) {
+                    document.getElementById('spinButton').disabled = true;
+                    /*   setTimeout(() => alert("No ganaste, inténtalo de nuevo"), 500); */ // Mostrar alerta al final si no ganó
+                }
+            }
+        });
+
+        function getNonRepeatingIndexes() {
+            const maxIndex = 8; // Define el rango máximo de los índices
+            const availableIndexes = Array.from({ length: maxIndex }, (_, i) => i); // Genera un arreglo de índices [0, 1, 2, ..., maxIndex - 1]
+            // Mezclar los índices para obtener una lista aleatoria
+            for (let i = availableIndexes.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [availableIndexes[i], availableIndexes[j]] = [availableIndexes[j], availableIndexes[i]];
+            }
+            return availableIndexes.slice(0, 3); // Retorna los primeros tres índices aleatorios y diferentes
+        }
+    </script>
+</body>
+
+</html>

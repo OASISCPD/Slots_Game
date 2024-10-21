@@ -1,0 +1,74 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slots {
+  width: 276.5px;
+  height: 237px;
+  border: 2px solid black;
+  border-radius: 3%;
+  display: flex;
+  padding: 23.7px;
+  justify-content: space-between;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.3);
+}
+
+.slots .reel {
+  border: 2px solid black;
+  border-radius: 2%;
+  width: 79px;
+  height: 237px;
+  /* background-image: url('https://assets.codepen.io/439000/slotreel.webp'); */
+  background-image: url("/images/rool.jpg");
+  /* Cambia 'tu_imagen.webp' por el nombre de tu imagen */
+}
+
+@media (max-width: 600px) {
+  .slots {
+    width: 260.7px;
+    height: 237px;
+    padding: 23.7px;
+  }
+
+  .slots .reel {
+    width: 79px;
+    height: 237px;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 1023px) {
+  .slots {
+    width: 276.5px;
+    height: 237px;
+    padding: 19.75px;
+  }
+
+  .slots .reel {
+    width: 79px;
+    height: 237px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .slots {
+    width: 276.5px;
+    height: 237px;
+    padding: 19.75px;
+  }
+
+  .slots .reel {
+    width: 79px;
+    height: 237px;
+  }
+}
+
+/*# sourceMappingURL=index.css.map */
