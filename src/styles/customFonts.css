@@ -1,0 +1,36 @@
+/* AGREGAR /static/ para produccion */
+@font-face {
+    font-family: "Gotham Black";
+    src: url(/fonts/Gotham-Black.otf) format("opentype");
+    font-weight: bold;
+    font-style: bold;
+}
+
+@font-face {
+    font-family: "Gotham Medium";
+    src: url(/fonts/Gotham-Medium.otf) format("opentype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Gotham Book";
+    src: url(/fonts/Gotham-Book.otf) format("opentype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* MAS FUERTE */
+.textGothamBlack {
+    font-family: "Gotham Black";
+}
+
+/* SEGUNDO MAS FUERTE */
+.textGothamMedium {
+    font-family: "Gotham Medium";
+}
+
+/* TERCERO MAS FUERTE */
+.textGothamBook {
+    font-family: "Gotham Book";
+}
