@@ -1,10 +1,16 @@
 import { useEffect, useRef, useState } from "react";
-import { prizes } from '../data/data'
-import { getIdPrize, getPrizeDescriptions/* , separatePrize */ } from "../logic/convertValues";
-import { ModalLogic } from "./logic/ModalLogic";
-import { ModalGetPrize } from "./mod/ModalGetPrize";
-export function Slot() {
-
+import { getIdPrize, getPrizeDescriptions/* , separatePrize */ } from "../../logic/convertValues";
+import { ModalLogic } from ".././logic/ModalLogic";
+import { ModalGetPrize } from ".././mod/ModalGetPrize";
+import { dto_prizes_get } from "../../data/data";
+/* import { useNavigate } from "react-router-dom"; */
+interface propSlot {
+    prizes: dto_prizes_get[]
+    changedTemplate: () => void
+}
+export function Slot({ prizes, changedTemplate }: propSlot) {
+    //constante que maneja la redireccion
+    /*  const navigate = useNavigate() */
     const [clicksLeft, setClicksLeft] = useState(3);
     const [outcomes, setOutcomes] = useState<boolean[]>([]);
     const [hasWinner, setHasWinner] = useState<boolean>(false);
@@ -17,6 +23,7 @@ export function Slot() {
     const [namePrize, setNamePrize] = useState<string>('')
     //variable que almacena el premio ganador
     const [prizeWinning, setPrizeWinning] = useState<string>('')
+    //
     const handleReactButtonClick = () => {
         console.log('boton')
         if (iframeRef.current) {
@@ -24,11 +31,9 @@ export function Slot() {
             iframeRef.current.contentWindow?.postMessage({ type: 'SPIN' }, '*');
         }
     };
-
     //agrega el tipo de data que deberia llegar del fetch
     useEffect(() => {
         if (prizes.length === 0) return; // Salir si no hay premios
-
         console.log('Premios', prizes);
         /*       const convertData = separatePrize(prizes); */
         const convertDataV2 = getPrizeDescriptions(prizes);
@@ -56,7 +61,6 @@ export function Slot() {
         };
         setPrizesWithDelay();
     }, [prizes]); // Asegúrate de que prizes sea una dependencia
-
 
     useEffect(() => {
         const handleMessage = (event: any) => {
@@ -96,15 +100,13 @@ export function Slot() {
         console.log(spinningInCourse, clicksLeft, outcomes, hasWinner, namePrize)//printea el booleano con el estado en el momento
     }, [spinningInCourse, clicksLeft, outcomes, hasWinner, namePrize])
 
-
-
     return (
-        <div className="flex flex-col justify-center font-extrabold items-center gap-4 bg-gradient-to-tr from-gray-200 to-gray-400 min-h-[100dvh]">
+        <div className="flex flex-col justify-center font-extrabold items-center gap-4 ">
             <div className="text-black ">
-                <p>Clicks: {clicksLeft}</p>
+                <p>Intentos: {clicksLeft}</p>
                 <p>Has Winner: {hasWinner ? "Yes" : "No"}</p>
                 <p>booleanos_check: {outcomes.join(", ")}</p>
-                <p>Premios Seteados: {prizesSet ? "Sí" : "No"}</p> {/* Indica si los premios fueron seteados */}
+                <p>Premios Seteados: {prizesSet ? "Sí" : "No"}</p>
             </div>
             <iframe
                 ref={iframeRef}
@@ -114,14 +116,14 @@ export function Slot() {
                 height="350px"
             ></iframe>
             <button disabled={hasWinner || spinningInCourse} className={`${hasWinner ? 'bg-slate-400' : 'bg-black'}  ${spinningInCourse ? "bg-opacity-50" : ""} text-white rounded-md border-zinc-500 border-2 shadow-xl p-1  max-w-xs w-full ${spinningInCourse ? 'cursor-not-allowed' : 'cursor-pointer'}  `} onClick={handleReactButtonClick}>
-                {hasWinner ? 'Haz ganado' : ' Girar'}
+                {hasWinner ? 'Girar' : ' Girar'}
             </button>
             {prizeWinning !== '' && (
                 <h1 className="text-black">PREMIO: {prizeWinning}</h1>
             )}
             {modalPrize && (
                 <ModalLogic isOpen={true} onClose={() => setModalPrize(false)}>
-                    <ModalGetPrize onClose={() => setModalPrize(false)} onCloseOk={() => setModalPrize(false)} prize={prizeWinning} />
+                    <ModalGetPrize onClose={() => { setModalPrize(false), window.location.reload() }} onCloseOk={() => { setModalPrize(false), changedTemplate() }} prize={prizeWinning} />
                 </ModalLogic>
             )}
         </div>

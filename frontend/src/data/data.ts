@@ -3,6 +3,8 @@ export interface dto_prizes_get {
     descripcion_premio: string
     estado: boolean
 }
+
+
 export const prizes: dto_prizes_get[] = [
     {
         "id_premio": 1,
@@ -12,7 +14,7 @@ export const prizes: dto_prizes_get[] = [
     {
         "id_premio": 2,
         "descripcion_premio": "Ticket de $30.000",
-        "estado": true
+        "estado": false
     },
     {
         "id_premio": 3,
@@ -22,7 +24,7 @@ export const prizes: dto_prizes_get[] = [
     {
         "id_premio": 4,
         "descripcion_premio": "Ticket de $5.000",
-        "estado": false
+        "estado": true
     },
     {
         "id_premio": 5,

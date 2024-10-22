@@ -16,11 +16,11 @@
             <div class="reel"></div>
         </div>
         <!-- test -->
-        <img style="position:fixed; left: 0; top: 0; height: 100vh; width: auto;"
-            src="https://assets.codepen.io/439000/slotreel.webp">
+        <!-- <img style="position:fixed; left: 0; top: 0; height: 100vh; width: auto;"
+            src="https://assets.codepen.io/439000/slotreel.webp"> -->
         <!-- prod -->
-        <img style="position:fixed; right: 0; top: 0; height: 100vh; width: auto;"
-            src="/images/rool.jpg">
+        <!-- <img style="position:fixed; right: 0; top: 0; height: 100vh; width: auto;"
+            src="/images/rool.jpg"> -->
     </div>
     <script src="compiled.js"></script>
     <script>
@@ -64,11 +64,13 @@
                     const winIndexes = [idWin, idWin, idWin];
                     rollAll(true, winIndexes);
                     hasWinner = true;
-                    /*  sendUpdateToReact(); */
+                  /*   sendUpdateToReact(); */
                 } else {
                     const nonWinningIndexes = getNonRepeatingIndexes();
                     console.log(nonWinningIndexes)
-                    rollAll(false, nonWinningIndexes);
+                    /* rollAll(false, nonWinningIndexes); */
+                    console.log('random forzado')
+                    rollAll(false, [1, 1, 1]);
                 }
 
                 if (clicksLeft === 0 && !hasWinner) {
