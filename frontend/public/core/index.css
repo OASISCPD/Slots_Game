@@ -1,0 +1,29 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  overflow-y: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slots {
+  width: 229px;
+  height: 240px;
+  display: flex;
+  justify-content: space-between;
+  background-color: #9943ff;
+  z-index: 0;
+}
+
+.slots .reel {
+  width: 79px;
+  height: 240px;
+  background-image: url("/images/rool.png");
+  z-index: 2;
+}
+
+/*# sourceMappingURL=index.css.map */

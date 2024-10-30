@@ -1,6 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* 
+body {
+    background-color: #940707; 
+  } */
+
+/* styles.css */
+body {
+    background: radial-gradient(circle, #9943FF, #45001C);
+}
+
 
 @font-face {
     font-family: 'Gotham-Black';
@@ -23,6 +33,13 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'Bison-BoldItallic';
+    src: url('/fonts/Bison-BoldItallic.ttf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+}
+
 /* Define utility classes */
 .gothamBlack {
     font-family: 'Gotham-Black', sans-serif;
@@ -34,4 +51,24 @@
 
 .gothamMedium {
     font-family: 'Gotham-Medium', sans-serif;
+}
+
+.bisonBoldItallic {
+    font-family: 'Bison-BoldItallic', sans-serif;
+}
+
+/* ESTILOS DEL TEXTO */
+.gradientText {
+    background-image: linear-gradient(to bottom, #f6ff00, #ffffff, #f6ff00);
+    background-size: 100% 100%;
+    /* Asegura que el fondo cubra completamente el texto */
+    background-position: 0 0;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.gradientBackground {
+    background-image: radial-gradient(circle, #F10000, #610000);
+    background-size: cover;
+    /* Peso de la fuente */
 }

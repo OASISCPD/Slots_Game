@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { MdOutlineMailOutline } from "react-icons/md";
-import logo from '/images/pilar/logoPilar.png'
+/* const logoPath = `/images/${domain.toLowerCase()}/logoDominio.png`; */
+
 import { dtoModal, ModalError } from '../mod/ModalError';
 import { ModalLogic } from "../logic/ModalLogic";
 import { ModalOk } from "../mod/ModalOk";
 /* import '../../styles/slide.css' */
 import { useNavigate } from "react-router-dom";
-import { baseUrl } from "../../content/content";
+import { baseUrl/* , domain  */} from "../../content/content";
 
 type dtoDataEmail = {
     nombre_apellido: string
@@ -156,13 +157,13 @@ export function TemplateMail({ stopConfetti }: propFather) {
             </h2>
             <div className="relative flex my-12 lg:my-8 xl:my-12 xl:mx-[2rem] items-center">
                 <span className="absolute inset-y-0 left-2 flex items-center pl-3 pointer-events-none">
-                    <MdOutlineMailOutline size={24} className="text-gray-700" />
+                    <MdOutlineMailOutline size={24} className="text-gray-100" />
                 </span>
                 <input
                     type="email"
                     value={email}
                     onChange={handleEmailChange}
-                    className="pl-[3rem] pr-4 py-4 border-gray-300 text-black text-xl  placeholder-gray-500 h-full w-full border rounded-full focus:outline-none focus:border-indigo-500"
+                    className="pl-[3rem] pr-4 py-4   text-white text-xl neon-border-input placeholder-gray-100 h-full w-full  rounded-md focus:outline-none focus:border-indigo-500"
                     placeholder="M A I L"
                 />
             </div>
@@ -184,7 +185,7 @@ export function TemplateMail({ stopConfetti }: propFather) {
                         id="default-checkbox"
                         type="checkbox"
                         checked={isChecked}
-                        className="  text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2 " required
+                        className="  text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 focus:ring-2 " required
                     />
                     <label onClick={() => window.open('/terms')} className="ms-2 text-xs  text-yellowMain  underline sm:text-lg lg:text-sm xl:text-xl 2xl:text-base">Acepto términos y condiciones</label>
                 </div>
@@ -192,13 +193,13 @@ export function TemplateMail({ stopConfetti }: propFather) {
             <button
                 onClick={sendData}
                 disabled={!buttonActivated}
-                className={`${buttonActivated ? 'hover:scale-105 duration-100 bg-gradient-to-r from-green-700 to-greenMain' : 'bg-green-700 bg-opacity-70 text-opacity-70 '} xl:mx-[2rem] uppercase rounded-3xl p-2 px-[3rem] cursor-pointer  text-white sm:text-xl lg:text-sm xl:text-xl`}
+                className={`${buttonActivated ? 'hover:scale-105 duration-100 bg-gradient-to-r from-buttonColorMagenta to-redMain' : 'bg-redMain bg-opacity-50 text-opacity-70 '} xl:mx-[2rem] uppercase rounded-md p-2 px-[3rem] cursor-pointer  text-white sm:text-xl lg:text-sm xl:text-xl`}
             >
                 Enviar
             </button>
-            <div className=" flex justify-center my-[4rem] lg:my-[1rem]">
-                <img src={logo} className=" w-[12rem] sm:w-[24rem] lg:w-[12rem] xl:w-[16rem] " alt="logo empresarial" />
-            </div>
+        {/*     <div className=" flex justify-center my-[4rem] lg:my-[1rem]">
+                <img src={logoPath} className=" w-[12rem] sm:w-[40%] lg:w-[12rem] xl:w-[16rem] " alt="logo empresarial" />
+            </div> */}
             {modal?.boolean && modal?.number === 401 && (
                 <ModalLogic isOpen={true} onClose={() => setModal({ boolean: false, number: 401 })}>
                     <ModalError buttonText="Continuar" onClose={() => navigate('/howToGet')} title={dataModal?.title} subTitle={dataModal?.subTitle} />

@@ -14,7 +14,8 @@ export default {
         greenDark: "#1D9D22",
         blueMain: "#023e8a",
         roseMain: '#fd27f1',
-        purpleMain: "#5D0057"
+        purpleMain: "#5D0057",
+        backgroundRed: '#45001C'
       }
     },
   },

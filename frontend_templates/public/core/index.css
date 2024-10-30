@@ -1,0 +1,28 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  overflow-y: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slots {
+  width: 276.5px;
+  height: 237px;
+  border: 1px solid black;
+  display: flex;
+  padding: 23.7px;
+  justify-content: space-between;
+}
+.slots .reel {
+  border: 1px solid black;
+  width: 79px;
+  height: 237px;
+  background-image: url("/images/rool.jpg");
+}
+
+/*# sourceMappingURL=index.css.map */

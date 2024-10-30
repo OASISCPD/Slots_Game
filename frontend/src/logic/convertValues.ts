@@ -1,4 +1,4 @@
-import { dto_prizes_get } from "../data/data";
+import { dto_prizes_get/* , prizes_DTO  */ } from "../data/data";
 
 
 // Función que convierte la data que me llega para que la reciba los demás componentes de la manera que esperan
@@ -26,4 +26,24 @@ export function getIdPrize(prizes: dto_prizes_get[]) {
 
     // Retornar solo los IDs de los premios con estado true
     return truePrizes.map(prize => prize.id_premio); // Asegúrate de que 'id' es la propiedad correcta
+}
+
+
+// Función que convierte la data que me llega para que la reciba los demás componentes de la manera que esperan
+export function getIndexPrize(prizes: dto_prizes_get[]) {
+    const truePrizes = prizes.filter(prize => prize.estado === true);
+    console.log(truePrizes); // Para ver qué premios fueron filtrados
+    return truePrizes.map(prize => prize.index_id);
+}
+
+
+
+//function que me reotrna el nombre del premio ganador
+
+export function getNamePrize(prizes: dto_prizes_get[]) {
+    // Filtrar los premios con estado true
+    const truePrizes = prizes.filter(prize => prize.estado === true);
+
+    // Retornar solo los index_id de los premios con estado true
+    return truePrizes.map(prize => prize.descripcion_premio);
 }
