@@ -9,7 +9,7 @@ import { Terms } from './components/terms/Terms';
 function App() {
   return (
     <div className="gothamMedium">
-      <Router>
+      <Router> 
         <Routes>
           <Route path='/' element={<Home domain={domain} />} />
           <Route path='/minorAge' element={<MinorAge domain={domain} />} />

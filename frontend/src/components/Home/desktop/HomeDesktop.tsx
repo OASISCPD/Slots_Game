@@ -7,12 +7,12 @@ import {/*  codeCampaignPilar, codeCampaignZarate, codeCampaignSalta,  */propDom
 import { prizesHard } from "../../../data/data"
 import { Footer } from "../../Footer"
 import { FullScreeeLoader } from "../../loadings/FullScreenLoader"
-import { TemplateMail } from "../TemplateMail"
 import { ModalLogic } from "../../logic/ModalLogic"
 import { ModalGetPrize } from "../../mod/ModalGetPrize"
 import { getNamePrize } from "../../../logic/convertValues"
-import { Game } from "../../Game"
+/* import { Game } from "../../Game" */
 import { GameDesktop } from "../../GameDesktop"
+import { TemplateMailDesktop } from "./TemplateMailDesktop"
 const logoPathTitle3 = `/images/${domain.toLowerCase()}/tituloMobile3.png`;
 const logoPathTitle2 = `/images/${domain.toLowerCase()}/tituloMobilep2.png`;
 const logoPathTitle1 = `/images/${domain.toLowerCase()}/tituloDesktop1.png`;
@@ -115,33 +115,34 @@ export function HomeDesktop({ domain }: propDomain) {
                 <FullScreeeLoader />
             )}
             {/*    {prizes && prizes.length > 0 ? ( */}
-            <div className="flex-1 mx-[1rem]">
-                {templateMail ? (
-                    <TemplateMail stopConfetti={() => ''} />
+            <div className="flex-1 mx-[1rem] min-h-screen ">
+                {!templateMail ? (
+                    <TemplateMailDesktop stopConfetti={() => ''} />
                 ) : (
                     <div className="relative">
                         <div className="">
                             <img
                                 src={logoPathTitle1}
                                 alt=""
-                                className={`w-[24rem] sm:w-[24rem] lg:w-[20rem] xl:w-[24rem] 2xl:w-[28rem] mx-auto ${clicks > 2 ? '' : 'hidden'}`}
+                                className={`w-[24rem] sm:w-[24rem] lg:w-[20rem] xl:w-[24rem] 2xl:w-[50dvh] mx-auto ${clicks > 2 ? '' : 'hidden'}`}
                             />
 
                             <img
                                 src={logoPathTitle1}
                                 alt=""
-                                className={`w-[24rem] sm:w-[24rem] lg:w-[20rem] xl:w-[24rem] 2xl:w-[28rem] mx-auto ${clicks === 2 ? '' : 'hidden'}`}
+                                className={`w-[24rem] sm:w-[24rem] lg:w-[20rem] xl:w-[24rem] 2xl:w-[50dvh] mx-auto ${clicks === 2 ? '' : 'hidden'}`}
                             />
 
                             <img
                                 src={logoPathTitle1}
                                 alt=""
-                                className={`w-[24rem] sm:w-[24rem] lg:w-[20rem] xl:w-[24rem] 2xl:w-[28rem] mx-auto ${clicks >= 0 && clicks <= 1 ? '' : 'hidden'}`}
+                                className={`w-[24rem] sm:w-[24rem] lg:w-[20rem] xl:w-[24rem] 2xl:w-[50dvh] mx-auto ${clicks >= 0 && clicks <= 1 ? '' : 'hidden'}`}
                             />
                         </div>
                         <GameDesktop setClicks={setClicks} getPrize={openModal} prizes={prizesHard} />
                     </div>
                 )}
+                <img src={logoPath} alt="" className="w-[12rem] my-[2rem] sm:w-[12rem] lg:w-[11rem] xl:w-[20dvh] mx-auto" />
             </div>
             {/*    ) : ( */}
             {/*   <div className=" flex flex-col justify-center items-center ">
@@ -152,7 +153,6 @@ export function HomeDesktop({ domain }: propDomain) {
             </div> */}
             {/* IMAGE */}
 
-            <img src={logoPath} alt="" className="w-[12rem] sm:w-[12rem] lg:w-[11rem] xl:w-[11rem] mx-auto" />
             <Footer domain={domain} />
             {/*     )} */}
             {modal && (

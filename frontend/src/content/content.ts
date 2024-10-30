@@ -20,7 +20,7 @@ export const googleMapsPilar = 'https://maps.app.goo.gl/rgqmXwv3xqAgcqio9'
 export const urlWebPilar = 'https://bingopilar.com.ar/'
 
 //codigo de la campana
-export const codeCampaignPilar = 'ead3284690'//en desarrollo se mantendria el codeCampaign ya q siempre esta conectada la base del donwebPilar
+export const codeCampaignPilar = '369f5a533f'//en desarrollo se mantendria el codeCampaign ya q siempre esta conectada la base del donwebPilar
 
 //ZARATE
 export const facebookZarate = 'https://www.facebook.com/oasiszarate'

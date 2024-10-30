@@ -12,7 +12,7 @@ interface dto_modal {
 export function ModalGetPrize({ /* onClose, */ onCloseOk, prize }: dto_modal) {
     const [showModal, setShowModal] = useState<boolean>(false)
     const [scaleClass, setScaleClass] = useState("scale-100");
-    const [isClicked, setIsClicked] = useState<boolean>(false)
+    const [isClicked/* , setIsClicked */] = useState<boolean>(false)
 
     const [fontsLoaded, setFontsLoaded] = useState<boolean>(false);
     useEffect(() => {
@@ -52,10 +52,10 @@ export function ModalGetPrize({ /* onClose, */ onCloseOk, prize }: dto_modal) {
     }, [isClicked]);
 
     return (
-        <div className={`fixed inset-0 z-50 flex items-center justify-center overflow-auto bg-black text-black bg-opacity-50 transition-opacity duration-300 ${showModal ? 'opacity-100' : 'opacity-0'}`}>
+        <div className={`fixed inset-0 z-50 flex items-center justify-center overflow-auto bg-black text-white bg-opacity-50 transition-opacity duration-300 ${showModal ? 'opacity-100' : 'opacity-0'}`}>
             <div>
                 <div className="fixed bisonBoldItallic  inset-0 flex items-center justify-center  z-50">
-                    <form /* onSubmit={handleSubmit(sendData)} */ className="gradientBackground border-4 border-redMain shadow-2xl shadow-gray-400   py-[3rem] text-black rounded-3xl sm:py-[4rem] lg:py-[2rem]   p-4 xl:p-[2rem] w-[40vh] 2xl:py-[4rem]    transform transition-all duration-300">
+                    <form /* onSubmit={handleSubmit(sendData)} */ className="gradientBackground border-4 border-redMain shadow-2xl shadow-gray-400   py-[3rem] rounded-3xl sm:py-[4rem] lg:py-[2rem]   p-4 xl:p-[2rem] w-[40vh] 2xl:py-[4rem]    transform transition-all duration-300">
                         {!fontsLoaded ? (
                             <Spinner />
                         ) : (

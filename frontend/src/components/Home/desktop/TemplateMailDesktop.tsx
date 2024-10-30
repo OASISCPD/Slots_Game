@@ -1,13 +1,19 @@
 import { useEffect, useState } from "react";
 import { MdOutlineMailOutline } from "react-icons/md";
 /* const logoPath = `/images/${domain.toLowerCase()}/logoDominio.png`; */
+const buttonSend = `/images/${domain.toLowerCase()}/buttonEnviar.png`;
+const buttonSendDisabled = `/images/${domain.toLowerCase()}/buttonEnviarDisabled.png`;
 
-import { dtoModal, ModalError } from '../mod/ModalError';
-import { ModalLogic } from "../logic/ModalLogic";
-import { ModalOk } from "../mod/ModalOk";
+import { dtoModal, ModalError } from '../../mod/ModalError';
+import { ModalLogic } from "../../logic/ModalLogic";
+import { ModalOk } from "../../mod/ModalOk";
 /* import '../../styles/slide.css' */
 import { useNavigate } from "react-router-dom";
-import { baseUrl/* , domain  */} from "../../content/content";
+import {
+    baseUrl,/* , domain  */
+    domain
+} from "../../../content/content";
+import { FaAt } from "react-icons/fa";
 
 type dtoDataEmail = {
     nombre_apellido: string
@@ -23,7 +29,7 @@ interface modalValues {
 interface propFather {
     stopConfetti: () => void
 }
-export function TemplateMail({ stopConfetti }: propFather) {
+export function TemplateMailDesktop({ stopConfetti }: propFather) {
     //craendo navigate para navegar
     const navigate = useNavigate()
     //logic modals
@@ -129,6 +135,39 @@ export function TemplateMail({ stopConfetti }: propFather) {
         }
     }
 
+    //funcion que valida mi email
+    function validarDominio(email: string): void {
+        const dominiosCorrectos = ['gmail', 'hotmail', 'outlook'];
+
+        // Extraer el dominio del email
+        const partes = email.split('@');
+        if (partes.length < 2) {
+            console.log("El email no es válido.");
+            return;
+        }
+
+        const dominioConGuiones = partes[1].split('.')[0];
+        console.log(dominioConGuiones)
+        // Verificar si el dominio extraído está en la lista de dominios correctos
+        if (dominiosCorrectos.includes(dominioConGuiones)) {
+            console.log("Dominio válido:", dominioConGuiones);
+        } else {
+            // Si no es válido, sugerir correcciones
+            const sugerencias = dominiosCorrectos.filter(dominio =>
+                dominio.includes(dominioConGuiones) || dominioConGuiones.includes(dominio)
+            );
+
+            if (sugerencias.length > 0) {
+                console.log("Quisiste poner:", sugerencias.join(', '));
+            } else {
+                console.log("Dominio no reconocido. No se encontraron sugerencias.");
+            }
+        }
+    }
+
+    // Ejemplo de uso
+    validarDominio("alex@gmial.com");
+
     useEffect(() => {
         const timer = setTimeout(() => {
             // Aquí va  función que frena el confetti
@@ -143,8 +182,9 @@ export function TemplateMail({ stopConfetti }: propFather) {
     }, [isChecked, isCheckedFirst, email])
 
     return (
-        <div style={{ zIndex: 10 }} className=" tracking-wide z-50   py-[2rem] textGothamMedium">
-            {isLoading && ( // Muestra el spinner de carga si isLoading es true
+        <div style={{ zIndex: 10 }} className=" tracking-wide z-50 min-h-screen flex flex-col items-center justify-center    py-[2rem] textGothamMedium">
+            <div>
+                {/*  {isLoading && ( // Muestra el spinner de carga si isLoading es true
                 <div className="fixed top-0 left-0 w-full h-full bg-gray-900 opacity-75 flex justify-center items-center z-50">
                     <div className="flex justify-center items-center h-screen">
                         <div className="rounded-full h-20 w-20 bg-red-800 animate-ping"></div>
@@ -167,7 +207,6 @@ export function TemplateMail({ stopConfetti }: propFather) {
                     placeholder="M A I L"
                 />
             </div>
-            {/* validaciones para envio de mail checkboxes */}
             <div className="p-3 bg-black bg-opacity-40 rounded-2xl mb-8 xl:mx-[2rem] sm:mb-12">
                 <div className="flex items-center justify-start my-1  ">
                     <input
@@ -196,10 +235,51 @@ export function TemplateMail({ stopConfetti }: propFather) {
                 className={`${buttonActivated ? 'hover:scale-105 duration-100 bg-gradient-to-r from-buttonColorMagenta to-redMain' : 'bg-redMain bg-opacity-50 text-opacity-70 '} xl:mx-[2rem] uppercase rounded-md p-2 px-[3rem] cursor-pointer  text-white sm:text-xl lg:text-sm xl:text-xl`}
             >
                 Enviar
-            </button>
-        {/*     <div className=" flex justify-center my-[4rem] lg:my-[1rem]">
+            </button> */}
+                {/*     <div className=" flex justify-center my-[4rem] lg:my-[1rem]">
                 <img src={logoPath} className=" w-[12rem] sm:w-[40%] lg:w-[12rem] xl:w-[16rem] " alt="logo empresarial" />
             </div> */}
+            </div>
+            <form >
+
+                <div className=" bisonBoldItallic w-full max-w-xl ">
+                    <h1 style={{ textShadow: '4px 6px 6px rgba(0, 0, 0, 0.5)' }} className="text-5xl text-white px-2  textGothamBlack  text-start   ">Ingresá tu dirección de correo</h1>
+                    <h2 style={{ textShadow: '4px 6px 6px rgba(0, 0, 0, 0.5)' }} className="text-yellowMain px-2 text-5xl  text-start">
+                        para enviarte tu premio
+                    </h2>
+                </div>
+                <div className="relative w-full max-w-xl  my-[4dvh] items-center">
+                    <span className="absolute inset-y-0 left-2 flex items-center pl-3 pointer-events-none">
+                        <FaAt size={24} className="text-fuchsia-700" />
+                    </span>
+                    <input
+                        type="email"
+                        value={email}
+                        onChange={handleEmailChange}
+                        className="  py-3 pl-[8dvh]   text-black text-xl placeholder-gray-500 h-full w-full  rounded-full focus:outline-none shadow-sm shadow-amber-100 focus:border-indigo-500"
+                        placeholder="M A I L"
+                    />
+                </div>
+                <div className="w-full max-w-xl gothamItalic">
+                    <h1 style={{ textShadow: '4px 6px 6px rgba(0, 0, 0, 0.5)' }} className="text-white uppercase"> <span className="text-yellowMain">RECORDá </span>que si ya participaste previamente de raspá y ganá o girá y ganá, no vas a poder reclamar el premio.</h1>
+                </div>
+                {/* TERMINOS Y CONDICIONES */}
+                <div className="flex items-center gothamItalic uppercase  w-full max-w-xl  justify-start my-[2dvh]   ">
+                    <input
+                        onChange={handleCheckboxChange}
+                        id="default-checkbox"
+                        type="checkbox"
+                        checked={isChecked}
+                        className="  text-blue-600 bg-gray-100 border-gray-300 rounded-sm ml-[1.5dvh] focus:ring-blue-500 focus:ring-2 " required
+                    />
+                    <label style={{ textShadow: '4px 6px 6px rgba(0, 0, 0, 0.5)' }} onClick={() => window.open('/terms')} className="ms-2   text-white   text-base">Acepto términos y condiciones</label>
+                </div>
+                {/* button con logica de disabled a enabled */}
+                <button onClick={() => console.log('enviando formulario')} className="flex items-center rounded-full  shadow-2xl shadow-black pointer-events-none">
+                    <img src={buttonSend} className="   w-[20dvh]" alt="" />
+                </button>
+            </form>
+            {/* gradientText */}
             {modal?.boolean && modal?.number === 401 && (
                 <ModalLogic isOpen={true} onClose={() => setModal({ boolean: false, number: 401 })}>
                     <ModalError buttonText="Continuar" onClose={() => navigate('/howToGet')} title={dataModal?.title} subTitle={dataModal?.subTitle} />

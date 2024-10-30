@@ -121,12 +121,12 @@ export function GameDesktop({ prizes, getPrize, setClicks }: propSlot) {
                 {isDesktop && (
                     <div className="relative ">
                         {win ? (
-                            <img src={imageBorder} alt="Fondo" className="w-[44rem]  h-full   mx-auto object-cover relative z-10" />
+                            <img src={imageBorder} alt="Fondo" className="w-[79dvh]  h-full   mx-auto object-cover relative z-10" />
 
                         ) : (
-                            <img src={imageBorder} alt="Fondo" className="w-[44rem]   h-full   mx-auto object-cover relative z-10" />
+                            <img src={imageBorder} alt="Fondo" className="w-[79dvh]   h-full   mx-auto object-cover relative z-10" />
                         )}
-                        <div className="absolute inset-0  mx-auto  flex items-center justify-center z-0">
+                        <div className="absolute inset-0  mx-auto   flex items-center justify-center z-0">
                             <iframe
                                 ref={iframeRef}
                                 src="/core/index.html"

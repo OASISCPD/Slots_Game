@@ -33,6 +33,14 @@ body {
     font-style: normal;
 }
 
+/* fuente itallic */
+@font-face {
+    font-family: 'Gotham-Italic';
+    src: url('/fonts/Gotham-Italic.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+}
+
 @font-face {
     font-family: 'Bison-BoldItallic';
     src: url('/fonts/Bison-BoldItallic.ttf') format('opentype');
@@ -51,6 +59,10 @@ body {
 
 .gothamMedium {
     font-family: 'Gotham-Medium', sans-serif;
+}
+
+.gothamItalic {
+    font-family: 'Gotham-Italic', sans-serif;
 }
 
 .bisonBoldItallic {

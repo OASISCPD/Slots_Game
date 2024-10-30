@@ -127,7 +127,7 @@ export function Game({ prizes, getPrize, setClicks }: propSlot) {
                             <img src={image} alt="Fondo" className="w-[100%]  h-full   mx-auto object-cover relative z-10" />
                         )}
                         {isTablet && (
-                            <img src={imageTablet} alt="Fondo" className="w-[100%]  h-full   mx-auto object-cover relative z-10" />
+                            <img src={image} alt="Fondo" className="w-[100%]  h-full   mx-auto object-cover relative z-10" />
                         )}
                         <div className="absolute inset-0 pl-[0.5rem] mx-auto -mt-[1.5rem] flex items-center justify-center z-0">
                             <iframe
@@ -143,12 +143,12 @@ export function Game({ prizes, getPrize, setClicks }: propSlot) {
                 {isTablet && (
                     <div className="relative ">
                         {win ? (
-                            <img src={image} alt="Fondo" className="sm:w-[60%] h-full   mx-auto object-cover relative z-10" />
+                            <img src={imageTablet} alt="Fondo" className="sm:w-[60%] h-full   mx-auto object-cover relative z-10" />
 
                         ) : (
-                            <img src={image} alt="Fondo" className="sm:w-[60%]  h-full   mx-auto object-cover relative z-10" />
+                            <img src={imageTablet} alt="Fondo" className="sm:w-[60%]  h-full   mx-auto object-cover relative z-10" />
                         )}
-                        <div className="absolute inset-0 pl-[0.5rem] mx-auto -mt-[1.8rem] flex items-center justify-center z-0">
+                        <div className="absolute inset-0 pl-[0.5rem] mx-auto -mt-[2rem] flex items-center justify-center z-0">
                             <iframe
                                 ref={iframeRef}
                                 src="/core/index.html"

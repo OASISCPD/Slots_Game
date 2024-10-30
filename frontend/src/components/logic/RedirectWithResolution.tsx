@@ -1,5 +1,5 @@
 import { useMediaQuery } from 'react-responsive'
-import { Home } from '../home/Home';
+import { Home } from '../home/mobile/Home';
 import { propDomain } from '../../content/content';
 import { HomeDesktop } from '../home/desktop/HomeDesktop';
 

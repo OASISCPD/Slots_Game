@@ -1,4 +1,3 @@
-import { FaSpinner } from 'react-icons/fa'; // Importa el spinner de react-icons
 import { ImSpinner8 } from 'react-icons/im';
 
 export function Spinner() {

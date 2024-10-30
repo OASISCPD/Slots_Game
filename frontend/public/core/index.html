@@ -66,7 +66,8 @@
             console.log('current', currentOutcome)
             if (currentOutcome) {//si es verdadero que ya puede ganar
                 const winIndexes = [index, index, index]
-                rollAll(true, winIndexes)
+                /* rollAll(true, winIndexes) */
+                rollAll(true, [0, 0, 0])
             }
             else {
                 const nonWinningIndexes = getNonRepeatingIndexes();
@@ -139,7 +140,7 @@
         setSlotWidth();
         window.addEventListener('resize', setSlotWidth);
     </script> -->
-    <script>
+    <!-- <script>
         const RESOLUTIONS = {
             "304x350": 205,
             "320x350": 205,
@@ -153,6 +154,7 @@
             /* TABLET */
             "500x350": 320,
             "728x350": 280,
+            "763x350": 280,
             "780x350": 300,
             "813x350": 310,
             /* DESKTOP */
@@ -202,6 +204,112 @@
         // Ejecutar al cargar la página y al cambiar el tamaño de la ventana
         setSlotWidth();
         window.addEventListener('resize', setSlotWidth);
+    </script> -->
+    <!-- <script>
+        const RESOLUTION_RANGES = {
+            "304-320": 205,
+            "321-335": 220,
+            "336-374": 235,
+            "375-390": 250,
+            "391-414": 260,
+            "415-480": 280,
+            "480-711": 320, // Este rango cubre desde 500 hasta 720px
+            "712-763": 280,
+            "764-780": 300,
+            "781-813": 310,
+            "814-7000": 270 // Puedes continuar añadiendo más rangos según lo necesites
+        };
+
+        const TABLET_WIDTH = 300; // Valor predeterminado para tabletas
+
+        function getResolutionKey(width) {
+            console.log(`Checking width: ${width}px`);
+
+            // Buscar si el ancho actual cae dentro de algún rango
+            const rangeKey = Object.keys(RESOLUTION_RANGES).find(range => {
+                const [minWidth, maxWidth] = range.split('-').map(Number);
+                return width >= minWidth && width <= maxWidth;
+            });
+
+            if (rangeKey) {
+                console.log(`Resolution in range ${rangeKey}, applying width: ${RESOLUTION_RANGES[rangeKey]}px`);
+                return RESOLUTION_RANGES[rangeKey];
+            }
+
+            return null;
+        }
+
+        function setSlotWidth() {
+            const width = window.innerWidth;
+            const slotsContainer = document.getElementById('slotsContainer');
+            const slotWidth = getResolutionKey(width);
+
+            if (slotWidth) {
+                slotsContainer.style.width = `${slotWidth}px`;
+                console.log(`Setting slot width to ${slotWidth}px`);
+            } else {
+                slotsContainer.style.width = '250px'; // Valor por defecto
+                console.log(`No matching resolution range found, setting default width to 250px`);
+            }
+        }
+
+        // Ejecutar al cargar la página y al cambiar el tamaño de la ventana
+        setSlotWidth();
+        window.addEventListener('resize', setSlotWidth);
+    </script> -->
+    <script>
+        const RESOLUTION_RANGES = {
+            "304-320": 205,
+            "321-335": 220,
+            "336-374": 235,
+            "375-390": 250,
+            "391-414": 260,
+            "415-480": 280,
+            "480-711": 320, // Este rango cubre desde 500 hasta 720px
+            "712-763": 280,
+            "764-780": 300,
+            "781-813": 310,
+            "814-7000": 270 // Puedes continuar añadiendo más rangos según lo necesites
+        };
+
+        const TABLET_WIDTH = 300; // Valor predeterminado para tabletas
+
+        function getResolutionKey(width) {
+            console.log(`Checking width: ${width}px`);
+
+            // Buscar si el ancho actual cae dentro de algún rango
+            const rangeKey = Object.keys(RESOLUTION_RANGES).find(range => {
+                const [minWidth, maxWidth] = range.split('-').map(Number);
+                return width >= minWidth && width <= maxWidth;
+            });
+
+            if (rangeKey) {
+                console.log(`Resolution in range ${rangeKey}, applying width: ${RESOLUTION_RANGES[rangeKey]}px`);
+                return RESOLUTION_RANGES[rangeKey];
+            }
+
+            return null;
+        }
+
+        function setSlotWidth() {
+            const width = window.innerWidth; // Mantener en px
+            const slotsContainer = document.getElementById('slotsContainer');
+            const slotWidth = getResolutionKey(width);
+
+            if (slotWidth) {
+                slotsContainer.style.width = `${slotWidth}px`; // Usar px para el tamaño
+                console.log(`Setting slot width to ${slotWidth}px`);
+            } else {
+                slotsContainer.style.width = '250px'; // Valor por defecto en px
+                console.log(`No matching resolution range found, setting default width to 250px`);
+            }
+        }
+
+        // Ejecutar al cargar la página y al cambiar el tamaño de la ventana
+        setSlotWidth();
+        window.addEventListener('resize', setSlotWidth);
     </script>
+
 </body>
+
 </html>
