@@ -66,8 +66,8 @@
             console.log('current', currentOutcome)
             if (currentOutcome) {//si es verdadero que ya puede ganar
                 const winIndexes = [index, index, index]
-                /* rollAll(true, winIndexes) */
-                rollAll(true, [0, 0, 0])
+                rollAll(true, winIndexes)
+               /*  rollAll(true, [0, 0, 0]) */
             }
             else {
                 const nonWinningIndexes = getNonRepeatingIndexes();

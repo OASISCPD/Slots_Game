@@ -4,7 +4,7 @@ import { Game } from "../../Game"
 /* import { getPrize } from "../../api/getPrize" */
 /* import { FaSpinner } from "react-icons/fa" */
 import {/*  codeCampaignPilar, codeCampaignZarate, codeCampaignSalta,  */propDomain, domain, codeCampaignPilar, codeCampaignZarate, codeCampaignSalta } from "../../../content/content"
-import { dto_prizes_get, prizesHard } from '../../../data/data'
+import { dto_prizes_get/* , prizesHard */ } from '../../../data/data'
 import { Footer } from "../../Footer"
 import { FullScreeeLoader } from "../../loadings/FullScreenLoader"
 import { TemplateMail } from "../mobile/TemplateMail"
@@ -14,6 +14,8 @@ import { getNamePrize } from "../../../logic/convertValues"
 import { getPrize } from "../../../api/getPrize"
 import { FaSpinner } from "react-icons/fa"
 import { ModalError } from "../../mod/ModalError"
+import { useNavigate } from "react-router-dom"
+import { ModalAge } from "../../mod/ModalAge"
 const logoPathTitle3 = `/images/${domain.toLowerCase()}/tituloMobile3.png`;
 const logoPathTitle2 = `/images/${domain.toLowerCase()}/tituloMobile2.png`;
 const logoPathTitle1 = `/images/${domain.toLowerCase()}/tituloMobile1.png`;
@@ -21,6 +23,8 @@ const logoPath = `/images/${domain.toLowerCase()}/logoDominio.png`;
 
 
 export function Home({ domain }: propDomain) {
+    //navigate
+    const navigate = useNavigate()
     //constante de modal
     const [modal, setModal] = useState<boolean>(false)
     //clicks para jugar
@@ -36,6 +40,9 @@ export function Home({ domain }: propDomain) {
     const [loadingFetch, setLoadingFetch] = useState<boolean>(false)
     //modal que printea el error
     const [modalError, setModalError] = useState<boolean>(false)
+    //validacion de menor de edad agregando logica
+    const [fetchPrize, setFetchPrize] = useState<boolean>(false);
+    const [showAgeModal, setShowAgeModal] = useState<boolean>(false);
     /* console.log(prizes) */
     //funcion que trae el premio
     async function getData() {
@@ -67,6 +74,8 @@ export function Home({ domain }: propDomain) {
             const namePrize: string[] = getNamePrize(res)
             console.log('nombre del premio anentrega--->', namePrize[0])
             setNamePrize(namePrize[0])
+            //funcion que abriria el modal para preguntar si es mayor de edad
+            //aca iria
             console.log(res)
         } catch (error) {
             console.error(error)
@@ -138,10 +147,40 @@ export function Home({ domain }: propDomain) {
     useEffect(() => {
         console.log('estado de las imagenes', imagesLoaded)
         if (imagesLoaded) {
-            getData()
+            /* getData() */
+            //llamar a la funcion que valida si la persona es menor de edad o no
+            checkIsAdult()
+
         }
     }, [imagesLoaded])
 
+    const handleAgeConfirmation = () => {
+        localStorage.setItem('isAdult', 'true');
+        setShowAgeModal(false);
+        setFetchPrize(true)
+    };
+
+    const handleAgeRejection = () => {
+        localStorage.removeItem('isAdult');
+        setShowAgeModal(true);
+        navigate('/minorAge');
+    };
+
+    function checkIsAdult() {
+        const isAdult = localStorage.getItem('isAdult');
+        console.log('valor', isAdult)
+        if (isAdult !== 'true') {
+            setShowAgeModal(true);
+            return
+        }
+        setFetchPrize(true)
+    }
+    useEffect(() => {
+        if (fetchPrize) {
+            console.log('se puede hacer la consulta a l fecth pq es mayor de edad')
+            getData()
+        }
+    }, [fetchPrize])
 
     return (
         <div className="flex flex-col min-h-screen">
@@ -202,7 +241,7 @@ export function Home({ domain }: propDomain) {
             </div> */}
             {/* IMAGE */}
 
-            <img src={logoPath} alt="" className="w-[12rem] sm:w-[12rem] lg:w-[11rem] xl:w-[11rem] mx-auto" />
+            <img src={logoPath} alt="" className={`${domain === "SALTA" ? 'w-[6rem] sm:w-[8rem] lg:w-[8rem]' : 'w-[12rem] sm:w-[12rem] lg:w-[12rem]'} mx-auto`} />
             <Footer domain={domain} />
             {/*     )} */}
             {modal && (
@@ -213,6 +252,15 @@ export function Home({ domain }: propDomain) {
             {modalError && (
                 <ModalLogic isOpen={true} onClose={closeModal}>
                     <ModalError buttonText="error de fetch" subTitle="lorem" title="lorem" onClose={closeModal} />
+                </ModalLogic>
+            )}
+            {showAgeModal && (
+                <ModalLogic isOpen={true} onClose={closeModal}>
+                    <ModalAge
+                        onClose={handleAgeRejection}
+                        onCloseOk={handleAgeConfirmation}
+                        title="¿SOS MAYOR DE 18 AÑOS?"
+                    />
                 </ModalLogic>
             )}
         </div>

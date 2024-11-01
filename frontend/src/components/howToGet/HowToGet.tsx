@@ -2,10 +2,7 @@ import { useEffect, useState } from 'react';
 import { Footer } from '../Footer';
 const logoPath = `/images/${domain.toLowerCase()}/logoDominio.png`;
 import { domain, googleMapsPilar, googleMapsSalta, googleMapsZarate, propDomain } from '../../content/content';
-import { getGradientButton, getGradientByDomain } from '../../logic/logicColors';
-/* import { LoadingInit } from '../components/loadings/LoadingInit'; */
-/* import { facebook, googleMapsPilar, instagram, whatsapp } from ''; */
-
+import { FaMapMarkerAlt } from 'react-icons/fa';
 
 
 export function HowToGet({ domain }: propDomain) {
@@ -52,19 +49,20 @@ export function HowToGet({ domain }: propDomain) {
             <>
             </>
         ) : (
-            <div className={`flex flex-col  min-h-[100dvh] ${getGradientByDomain(domain)}`}
+            <div className={`flex flex-col  min-h-[100dvh] `}
             >
-                <div className="flex-grow flex flex-col justify-center py-24 textGothamMedium">
+                <div className="flex-grow flex flex-col justify-center py-24 bisonBoldItallic">
                     <div className="relative z-20 mx-[2rem] text-start py-8 text-white">
-                        <h1 style={{ textShadow: '2px 5px 4px rgba(0, 0, 0, 0.5)' }} className=' text-2xl sm:text-3xl lg:text-2xl text-center textGothamBlack tracking-wide'>ACERCATE CON TU DNI AL STAND DE ATC <br /> Y CANJEÁ TU PREMIO</h1>
+                        <h1 style={{ textShadow: '4px 6px 6px rgba(0, 0, 0, 0.5)' }} className=' text-3xl sm:text-4xl 2xl:text-6xl text-center  tracking-wider'><span className='text-yellowMain'>TE ESPERAMOS,</span> CON TU DNI <br /> EN NUESTRO STAND DE ATENCIÓN AL CLIENTE</h1>
                     </div>
-                    <div className='flex justify-center items-center'>
-                        <button onClick={() => openLink(domain)} className={`text-white shadow-lg uppercase mt-8 lg:mt-0 ${getGradientButton(domain)}  border-0 py-2 mx-[4rem]   rounded-3xl items-center text-lg px-8 sm:px-12 sm:text-2xl lg:text-xl`}>
-                            Cómo llegar
+                    <div className='flex justify-center text-yellowMain items-center'>
+                        <span ><FaMapMarkerAlt size={40} /></span>
+                        <button onClick={() => openLink(domain)} className={`    items-center `}>
+                            <h1 className='underline text-2xl sm:text-3xl 2xl:text-4xl' style={{ textShadow: '4px 6px 6px rgba(0, 0, 0, 0.5)' }}> Cómo llegar</h1>
                         </button>
                     </div>
                     <div className='flex justify-center items-center content-center mt-48 lg:mt-[8rem]'>
-                        <img src={logoPath} alt="Logo Pilar" className='w-[12rem] sm:w-[16rem] lg:w-[12rem] xl:w-[12rem]' />
+                        <img src={logoPath} alt="Logo Pilar" className={`${domain === 'SALTA' ? 'w-[8rem] sm:w-[12rem] lg:w-[16rem]' : 'w-[12rem] sm:w-[14rem] lg:w-[12rem] 2xl:w-[16rem]'}`} />
                     </div>
                 </div>
                 <Footer domain={domain} />

@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import { MdErrorOutline } from "react-icons/md";
-import buttonImage from '/images/getPrizeButton.png'
+import { domain } from '../../content/content';
+//imagen dinamica
+const buttonImage = `/images/${domain.toLocaleLowerCase()}/getPrizeButton.png`
 
 
 interface Props {
@@ -68,7 +70,7 @@ export function ModalError({ onClose, title, subTitle, buttonText }: Props) {
     }, [isClicked]);
 
     return (
-        <div className="p-4 flex bisonBoldItallic items-center justify-center h-screen text-white  ">
+        <div className="p-4 flex bisonBoldItallic items-center justify-center h-screen text-white textGothamMedium ">
             <div>
                 <div x-show="showModal" className={`fixed inset-0 z-50 flex items-center justify-center overflow-auto bg-black bg-opacity-50 transition-opacity duration-300 ${showModal ? 'opacity-100' : 'opacity-0'}`}>
 

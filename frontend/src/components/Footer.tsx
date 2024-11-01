@@ -67,8 +67,8 @@ export function Footer({ domain }: propDomain) {
         <div className="w-full textGothamBook tracking-wide">
             <div className="flex flex-col lg:flex lg:flex-row  w-full pr-[1rem] justify-center items-center py-2">
                 <img src={logoLoteria} className="w-[10rem] sm:w-[10rem] lg:w-[12rem] p-2 " alt="Logo Loteria" />
-                <h1 className=" text-sm sm:text-lg lg:text-sm xl:text-base  text-gray-300 mx-8 lg:mx-auto text-center">
-                    El juego compulsivo es perjudicial para la salud.<br /> solo para mayores de 18 años
+                <h1 className=" text-sm sm:text-lg lg:text-sm xl:text-base  text-gray-300 mx-8 lg:mx-auto text-center bebasNeueRegular">
+                    El juego compulsivo es perjudicial para la salud.<br /> Solo para mayores de 18 años
                 </h1>
                 <div className="flex justify-center gap-4 py-4 items-center text-gray-300">
                     {/*  <BsWhatsapp className="cursor-pointer hover:text-greenMain duration-300" onClick={() => window.open(`${whatsapp}`)} size={iconSize} />

@@ -26,6 +26,7 @@ export function getGradientButton(domain: string) {
 }
 
 
+
 export function colorSpinLoader(domain: string) {
     switch (domain) {
         case 'PILAR':

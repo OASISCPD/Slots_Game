@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { /* dto_prizes_get, */ dto_prizes_get } from '../data/data'
+import { domain } from "../content/content";
 import { getIndexPrize } from "../logic/convertValues";
 //imagen que funciona como button
-import imageButton from '/images/spinButton.png'
+const imageButton = `/images/${domain.toLowerCase()}/spinButton.png`
 //importando image
 import image from '/images/test.png'
 import imageTablet from '/images/testTablet.png'
@@ -14,9 +15,14 @@ interface propSlot {
     getPrize: () => void
     setClicks: React.Dispatch<React.SetStateAction<number>>;
 }
+const winSound = new Audio('/sounds/sonidoSlot.mp3')
+//configuramos el sonido a salir 
+winSound.volume = 0.2; // 20% del volumen
 
 export function Game({ prizes, getPrize, setClicks }: propSlot) {
-    //resoluciones
+
+    //sounds
+    //audio
 
     // Define las resoluciones
     const isMobile = useMediaQuery({ query: '(max-width: 767px)' });
@@ -32,6 +38,10 @@ export function Game({ prizes, getPrize, setClicks }: propSlot) {
     const [win, setWin] = useState<boolean>(false)
     const handleReactButtonClick = () => {
         if (iframeRef.current) {
+            // Reproduce el sonido
+            winSound.play().catch(error => {
+                console.error('Error al reproducir el sonido:', error);
+            });
             // Envía un mensaje al iframe para que ejecute la función spinReels
             iframeRef.current.contentWindow?.postMessage({ type: 'SPIN', data: indexWin }, '*');
         }

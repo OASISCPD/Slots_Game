@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react"
-/* import { dto_prizes_get } from "../../data/data" */
-/* import { Game } from "" */
-/* import { getPrize } from "../../api/getPrize" */
-/* import { FaSpinner } from "react-icons/fa" */
-import {/*  codeCampaignPilar, codeCampaignZarate, codeCampaignSalta,  */propDomain, domain } from "../../../content/content"
-import { prizesHard } from "../../../data/data"
+import { getPrize } from "../../../api/getPrize"
+import { codeCampaignPilar, codeCampaignZarate, codeCampaignSalta, propDomain, domain } from "../../../content/content"
+import { dto_prizes_get, prizesHard } from "../../../data/data"
 import { Footer } from "../../Footer"
 import { FullScreeeLoader } from "../../loadings/FullScreenLoader"
 import { ModalLogic } from "../../logic/ModalLogic"
@@ -27,36 +24,36 @@ export function HomeDesktop({ domain }: propDomain) {
     //constante que almacena el nombre del premio
     const namePrize: string[] = getNamePrize(prizesHard)
     //constante q almacena un booleano para printear o no el componente del template
-    const [templateMail, setTemplateMail] = useState<boolean>(false)
+    const [templateMail, setTemplateMail] = useState<boolean>(true)//cambviar a false
     //constatnte que maneja los premios
-    /*  const [prizes, setPrizes] = useState<dto_prizes_get[]>() */
+    const [prizes, setPrizes] = useState<dto_prizes_get[]>()
     //constante que printea el template de loading
     const [loading] = useState<boolean>(false)
     // Cargando imágenes
     const [imagesLoaded, setImagesLoaded] = useState<boolean>(false);
     /* console.log(prizes) */
     //funcion que trae el premio
-    /*  async function getData() {
-         // Definir el código según el dominio
-         let campaignCode;
-         if (domain.toUpperCase() === 'PILAR') {
-             campaignCode = codeCampaignPilar;
-         } else if (domain.toUpperCase() === 'ZARATE') {
-             campaignCode = codeCampaignZarate;
-         } else if (domain.toUpperCase() === 'SALTA') {
-             campaignCode = codeCampaignSalta;
-         }
-         else {
-             campaignCode = ''; // Usa el código que se pasa como argumento si no es 'pilar' o 'zarate'
-         }
-         try {
-             const res = await getPrize(campaignCode)
-             setPrizes(res)
-             console.log(res)
-         } catch (error) {
-             console.error(error)
-         }
-     } */
+    async function getData() {
+        // Definir el código según el dominio
+        let campaignCode;
+        if (domain.toUpperCase() === 'PILAR') {
+            campaignCode = codeCampaignPilar;
+        } else if (domain.toUpperCase() === 'ZARATE') {
+            campaignCode = codeCampaignZarate;
+        } else if (domain.toUpperCase() === 'SALTA') {
+            campaignCode = codeCampaignSalta;
+        }
+        else {
+            campaignCode = ''; // Usa el código que se pasa como argumento si no es 'pilar' o 'zarate'
+        }
+        try {
+            const res = await getPrize(campaignCode)
+            setPrizes(res)
+            console.log(res)
+        } catch (error) {
+            console.error(error)
+        }
+    }
     //funcion que abre el modal para confirmar el premio
     function openModal() {
         setModal(true)
@@ -116,33 +113,33 @@ export function HomeDesktop({ domain }: propDomain) {
             )}
             {/*    {prizes && prizes.length > 0 ? ( */}
             <div className="flex-1 mx-[1rem] min-h-screen ">
-                {!templateMail ? (
+                {templateMail ? (
                     <TemplateMailDesktop stopConfetti={() => ''} />
                 ) : (
                     <div className="relative">
-                        <div className="">
-                            <img
-                                src={logoPathTitle1}
-                                alt=""
-                                className={`w-[24rem] sm:w-[24rem] lg:w-[20rem] xl:w-[24rem] 2xl:w-[50dvh] mx-auto ${clicks > 2 ? '' : 'hidden'}`}
-                            />
+                        <img
+                            src={logoPathTitle1}
+                            alt=""
+                            className={`w-[24rem] sm:w-[24rem] lg:w-[20rem] xl:w-[24rem] 2xl:w-[50dvh] mx-auto ${clicks > 2 ? '' : 'hidden'}`}
+                        />
 
-                            <img
-                                src={logoPathTitle1}
-                                alt=""
-                                className={`w-[24rem] sm:w-[24rem] lg:w-[20rem] xl:w-[24rem] 2xl:w-[50dvh] mx-auto ${clicks === 2 ? '' : 'hidden'}`}
-                            />
+                        <img
+                            src={logoPathTitle1}
+                            alt=""
+                            className={`w-[24rem] sm:w-[24rem] lg:w-[20rem] xl:w-[24rem] 2xl:w-[50dvh] mx-auto ${clicks === 2 ? '' : 'hidden'}`}
+                        />
 
-                            <img
-                                src={logoPathTitle1}
-                                alt=""
-                                className={`w-[24rem] sm:w-[24rem] lg:w-[20rem] xl:w-[24rem] 2xl:w-[50dvh] mx-auto ${clicks >= 0 && clicks <= 1 ? '' : 'hidden'}`}
-                            />
-                        </div>
-                        <GameDesktop setClicks={setClicks} getPrize={openModal} prizes={prizesHard} />
+                        <img
+                            src={logoPathTitle1}
+                            alt=""
+                            className={`w-[24rem] sm:w-[24rem] lg:w-[20rem] xl:w-[24rem] 2xl:w-[50dvh] mx-auto ${clicks >= 0 && clicks <= 1 ? '' : 'hidden'}`}
+                        />
+                        <GameDesktop setClicks={setClicks} getPrize={openModal} prizes={prizes} />
                     </div>
                 )}
-                <img src={logoPath} alt="" className="w-[12rem] my-[2rem] sm:w-[12rem] lg:w-[11rem] xl:w-[20dvh] mx-auto" />
+                {!templateMail && (
+                    <img src={logoPath} alt="" className="w-[12rem]  sm:w-[12rem] lg:w-[11rem] xl:w-[20dvh] mx-auto" />
+                )}
             </div>
             {/*    ) : ( */}
             {/*   <div className=" flex flex-col justify-center items-center ">

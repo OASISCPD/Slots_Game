@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 //importanto imagen del button
-import buttonImage from '/images/getPrizeButton.png'
+/* import buttonImage from '/images/getPrizeButton.png' */
 import { Spinner } from "../loadings/Spinner";
+import { domain } from "../../content/content";
+const buttonImage = `/images/${domain.toLowerCase()}/getPrizeButton.png`
 /* import { AiOutlineCloseCircle } from "react-icons/ai"; */
 
 interface dto_modal {

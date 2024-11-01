@@ -15,7 +15,11 @@ export default {
         blueMain: "#023e8a",
         roseMain: '#fd27f1',
         purpleMain: "#5D0057",
-        backgroundRed: '#45001C'
+        backgroundRed: '#45001C',
+        violetMain: '#69005B',
+        roseRedMain: '#C70057',
+        magentaMain: '#FF008D',
+        fuchsiaMain: '#FF03FF'
       }
     },
   },

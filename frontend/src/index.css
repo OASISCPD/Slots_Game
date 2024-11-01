@@ -7,9 +7,31 @@ body {
   } */
 
 /* styles.css */
-body {
+/* body {
+    background: radial-gradient(circle, #9943FF, #45001C);
+
+} */
+
+/* Estilos específicos para cada dominio */
+.domain-pilar {
     background: radial-gradient(circle, #9943FF, #45001C);
 }
+
+.domain-salta {
+    background: radial-gradient(circle, #9127CB, #3B0247);
+}
+
+/* zarate se mantiene igual que pilar */
+.domain-zarate {
+    background: radial-gradient(circle, #9943FF, #45001C);
+    /* Colores de ejemplo para ZARATE */
+}
+
+/* mas gradiente por porcentajes */
+/* body {
+    background: radial-gradient(circle, #9943FF 10%, #45001C 60%);
+} */
+
 
 
 @font-face {
@@ -41,9 +63,25 @@ body {
     font-style: normal;
 }
 
+/* FUENTE APUNTADA PARA EL FOOTER */
+@font-face {
+    font-family: 'BebasNeue-Regular';
+    src: url('/fonts/BebasNeue-Regular.ttf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+}
+
 @font-face {
     font-family: 'Bison-BoldItallic';
     src: url('/fonts/Bison-BoldItallic.ttf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+/* FUENTE PARA SALTA */
+@font-face {
+    font-family: 'OpenSans-BoldItalic';
+    src: url('/fonts/OpenSans-BoldItalic.ttf') format('opentype');
     font-weight: 500;
     font-style: normal;
 }
@@ -69,9 +107,29 @@ body {
     font-family: 'Bison-BoldItallic', sans-serif;
 }
 
-/* ESTILOS DEL TEXTO */
+/* fuente de footer  */
+.bebasNeueRegular {
+    font-family: 'BebasNeue-Regular', sans-serif;
+}
+
+/* FUENTE PARA SALTA */
+.OpenSansBoldItalic {
+    font-family: 'OpenSans-BoldItalic', sans-serif;
+}
+
+/* ESTILOS PARA PILAR */
+/*  TEXTOS */
 .gradientText {
     background-image: linear-gradient(to bottom, #f6ff00, #ffffff, #f6ff00);
+    background-size: 100% 100%;
+    /* Asegura que el fondo cubra completamente el texto */
+    background-position: 0 0;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.gradientTextRevert {
+    background-image: linear-gradient(to bottom, #ffffff, #f6ff00, #ffffff);
     background-size: 100% 100%;
     /* Asegura que el fondo cubra completamente el texto */
     background-position: 0 0;
@@ -84,3 +142,6 @@ body {
     background-size: cover;
     /* Peso de la fuente */
 }
+
+/* ESTILOS PARA SALTA */
+/* TEXTOS */

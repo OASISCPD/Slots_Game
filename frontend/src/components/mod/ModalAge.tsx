@@ -14,6 +14,7 @@ export interface dtoModal {
 export function ModalAge({ onClose, title, onCloseOk }: Props) {
     /* const [loading, setLoading] = useState<boolean>(false); */
     const [showModal, setShowModal] = useState<boolean>(false);
+    const [fontsLoaded, setFontsLoaded] = useState<boolean>(false);
 
     useEffect(() => {
         const timeout = setTimeout(() => setShowModal(true), 10);
@@ -26,21 +27,38 @@ export function ModalAge({ onClose, title, onCloseOk }: Props) {
         };
     }, []);
 
+    useEffect(() => {
+        const loadFonts = async () => {
+            // Aquí puedes cargar las fuentes que necesitas
+            const font = new FontFace('bisonBoldItallic', 'url(/fonts/Bison-BoldItallic.ttf)');
+            await font.load();
+            document.fonts.add(font);
+            setFontsLoaded(true);
+        };
+
+        loadFonts();
+    }, []);
+    useEffect(() => {
+        if (fontsLoaded) {
+            const timeout = setTimeout(() => setShowModal(true), 10);
+            return () => clearTimeout(timeout);
+        }
+    }, [fontsLoaded]);
     return (
-        <div className="p-4 flex items-center justify-center h-screen text-white textGothamMedium ">
+        <div className="p-4 flex items-center justify-center h-screen text-yellowMain bisonBoldItallic ">
             <div>
                 <div x-show="showModal" className={`fixed inset-0 z-50 flex items-center justify-center overflow-auto bg-black bg-opacity-50 transition-opacity duration-300 ${showModal ? 'opacity-100' : 'opacity-0'}`}>
 
-                    <div className="bg-white rounded-2xl p-8 w-[20rem] sm:w-[24rem] py-8 shadow-2xl transform transition-all duration-300">
+                    <div className="gradientBackground border-4 border-redMain rounded-2xl p-[4dvh] w-[20rem] sm:w-[24rem] py-8 shadow-2xl transform transition-all duration-300">
                         <div className='flex justify-center items-center'>
                             <img src={img} className='w-[4rem] sm:w-[6rem]' alt="" />
                         </div>
                         <div className="flex justify-between tracking-wide items-center my-8">
-                            <h2 className="text-lg text-center text-backgroundCyanDark text-gray-700 ml-auto mr-auto uppercase sm:text-xl textGothamMedium font-semibold">{title}</h2>
+                            <h2 className=" text-center text-backgroundCyanDark text-gray-700 mx-auto uppercase text-4xl gradientText font-semibold px-2">{title}</h2>
                         </div>
                         <div className='grid grid-cols-2 tracking-wide gap-4 items-center'>
-                            <button onClick={onClose} className='px-[2.5rem] sm:px-[4rem] mx-auto py-1 rounded-full min-w-[6rem] bg-gradient-to-r from-zinc-200 to-black duration-300 sm:text-xl'>No!</button>
-                            <button onClick={onCloseOk} className='px-[2.5rem] sm:px-[4rem]  mx-auto py-1 rounded-full bg-gradient-to-r from-redMain to-black duration-300 sm:text-xl'>Si!</button>
+                            <button onClick={onClose} className='px-[4dvh] text-2xl sm:text-2xl sm:px-[4dvh] mx-auto py-1 rounded-full min-w-[6rem] bg-gradient-to-b from-zinc-500 to-black duration-300 '>No!</button>
+                            <button onClick={onCloseOk} className='px-[4dvh] text-2xl sm:text-2xl sm:px-[4dvh]  mx-auto py-1 rounded-full bg-gradient-to-b from-roseMain to-magentaMain duration-300 '>Si!</button>
                         </div>
                     </div>
                 </div>

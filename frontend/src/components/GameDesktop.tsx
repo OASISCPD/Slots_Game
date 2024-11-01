@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { /* dto_prizes_get, */ dto_prizes_get } from '../data/data'
 import { getIndexPrize } from "../logic/convertValues";
 //imagen que funciona como button
-import imageButton from '../../public/images/spinButton.png'
+const imageButton = `/images/${domain.toLowerCase()}/spinButton.png`
 //importando image
 const imageBorder = `/images/${domain.toLowerCase()}/testDesktop.png`;
 /* import imageWin from '../../public/images/testWin.png' */

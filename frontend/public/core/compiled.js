@@ -56,7 +56,7 @@ var roll = function roll(reel) {
 };
 
 // Nueva función rollAll con opción de forzar un resultado y tiempos diferentes
-function rollAll() {
+/* function rollAll() {
   var forceWin = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
   var winIndexes = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [0, 0, 0];
   isClicked = true;
@@ -87,6 +87,46 @@ function rollAll() {
         }
       });
     }, i * delayBetweenReels); // Incrementar el retraso para cada reel
+  });
+} */
+
+//esta funcion es asincrona y response correctamente 
+function rollAll() {
+  var forceWin = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+  var winIndexes = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [0, 0, 0];
+  isClicked = true;
+  sendUpdateBoolean(); // Enviar la actualización del booleano una vez al inicio
+  var reelsList = document.querySelectorAll('.slots > .reel');
+  var delayBetweenReels = 300; // Retraso entre el inicio de cada rodillo
+
+  // Crear una lista de promesas para cada `roll`
+  var rollPromises = _toConsumableArray(reelsList).map(function (reel, i) {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        roll(reel, i, forceWin ? winIndexes[i] : null).then(function (delta) {
+          indexes[i] = (indexes[i] + delta) % num_icons;
+          console.log(`Reel ${i} index: `, indexes[i]);
+          resolve(); // Resolvemos la promesa después de completar el rollo
+        });
+      }, i * delayBetweenReels);
+    });
+  });
+
+  // Esperar a que todas las promesas terminen antes de continuar
+  Promise.all(rollPromises).then(() => {
+    console.log('Último reel completado', indexes[2]);
+    isClicked = false;
+    sendUpdateBoolean(); // Enviar el booleano actualizado una vez que todo termina
+
+    // Verificar condiciones de victoria
+    if (indexes[0] === indexes[1] && indexes[1] === indexes[2]) {
+      console.log('WIN WIN WIN');
+      sendUpdateToReact();
+      window.parent.postMessage({
+        type: 'WIN',
+        message: 'WIN WIN WIN'
+      }, '*');
+    }
   });
 }
 

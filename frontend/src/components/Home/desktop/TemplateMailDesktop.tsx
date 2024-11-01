@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { MdOutlineMailOutline } from "react-icons/md";
 /* const logoPath = `/images/${domain.toLowerCase()}/logoDominio.png`; */
 const buttonSend = `/images/${domain.toLowerCase()}/buttonEnviar.png`;
 const buttonSendDisabled = `/images/${domain.toLowerCase()}/buttonEnviarDisabled.png`;
@@ -182,7 +181,7 @@ export function TemplateMailDesktop({ stopConfetti }: propFather) {
     }, [isChecked, isCheckedFirst, email])
 
     return (
-        <div style={{ zIndex: 10 }} className=" tracking-wide z-50 min-h-screen flex flex-col items-center justify-center    py-[2rem] textGothamMedium">
+        <div style={{ zIndex: 10 }} className=" tracking-wide z-50 min-h-screen flex flex-col items-center justify-center    py-[2rem] ">
             <div>
                 {/*  {isLoading && ( // Muestra el spinner de carga si isLoading es true
                 <div className="fixed top-0 left-0 w-full h-full bg-gray-900 opacity-75 flex justify-center items-center z-50">
@@ -241,8 +240,7 @@ export function TemplateMailDesktop({ stopConfetti }: propFather) {
             </div> */}
             </div>
             <form >
-
-                <div className=" bisonBoldItallic w-full max-w-xl ">
+                <div className=" bisonBoldItallic tracking-wider w-full max-w-xl ">
                     <h1 style={{ textShadow: '4px 6px 6px rgba(0, 0, 0, 0.5)' }} className="text-5xl text-white px-2  textGothamBlack  text-start   ">Ingresá tu dirección de correo</h1>
                     <h2 style={{ textShadow: '4px 6px 6px rgba(0, 0, 0, 0.5)' }} className="text-yellowMain px-2 text-5xl  text-start">
                         para enviarte tu premio
@@ -260,7 +258,7 @@ export function TemplateMailDesktop({ stopConfetti }: propFather) {
                         placeholder="M A I L"
                     />
                 </div>
-                <div className="w-full max-w-xl gothamItalic">
+                <div className="w-full max-w-xl  gothamItalic">
                     <h1 style={{ textShadow: '4px 6px 6px rgba(0, 0, 0, 0.5)' }} className="text-white uppercase"> <span className="text-yellowMain">RECORDá </span>que si ya participaste previamente de raspá y ganá o girá y ganá, no vas a poder reclamar el premio.</h1>
                 </div>
                 {/* TERMINOS Y CONDICIONES */}
@@ -275,7 +273,7 @@ export function TemplateMailDesktop({ stopConfetti }: propFather) {
                     <label style={{ textShadow: '4px 6px 6px rgba(0, 0, 0, 0.5)' }} onClick={() => window.open('/terms')} className="ms-2   text-white   text-base">Acepto términos y condiciones</label>
                 </div>
                 {/* button con logica de disabled a enabled */}
-                <button onClick={() => console.log('enviando formulario')} className="flex items-center rounded-full  shadow-2xl shadow-black pointer-events-none">
+                <button onClick={() => console.log('enviando formulario')} className="flex items-center rounded-full  shadow-2xl shadow-black ">
                     <img src={buttonSend} className="   w-[20dvh]" alt="" />
                 </button>
             </form>
