@@ -18,7 +18,7 @@ export interface dtoModal {
 }
 
 
-export function ModalAlreadyPlayed({ onClose, title, subTitle, }: Props) {
+export function ModalAlreadyPlayed({ onClose, subTitle, }: Props) {
     /* const [loading, setLoading] = useState<boolean>(false); */
     const [showModal, setShowModal] = useState<boolean>(false);
     const [fontsLoaded, setFontsLoaded] = useState<boolean>(false);
@@ -63,7 +63,7 @@ export function ModalAlreadyPlayed({ onClose, title, subTitle, }: Props) {
                             <h2 className="text-sm text-center tracking-wide  ml-auto mr-auto uppercase   px-2">{subTitle}</h2>
                         </div>
                         <button id="btnReclamaTuPremio" className="flex justify-center my-[1dvh] lg:my-[2dvh] items-center mx-auto" type="button" onClick={onClose}>
-                            <img src={buttonImage} alt="button" className={`w-[12dvh] mx-auto transition-transform duration-1000 `} />
+                            <img src={buttonImage} alt="button" className={`w-[10dvh] mx-auto transition-transform duration-1000 `} />
                         </button>
                     </div>
                 </div>

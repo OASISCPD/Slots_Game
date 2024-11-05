@@ -121,12 +121,12 @@ export function GameDesktop({ prizes, getPrize, setClicks }: propSlot) {
                 {isDesktop && (
                     <div className="relative ">
                         {win ? (
-                            <img src={imageBorder} alt="Fondo" className="w-[79dvh]  h-full   mx-auto object-cover relative z-10" />
+                            <img src={imageBorder} alt="Fondo" className={`${domain === "SALTA" ? 'w-[40rem]' : 'w-[46rem]'}  h-full   mx-auto object-cover relative z-10`} />
 
                         ) : (
-                            <img src={imageBorder} alt="Fondo" className="w-[79dvh]   h-full   mx-auto object-cover relative z-10" />
+                            <img src={imageBorder} alt="Fondo" className={`${domain === "SALTA" ? 'w-[40rem]' : 'w-[46rem]'}  h-full   mx-auto object-cover relative z-10`} />
                         )}
-                        <div className="absolute inset-0  mx-auto   flex items-center justify-center z-0">
+                        <div className={`absolute inset-0  mx-auto   flex items-center justify-center z-0 ${domain === "SALTA" ? 'mt-[1dvh]' : ''}`}>
                             <iframe
                                 ref={iframeRef}
                                 src="/core/index.html"
@@ -141,7 +141,7 @@ export function GameDesktop({ prizes, getPrize, setClicks }: propSlot) {
                     <img
                         src={imageButton}
                         alt="button"
-                        className={`w-[12rem] sm:w-[12rem] lg:w-[10rem] xl:w-[10rem] mx-auto transition-transform duration-1000 ${scaleClass}`} // Aplica la clase de escala
+                        className={`${domain.toUpperCase() === "SALTA" ? 'w-[4rem] sm:w-[8rem] lg:w-[8rem]' : 'w-[12rem] sm:w-[12rem] lg:w-[10rem] xl:w-[10rem]'} mx-auto transition-transform duration-1000 ${scaleClass}`} // Aplica la clase de escala
                     />
                 </button>
             </div>

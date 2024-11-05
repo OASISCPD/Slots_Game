@@ -1,13 +1,20 @@
 import { useEffect, useState } from "react";
-import { MdOutlineMailOutline } from "react-icons/md";
 /* const logoPath = `/images/${domain.toLowerCase()}/logoDominio.png`; */
+const buttonSend = `/images/${domain.toLowerCase()}/buttonEnviar.png`;
+/* const buttonSendDisabled = `/images/${domain.toLowerCase()}/buttonEnviarDisabled.png`; */
 
 import { dtoModal, ModalError } from '../../mod/ModalError';
 import { ModalLogic } from "../../logic/ModalLogic";
 import { ModalOk } from "../../mod/ModalOk";
 /* import '../../styles/slide.css' */
 import { useNavigate } from "react-router-dom";
-import { baseUrl/* , domain  */} from "../../../content/content";
+import {
+    baseUrl,/* , domain  */
+    domain
+} from "../../../content/content";
+import { FaAt } from "react-icons/fa";
+import { ModalAlreadyPlayed } from "../../mod/ModalAlreadyPlayed";
+import { ModalAssessments } from "../../mod/ModalAssessments";
 
 type dtoDataEmail = {
     nombre_apellido: string
@@ -30,9 +37,8 @@ export function TemplateMail({ stopConfetti }: propFather) {
     const [modal, setModal] = useState<modalValues | null>(null)
     const [dataModal, setDataModal] = useState<dtoModal | null>(null)
     const [email, setEmail] = useState<string>('');
-    //primer check
-    const [isCheckedFirst, setIsCheckedFirst] = useState<boolean>(false);
-    //segundo check
+    const [modalAssessments, setModalAssessments] = useState<boolean>(false);
+    // check
     const [isChecked, setIsChecked] = useState<boolean>(false);
     const [buttonActivated, setButtonActivated] = useState<boolean>(false);
     const [isLoading, setLoading] = useState(false); // Estado para controlar la carga
@@ -43,7 +49,8 @@ export function TemplateMail({ stopConfetti }: propFather) {
     // Función para validar si el botón debe estar habilitado
     const updateButtonActivation = () => {
         const isEmailValid = emailRegex.test(email);
-        setButtonActivated(isEmailValid && isChecked && isCheckedFirst);
+        console.log('VALROES    ', isEmailValid, isChecked)
+        setButtonActivated(isEmailValid && isChecked);
     };
 
     // Función para manejar el cambio en el campo de correo electrónico
@@ -59,11 +66,8 @@ export function TemplateMail({ stopConfetti }: propFather) {
         /*  updateButtonActivation(); // Actualiza la activación del botón */
     };
 
-    // Función para manejar el cambio en el checkbox
-    const handleCheckboxChangeFirst = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setIsCheckedFirst(event.target.checked);
-        /*  updateButtonActivation(); // Actualiza la activación del botón */
-    };
+
+
 
     //envio de data
     async function sendData() {
@@ -90,16 +94,17 @@ export function TemplateMail({ stopConfetti }: propFather) {
         try {
             const response = await fetch(`${baseUrl}/insertar_accion`, requestOptions)
             const data = await response.json()
+            /* const data = { status_code: 200 } */
             /* const data = 200 */
             switch (data.status_code) {
                 case 200:
                     setModal({ boolean: true, number: 200 })
-                    setDataModal({ title: 'TE HEMOS ENVIADO EL PREMIO A LA CASILLA DE CORREO', subTitle: 'SI NO TE LLEGÓ, VERIFICÁ  EN TU CASILLA DE SPAM O CORREO NO DESEADO' })
+                    setDataModal({ title: 'YA TENÉS TU PREMIO', subTitle: 'SI NO TE LLEGÓ VERIFICÁ LA CARPETA DE “ NO DESEADOS O SPAM”' })
                     // Aquí puedes agregar la lógica para mostrar un mensaje de éxito o hacer alguna acción adicional
                     break;
                 case 403:
                     setModal({ boolean: true, number: 403 })
-                    setDataModal({ title: 'Debes jugar para poder recibir el premio', subTitle: 'Se refrescará la página y volverá al inicio para poder jugar' })
+                    setDataModal({ title: 'Debes jugar para poder recibir el premio', subTitle: 'Se refrescará la página y volverás al inicio para poder jugar' })
                     break;
                 case 405:
                     setModal({ boolean: true, number: 405 })
@@ -116,6 +121,13 @@ export function TemplateMail({ stopConfetti }: propFather) {
                 case 401:
                     setModal({ boolean: true, number: 401 })
                     setDataModal({ title: 'Por alguna razón el formulario ya ha sido enviado', subTitle: 'Se lo redirigirá a otra sección' })
+                    break;
+                case 500:
+                    setModal({ boolean: true, number: 500 });
+                    setDataModal({
+                        title: 'Ocurrió un problema inesperado',
+                        subTitle: 'Estamos experimentando dificultades técnicas. Por favor intente nuevamente '
+                    });
                     break;
                 default:
                     break;
@@ -140,7 +152,8 @@ export function TemplateMail({ stopConfetti }: propFather) {
 
     useEffect(() => {
         updateButtonActivation()
-    }, [isChecked, isCheckedFirst, email])
+        console.log(isChecked, buttonActivated, email)
+    }, [isChecked, email])
 
     return (
         <div style={{ zIndex: 10 }} className=" tracking-wide z-50   py-[2rem] textGothamMedium">
@@ -151,89 +164,87 @@ export function TemplateMail({ stopConfetti }: propFather) {
                     </div>
                 </div>
             )}
-            <h1 style={{ textShadow: '2px 4px 4px rgba(0, 0, 0, 0.5)' }} className="text-2xl  textGothamBlack  text-white text-center sm:text-4xl lg:text-xl xl:sm:text-3xl  ">INGRESÁ TU CORREO Y TE ENVIAREMOS UN MAIL CON TU PREMIO</h1>
-            <h2 className="text-yellowMain lg:text-center mb-8 mt-4 sm:my-12 lg:my-4 xl:my-12  text-sm sm:text-xl lg:text-base xl:text-xl  text-center">
-                Revisá la casilla de SPAM si no lo ves en bandeja de ENTRADA
-            </h2>
-            <div className="relative flex my-12 lg:my-8 xl:my-12 xl:mx-[2rem] items-center">
-                <span className="absolute inset-y-0 left-2 flex items-center pl-3 pointer-events-none">
-                    <MdOutlineMailOutline size={24} className="text-gray-100" />
-                </span>
-                <input
-                    type="email"
-                    value={email}
-                    onChange={handleEmailChange}
-                    className="pl-[3rem] pr-4 py-4   text-white text-xl neon-border-input placeholder-gray-100 h-full w-full  rounded-md focus:outline-none focus:border-indigo-500"
-                    placeholder="M A I L"
-                />
-            </div>
-            {/* validaciones para envio de mail checkboxes */}
-            <div className="p-3 bg-black bg-opacity-40 rounded-2xl mb-8 xl:mx-[2rem] sm:mb-12">
-                <div className="flex items-center justify-start my-1  ">
-                    <input
-                        onChange={handleCheckboxChangeFirst}
-                        id="default-checkbox"
-                        type="checkbox"
-                        checked={isCheckedFirst}
-                        className=" text-blue-600 bg-gray-100 border-gray-300  rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" required
-                    />
-                    <h1 className="ms-2 text-xs text-white sm:text-lg lg:text-sm xl:text-xl 2xl:text-base">Recordá que si ya participaste de Raspá y Ganá, no vas a poder reclamar el premio.</h1>
+            <form onSubmit={sendData} className="flex flex-col items-center justify-center pt-[4dvh] sm:pt[8dvh]  lg:mt-[12dvh]">
+                <div className=" bisonBoldItallic tracking-wider w-full max-w-xl ">
+                    <h1 style={{ textShadow: '4px 6px 6px rgba(0, 0, 0, 0.5)' }} className="text-5xl text-white px-2  textGothamBlack  text-start   ">Ingresá tu dirección de correo</h1>
+                    <h2 style={{ textShadow: '4px 6px 6px rgba(0, 0, 0, 0.5)' }} className="text-yellowMain px-2 text-4xl  text-start">
+                        para enviarte tu premio
+                    </h2>
                 </div>
-                <div className="flex items-center justify-start my-1   ">
+                <div className="relative w-full max-w-xl  my-[4dvh] items-center">
+                    <span className="absolute inset-y-0 left-2 flex items-center pl-3 pointer-events-none">
+                        <FaAt size={24} className="text-fuchsia-700" />
+                    </span>
+                    <input
+                        type="email"
+                        value={email}
+                        onChange={handleEmailChange}
+                        className=" py-3 pl-[8dvh]   text-black text-xl placeholder-gray-500 h-full w-full  rounded-full focus:outline-none shadow-sm shadow-amber-100 focus:border-indigo-500"
+                        placeholder="M A I L"
+                    />
+                </div>
+                <div className="w-full max-w-xl  gothamItalic text-sm">
+                    <h1 style={{ textShadow: '4px 6px 6px rgba(0, 0, 0, 0.5)' }} className="text-white uppercase">VENÍ A RECLAMAR TU PREMIO SOLO DE LUNES A JUEVES</h1>
+                    <h1 style={{ textShadow: '4px 6px 6px rgba(0, 0, 0, 0.5)' }} className="text-white uppercase"> <span className="text-yellowMain">RECORDá </span>que si ya participaste previamente de raspá y ganá o girá y ganá, no vas a poder reclamar el premio.</h1>
+                </div>
+                {/* TERMINOS Y CONDICIONES */}
+                <div className="flex items-center gothamItalic text-sm uppercase  w-full max-w-xl  justify-start my-[2dvh]   ">
                     <input
                         onChange={handleCheckboxChange}
                         id="default-checkbox"
                         type="checkbox"
                         checked={isChecked}
-                        className="  text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 focus:ring-2 " required
+                        className="  text-blue-600 bg-gray-100 border-gray-300 rounded-sm  focus:ring-blue-500 focus:ring-2 " required
                     />
-                    <label onClick={() => window.open('/terms')} className="ms-2 text-xs  text-yellowMain  underline sm:text-lg lg:text-sm xl:text-xl 2xl:text-base">Acepto términos y condiciones</label>
+                    <label style={{ textShadow: '4px 6px 6px rgba(0, 0, 0, 0.5)' }} onClick={() => window.open('/terms')} className="ms-2   text-white  underline ">Acepto términos y condiciones</label>
                 </div>
-            </div>
-            <button
-                onClick={sendData}
-                disabled={!buttonActivated}
-                className={`${buttonActivated ? 'hover:scale-105 duration-100 bg-gradient-to-r from-buttonColorMagenta to-redMain' : 'bg-redMain bg-opacity-50 text-opacity-70 '} xl:mx-[2rem] uppercase rounded-md p-2 px-[3rem] cursor-pointer  text-white sm:text-xl lg:text-sm xl:text-xl`}
-            >
-                Enviar
-            </button>
-        {/*     <div className=" flex justify-center my-[4rem] lg:my-[1rem]">
-                <img src={logoPath} className=" w-[12rem] sm:w-[40%] lg:w-[12rem] xl:w-[16rem] " alt="logo empresarial" />
-            </div> */}
+
+                <div className="flex items-center w-full max-w-xl">
+
+                    <button type="button" disabled={!buttonActivated} onClick={sendData} className={`${buttonActivated ? '' : 'opacity-50 cursor-not-allowed'} rounded-full    shadow-2xl shadow-black `}>
+                        {buttonActivated}
+                        <img src={buttonActivated ? buttonSend : buttonSend} className={`  w-[12dvh]`} alt="" />
+                    </button>
+                </div>
+            </form>
+
             {modal?.boolean && modal?.number === 401 && (
                 <ModalLogic isOpen={true} onClose={() => setModal({ boolean: false, number: 401 })}>
-                    <ModalError buttonText="Continuar" onClose={() => navigate('/howToGet')} title={dataModal?.title} subTitle={dataModal?.subTitle} />
+                    <ModalError onClose={() => navigate('/howToGet')} title={dataModal?.title} subTitle={dataModal?.subTitle} />
                 </ModalLogic>
             )}
             {modal?.boolean && modal?.number === 403 && (
                 <ModalLogic isOpen={true} onClose={() => setModal({ boolean: false, number: 403 })}>
-                    <ModalError buttonText="Jugar" onClose={() => window.location.reload()} title={dataModal?.title} subTitle={dataModal?.subTitle} />
+                    <ModalError onClose={() => window.location.reload()} title={dataModal?.title} subTitle={dataModal?.subTitle} />
                 </ModalLogic>
             )}
             {modal?.boolean && modal?.number === 402 && (
                 <ModalLogic isOpen={true} onClose={() => setModal({ boolean: false, number: 402 })}>
-                    <ModalError buttonText="Cerrar" onClose={() => navigate('/alreadyPlayed')} title={dataModal?.title} subTitle={dataModal?.subTitle} />
+                    <ModalAlreadyPlayed onClose={() => navigate('/alreadyPlayed')} title={dataModal?.title} subTitle={dataModal?.subTitle} />
                 </ModalLogic>
             )}
             {modal?.boolean && modal?.number === 404 && (
                 <ModalLogic isOpen={true} onClose={() => setModal({ boolean: false, number: 404 })}>
-                    <ModalError buttonText="Volver" onClose={() => setModal({ boolean: false, number: 404 })} title={dataModal?.title} subTitle={dataModal?.subTitle} />
+                    <ModalError onClose={() => setModal({ boolean: false, number: 404 })} title={dataModal?.title} subTitle={dataModal?.subTitle} />
                 </ModalLogic>
             )}
             {modal?.boolean && modal?.number === 405 && (
                 <ModalLogic isOpen={true} onClose={() => setModal({ boolean: false, number: 405 })}>
-                    <ModalError buttonText="Volver" onClose={() => setModal({ boolean: false, number: 405 })} title={dataModal?.title} subTitle={dataModal?.subTitle} />
+                    <ModalError onClose={() => setModal({ boolean: false, number: 405 })} title={dataModal?.title} subTitle={dataModal?.subTitle} />
                 </ModalLogic>
             )}
             {modal?.boolean && modal?.number === 200 && (
                 <ModalLogic isOpen={true} onClose={() => setModal({ boolean: false, number: 200 })}>
-                    <ModalOk email={email} onClose={() => { setModal({ boolean: false, number: 200 }), navigate('/howToGet') }} title={dataModal?.title} subTitle={dataModal?.subTitle} />
+                    <ModalOk email={email} onClose={() => { setModal({ boolean: false, number: 200 }), /* navigate('/howToGet') */ setModalAssessments(true) }} title={dataModal?.title} subTitle={dataModal?.subTitle} />
                 </ModalLogic>
             )}
             {modal?.boolean && modal?.number === 500 && (
                 <ModalLogic isOpen={true} onClose={() => setModal({ boolean: false, number: 500 })}>
-                    <ModalError buttonText="Volver" onClose={() => { setModal({ boolean: false, number: 500 }) }} title={dataModal?.title} subTitle={dataModal?.subTitle} />
+                    <ModalError onClose={() => { setModal({ boolean: false, number: 500 }) }} title={dataModal?.title} subTitle={dataModal?.subTitle} />
                 </ModalLogic>
+            )}
+            {modalAssessments && (
+                <ModalAssessments onClose={() => { setModalAssessments(false), navigate('/howToGet') }} subTitle="a ESTA  EXPERIENCIA?" title="¿Cuántas estrellas le das" />
             )}
         </div>
     )

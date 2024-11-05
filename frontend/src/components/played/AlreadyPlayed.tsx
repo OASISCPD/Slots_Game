@@ -3,7 +3,7 @@ const logoPath = `/images/${domain.toLowerCase()}/logoDominio.png`;
 import { Footer } from '../Footer';
 import { FullScreeeLoader } from '../loadings/FullScreenLoader';
 import { domain, propDomain } from '../../content/content';
-import { getTextByLink, openLink, openLinkWeb } from '../../logic/openLinks';
+import { getTextByLink, openLinkWeb } from '../../logic/openLinks';
 
 export function AlreadyPlayed({ domain }: propDomain) {
     //VARIABLE QUE CAMBVIAN PARA MOSTRAR LAS IMAGENES Y EL TEMPLATE EN CUESTION
@@ -58,7 +58,7 @@ export function AlreadyPlayed({ domain }: propDomain) {
                             </button>
                         </div>
                         <div className='flex justify-center items-center content-center mt-48 lg:mt-[8rem]'>
-                            <img src={logoPath} alt="Logo Pilar" className={`${domain === 'SALTA' ? 'w-[8rem] sm:w-[10rem] lg:w-[12rem]' : 'w-[12rem] sm:w-[16rem] lg:w-[18rem] '}`} />
+                            <img src={logoPath} alt="Logo Pilar" className={`${domain === 'SALTA' ? 'w-[8rem] sm:w-[10rem]  2xl:w-[12rem]' : 'w-[12rem] sm:w-[14rem]  2xl:w-[16rem]'}`} />
                         </div>
                     </div>
                     <Footer domain={domain} />

@@ -178,7 +178,7 @@ export function Game({ prizes, getPrize, setClicks }: propSlot) {
                     <img
                         src={imageButton}
                         alt="button"
-                        className={`w-[12rem] sm:w-[12rem] lg:w-[10rem] xl:w-[10rem] mx-auto transition-transform duration-1000 ${scaleClass}`} // Aplica la clase de escala
+                        className={`${domain.toUpperCase() === "SALTA" ? 'w-[8rem] sm:w-[10rem] lg:w-[10rem]' : 'w-[12rem] sm:w-[12rem] lg:w-[10rem] xl:w-[10rem]'} mx-auto transition-transform duration-1000 ${scaleClass}`} // Aplica la clase de escala
                     />
                 </button>
             </div>

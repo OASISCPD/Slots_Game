@@ -206,7 +206,7 @@ export function Terms({ domain }: propDomain) {
                                 </ol>
                             )}
                             <div className='my-8 flex justify-center'>
-                                <img src={logoPath} className={`${domain === 'SALTA' ? 'w-[12dvh] sm:w-[12dvh] lg:w-[20dvh]' : 'w-[12rem] sm:w-[16rem]'}`} alt="" />
+                                <img src={logoPath} className={`${domain==='SALTA'?'w-[8rem] sm:w-[10rem]  2xl:w-[12rem]':'w-[12rem] sm:w-[14rem]  2xl:w-[16rem]'}`} alt="" />
                             </div>
                         </div>
                     </div>

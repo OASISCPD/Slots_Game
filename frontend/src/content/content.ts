@@ -7,7 +7,7 @@ export interface propDomain {
 }
 
 //dominio que maneja el flujo de la aplicacion
-export const domain: string = 'SALTA'//puede ser SALTA O PILAR O ZARATE
+export const domain: string = 'PILAR'//puede ser SALTA O PILAR O ZARATE
 
 //PILAR
 //variables y links para el footer y links de google map

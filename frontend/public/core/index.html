@@ -67,7 +67,7 @@
             if (currentOutcome) {//si es verdadero que ya puede ganar
                 const winIndexes = [index, index, index]
                 rollAll(true, winIndexes)
-               /*  rollAll(true, [0, 0, 0]) */
+                /*  rollAll(true, [0, 0, 0]) */
             }
             else {
                 const nonWinningIndexes = getNonRepeatingIndexes();
@@ -93,53 +93,6 @@
            console.log(outcome); // Puede ser true o false, pero si es false en las dos primeras, será true en la última. */
 
     </script>
-    <!--  <script>
-        const RESOLUTIONS = {
-            "335x350": 220,
-            "374x350": 235,
-            "350x350": 230,
-            "390x350": 250,
-            "414x896": 390,
-            "360x800": 330,
-            "390x844": 370,
-            /* TABLET */
-            "728x350": 280,
-            /* DESKTOP */
-            "984x350": 300
-        };
-
-        function getResolutionKey(width, height) {
-            console.log(`Checking resolution: ${width}x${height}`);
-            const closestKey = Object.keys(RESOLUTIONS).find(key => {
-                const [resWidth, resHeight] = key.split('x').map(Number);
-                const widthDiff = Math.abs(resWidth - width);
-                const heightDiff = Math.abs(resHeight - height);
-                console.log(`Comparing with key: ${key} (widthDiff: ${widthDiff}, heightDiff: ${heightDiff})`);
-                return widthDiff < 10 && heightDiff < 10; // Rango de 10px
-            });
-            return closestKey;
-        }
-
-        function setSlotWidth() {
-            const width = window.innerWidth;
-            const height = window.innerHeight;
-            const resolutionKey = getResolutionKey(width, height);
-            const slotsContainer = document.getElementById('slotsContainer');
-
-            if (resolutionKey) {
-                slotsContainer.style.width = `${RESOLUTIONS[resolutionKey]}px`;
-                console.log(`Matched resolution: ${resolutionKey}, setting width to ${RESOLUTIONS[resolutionKey]}px`);
-            } else {
-                // Establecer un valor por defecto si la resolución no coincide
-                slotsContainer.style.width = '200px'; // Valor por defecto
-                console.log(`No matching resolution found, setting default width to 400px`);
-            }
-        }
-
-        // Ejecutar al cargar la página y al cambiar el tamaño de la ventana
-        setSlotWidth();
-        window.addEventListener('resize', setSlotWidth);
-    </script> -->
     <!-- <script>
         const RESOLUTIONS = {
             "304x350": 205,
@@ -265,14 +218,29 @@
             "375-390": 250,
             "391-414": 260,
             "415-480": 280,
-            "480-711": 320, // Este rango cubre desde 500 hasta 720px
-            "712-763": 280,
-            "764-780": 300,
+            "480-520": 260, // Este rango cubre desde 500 hasta 720px
+            "521-560": 350, // Este rango cubre desde 500 hasta 720px
+            "561-590": 370, // Este rango cubre desde 500 hasta 720px
+            "591-711": 260, // Este rango cubre desde 500 hasta 720px
+            "712-763": 260,
+            "764-780": 260,
             "781-813": 310,
-            "814-7000": 270 // Puedes continuar añadiendo más rangos según lo necesites
+            "814-889": 260, // Puedes continuar añadiendo más rangos según lo necesites //contemplar imagenes diferentes por si se tienen que minimizar
+            "890-950": 280, // Puedes continuar añadiendo más rangos según lo necesites //contemplar imagenes diferentes por si se tienen que minimizar
+            "951-980": 260, 
+            "981-1000": 260, 
+            "1001-1101": 260, 
+            "1101-1200": 260, 
+            "1201-1300": 260, 
+            "1301-1500": 260, 
+            "1501-1600": 260, 
+            "1601-2030": 260, 
+            "2031-2169": 260, 
+            "2170-2445": 260, 
+            "2446-3270": 260, 
+            "3271-4922": 260, 
         };
-
-        const TABLET_WIDTH = 300; // Valor predeterminado para tabletas
+        const TABLET_WIDTH = 260; // Valor predeterminado para tabletas
 
         function getResolutionKey(width) {
             console.log(`Checking width: ${width}px`);

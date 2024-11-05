@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { FaRegStar, FaStar } from 'react-icons/fa';
-import { domain } from '../../content/content';
+import { baseUrl, domain } from '../../content/content';
+import { ModalError } from './ModalError';
+import { SpinnerFetch } from '../loadings/Spinner';
 const buttonSend = `/images/${domain.toLowerCase()}/buttonEnviar.png`;
 const buttonSendDisabled = `/images/${domain.toLowerCase()}/buttonEnviarDisabled.png`;
 interface Props {
@@ -10,10 +12,15 @@ interface Props {
 }
 
 export function ModalAssessments({ onClose, title, subTitle }: Props) {
+    //loading del modal
+    const [loading, setLoading] = useState<boolean>(false)
+    //modal de error
+    const [error, setError] = useState<boolean>(false)
     const [showModal, setShowModal] = useState<boolean>(false);
     const [gameRating, setGameRating] = useState<number>(0);
     const [prizeRating, setPrizeRating] = useState<number>(0);
-
+    //boealeano para printear button
+    const [buttonEnabled, setButtonEnabled] = useState<boolean>(false)
     useEffect(() => {
         const timeout = setTimeout(() => setShowModal(true), 10);
         return () => clearTimeout(timeout);
@@ -40,10 +47,40 @@ export function ModalAssessments({ onClose, title, subTitle }: Props) {
         ));
     };
 
-    function sendValues() {
+    async function sendValues() {
+        setLoading(true)
         console.log(`ENVIANDO AL FETCH ------> ${gameRating} y ${prizeRating}`)
+        //envio correcto
+        try {
+            const response = await fetch(`${baseUrl}/encuesta?premio=${prizeRating}&juego=${gameRating}`, {
+                credentials: 'include' as RequestCredentials,
+                mode: "cors" as RequestMode,
+                redirect: 'follow' as RequestRedirect
+            })
+            if (!response.ok) {
+
+                console.error('Error');
+                setError(true)
+                return
+            }
+            const data = await response.json();
+            console.log(data)
+            onClose()
+        } catch (error) {
+            console.error(error)
+        }
+        finally {
+            setLoading(false)
+        }
     }
     useEffect(() => {
+        if (gameRating !== 0 && prizeRating !== 0) {
+            setButtonEnabled(true)
+            return
+        }
+        else {
+            setButtonEnabled(false)
+        }
         console.log(`valores, juego: ${gameRating} premio: ${prizeRating}`)
     }, [gameRating, prizeRating])
 
@@ -54,6 +91,9 @@ export function ModalAssessments({ onClose, title, subTitle }: Props) {
                     className={`fixed inset-0 z-50 flex items-center justify-center overflow-auto bg-black bg-opacity-50 transition-opacity duration-300 ${showModal ? 'opacity-100' : 'opacity-0'}`}
                 >
                     <div className="gradientBackground border-4 border-redMain rounded-2xl p-8 w-[20rem] sm:w-[24rem] xl:w-[26rem] py-8 shadow-2xl transform transition-all duration-300">
+                        {loading && (
+                            <SpinnerFetch />
+                        )}
                         <div className="flex bisonBoldItallic flex-wrap justify-between items-center py-1">
                             <h2 style={{ textShadow: '4px 6px 6px rgba(0, 0, 0, 0.5)' }} className="text-2xl textGothamBlack text-center tracking-wide text-white bisonBoldItallic px-2 mx-auto uppercase">
                                 {title}
@@ -83,12 +123,15 @@ export function ModalAssessments({ onClose, title, subTitle }: Props) {
                             </div>
                         </div>
                         {/* BUTTON ENVIAR */}
-                        <button onClick={sendValues} className="flex items-center rounded-full mx-auto  shadow-2xl shadow-black ">
-                            <img src={buttonSend} className="  w-[10dvh]" alt="" />
+                        <button disabled={!buttonEnabled} onClick={sendValues} className="flex items-center rounded-full mx-auto shadow-2xl shadow-black ">
+                            <img src={buttonEnabled ? buttonSend : buttonSendDisabled} /* src={buttonEnabled ? buttonSend : buttonEnabled} */ className="w-[10dvh]" alt="buttonSend" />
                         </button>
                     </div>
                 </div>
             </div>
+            {error && (
+                <ModalError onClose={() => setError(false)} subTitle='Intentelo nuevamente...' title='Ocurrio un error al enviar el formulario' />
+            )}
         </div>
     );
 }

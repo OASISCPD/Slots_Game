@@ -5,10 +5,6 @@ const logoPath = `/images/${domain.toLowerCase()}/logoDominio.png`;
 import { Footer } from '../Footer';
 import { useNavigate } from 'react-router-dom';
 import { FullScreeeLoader } from '../loadings/FullScreenLoader';
-import { getGradientByDomain } from '../../logic/logicColors';
-import { FaMapMarkerAlt } from 'react-icons/fa';
-import { ModalLogic } from '../logic/ModalLogic';
-import { ModalAssessments } from '../mod/ModalAssessments';
 
 export function MinorAge({ domain }: propDomain) {
     //logica de carga de imagenes en el componente
@@ -44,7 +40,6 @@ export function MinorAge({ domain }: propDomain) {
             ) : (
                 <div className={`flex flex-col min-h-screen`}
                 >
-                    {domain}
                     <div className="flex-grow flex flex-col justify-center py-24  bisonBoldItallic">
                         <div className="relative z-20 mx-[2rem] text-start py-4 text-white ">
                             <h1 style={{ textShadow: '2px 5px 4px rgba(0, 0, 0, 0.5)' }} className=' text-4xl tracking-wide text-center  '>ESTA PROMO <span className='text-yellowMain'>ES SOLO PARA PERSONAS MAYORES DE 18 AÑOS.</span> </h1>
@@ -62,7 +57,7 @@ export function MinorAge({ domain }: propDomain) {
                             </button>
                         </div>
                         <div className='flex justify-center items-center content-center my-12'>
-                            <img src={logoPath} alt="Logo Pilar" className='w-[12rem] sm:w-[14rem]  2xl:w-[16rem]' />
+                            <img src={logoPath} alt="Logo Pilar" className={`${domain==='SALTA'?'w-[8rem] sm:w-[10rem]  2xl:w-[12rem]':'w-[12rem] sm:w-[14rem]  2xl:w-[16rem]'}`} />
                         </div>
                     </div>
                     <Footer domain={domain} />

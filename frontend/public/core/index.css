@@ -27,3 +27,29 @@ body {
 }
 
 /*# sourceMappingURL=index.css.map */
+@media (min-width: 690px) and (max-width:1023px) {
+
+  /* Cambia a la resolución mínima que definas para tablets */
+  .slots {
+    background-color: transparent;
+  }
+
+  .slots .reel {
+    background-image: url("/images/rool.png");
+    /* Cambia a la imagen que prefieras para tablets y en adelante */
+  }
+
+}
+
+@media (min-width: 1024px) {
+
+  /* Esto aplicará estilos solo a pantallas de ordenador grandes */
+  .slots {
+    /* Aplica aquí tus estilos específicos para pantallas de ordenador */
+    background-color: #9943ff;
+    /*     background-color: transparent */
+    /* opcion */
+
+  }
+
+}

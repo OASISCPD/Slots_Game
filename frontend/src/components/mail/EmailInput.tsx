@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 
 export function EmailInput() {
     const [email, setEmail] = useState('');
@@ -9,7 +9,7 @@ export function EmailInput() {
         setEmail(value);
 
         const [username, domain] = value.split('@');
-
+console.log(username)
         // Solo mostrar sugerencia si hay un `@` y el usuario no ha terminado de escribir el dominio.
         if (domain === '') {
             setSuggestion('gmail.com');

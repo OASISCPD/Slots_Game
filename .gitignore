@@ -12,7 +12,6 @@ flask_session
 node_modules
 static
 templates
-frontend_backup
 *.py
 
 # Editor directories and files
