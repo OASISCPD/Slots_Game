@@ -4,7 +4,6 @@ import { baseUrl, domain } from '../../content/content';
 import { ModalError } from './ModalError';
 import { SpinnerFetch } from '../loadings/Spinner';
 const buttonSend = `/images/${domain.toLowerCase()}/buttonEnviar.png`;
-const buttonSendDisabled = `/images/${domain.toLowerCase()}/buttonEnviarDisabled.png`;
 interface Props {
     onClose: () => void;
     title: string | undefined;
@@ -123,9 +122,12 @@ export function ModalAssessments({ onClose, title, subTitle }: Props) {
                             </div>
                         </div>
                         {/* BUTTON ENVIAR */}
-                        <button disabled={!buttonEnabled} onClick={sendValues} className="flex items-center rounded-full mx-auto shadow-2xl shadow-black ">
-                            <img src={buttonEnabled ? buttonSend : buttonSendDisabled} /* src={buttonEnabled ? buttonSend : buttonEnabled} */ className="w-[10dvh]" alt="buttonSend" />
-                        </button>
+                        <div className='mx-auto flex justify-center items-center'>
+
+                            <button disabled={!buttonEnabled} onClick={sendValues} className={` ${buttonEnabled ? '' : 'opacity-50 cursor-not-allowed'}flex items-center rounded-full mx-auto justify-center shadow-2xl shadow-black `}>
+                                <img src={buttonEnabled ? buttonSend : buttonSend} /* src={buttonEnabled ? buttonSend : buttonEnabled} */ className="w-[10dvh] mx-auto" alt="buttonSend" />
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -15,15 +15,23 @@ body {
   height: 240px;
   display: flex;
   justify-content: space-between;
-  background-color: #9943ff;
-  z-index: 0;
+  /* background-color: #9943ff; */
+  background-color: transparent;
+  z-index: 5;
+  border: 4px solid red;
+  padding: 6px;
+  border-radius: 4%;
 }
 
 .slots .reel {
   width: 79px;
+  /* border: 2px solid 18011D; */
+  border-radius: 2%;
   height: 240px;
-  background-image: url("/images/rool.png");
-  z-index: 2;
+  background-image: url("/images/zarate/rool.jpg");
+  /* background-image: url("/images/zarate/rool.png"); */
+  /*  background-image: url("/images/pilar/rool.png"); */
+  z-index: 0;
 }
 
 /*# sourceMappingURL=index.css.map */
@@ -34,10 +42,9 @@ body {
     background-color: transparent;
   }
 
-  .slots .reel {
+  /* .slots .reel {
     background-image: url("/images/rool.png");
-    /* Cambia a la imagen que prefieras para tablets y en adelante */
-  }
+  } */
 
 }
 
@@ -46,7 +53,8 @@ body {
   /* Esto aplicará estilos solo a pantallas de ordenador grandes */
   .slots {
     /* Aplica aquí tus estilos específicos para pantallas de ordenador */
-    background-color: #9943ff;
+    /* background-color: #9943ff; */
+    background-color: transparent;
     /*     background-color: transparent */
     /* opcion */
 

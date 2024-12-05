@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { getPrize } from "../../../api/getPrize"
 import { codeCampaignPilar, codeCampaignZarate, codeCampaignSalta, propDomain, domain } from "../../../content/content"
 import { dto_prizes_get,/*  prizesHard  */ } from "../../../data/data"
@@ -15,7 +15,8 @@ import { useNavigate } from "react-router-dom"
 import { dtoModal, ModalError } from "../../mod/ModalError"
 import { ModalAge } from "../../mod/ModalAge"
 import { ModalOk } from "../../mod/ModalOk"
-import { TemplateMail } from "../mobile/TemplateMail"
+import { TemplateMail } from "../TemplateMail"
+import { ModalInfo } from "../../mod/ModalInfo"
 /* import { useNavigate } from "react-router-dom" */
 const logoPathTitle3 = `/images/${domain.toLowerCase()}/tituloDesktop3.png`;
 const logoPathTitle2 = `/images/${domain.toLowerCase()}/tituloDesktop2.png`;
@@ -49,6 +50,10 @@ export function HomeDesktop({ domain }: propDomain) {
     //validacion de menor de edad agregando logica
     const [fetchPrize, setFetchPrize] = useState<boolean>(false);
     const [showAgeModal, setShowAgeModal] = useState<boolean>(false);
+    //modal que maneja info para los clientes
+    const [modalInfo, setModalInfo] = useState<boolean>(false)
+    //audio de win
+    const audioRef = useRef<HTMLAudioElement>(null)
     /* console.log(prizes) */
     //funcion que trae el premio
     async function getData() {
@@ -70,10 +75,11 @@ export function HomeDesktop({ domain }: propDomain) {
                 setLoadingFetch(false) */
         try {
             const res: any = await getPrize(campaignCode)
-            /* const res = { status_code: 401 } */
+            /*  const resTEST = { status: 402 } */
             // Handle various status codes
             console.log('CODIGO DE ESTADO', res.status)
             const data = await res.json()
+            console.log(res.status)
             switch (res.status) {
                 case 401:
                     const email = await fetchMailEnviado();
@@ -84,7 +90,6 @@ export function HomeDesktop({ domain }: propDomain) {
                         setModal({ boolean: true, number: 401 });
                         setDataModal({ title: 'El premio ya fue enviado', subTitle: `Checkeá tu casilla de mail y buscá Promociones ${domainText}` });
                     }
-                    /*   initPrizes(); */
                     break;
                 case 402:
                     /* setModal({ boolean: true, number: 200 }); */
@@ -104,9 +109,12 @@ export function HomeDesktop({ domain }: propDomain) {
                     setNamePrize(namePrize402[0])
                     break;
                 case 403:
+                    setModal({ boolean: true, number: 403 });
+                    setDataModal({ title: '¡Estamos mejorando nuestra plataforma!', subTitle: 'Estaremos de vuelta pronto' });
+                    break
                 case 404:
                 case 500:
-                    setModal({ boolean: true, number: res.status_code });
+                    setModal({ boolean: true, number: 500 });
                     setDataModal({ title: '¡Estamos mejorando nuestra plataforma!', subTitle: 'Estaremos de vuelta pronto' });
                     break;
                 case 200:
@@ -127,47 +135,10 @@ export function HomeDesktop({ domain }: propDomain) {
                     break;
                 default:
                     console.error('Error desconocido');
-                    /*   setModal({ boolean: true, number: 500 });
-                      setDataModal({ title: '¡Ocurrio un error desconocido!', subTitle: 'Estaremos de vuelta pronto' }); */
+                    setModal({ boolean: true, number: 500 });
+                    setDataModal({ title: '¡Ocurrio un error desconocido!', subTitle: 'Estaremos de vuelta pronto' });
                     break;
             }
-            /* 
-             {modal?.boolean && modal.number === 401 && (
-                <Modal isOpen={true} onClose={() => setModal({ boolean: false, number: 401 })}>
-                    <ModalOk email={email} onClose={() => { setModal({ boolean: false, number: 401 }), navigate('/howToGet') }} title={dataModal?.title} subTitle={dataModal?.subTitle} />
-                </Modal>
-            )}
-            {modal?.boolean && modal.number === 403 && (
-                <Modal isOpen={true} onClose={() => setModal({ boolean: false, number: 403 })}>
-                    <ModalError buttonText='Continuar' onClose={() => { setModal({ boolean: false, number: 403 }), navigate('/howToGet') }} title={dataModal?.title} subTitle={dataModal?.subTitle} />
-                </Modal>
-            )}
-            {modal?.boolean && modal.number === 404 && (
-                <Modal isOpen={true} onClose={() => setModal({ boolean: false, number: 403 })}>
-                    <ModalError buttonText='Continuar' onClose={() => { setModal({ boolean: false, number: 403 }), navigate('/howToGet') }} title={dataModal?.title} subTitle={dataModal?.subTitle} />
-                </Modal>
-            )}
-            {modal?.boolean && modal.number === 500 && (
-                <Modal isOpen={true} onClose={() => setModal({ boolean: false, number: 500 })}>
-                    <ModalError buttonText='Continuar' onClose={() => { setModal({ boolean: false, number: 500 }), navigate('/howToGet') }} title={dataModal?.title} subTitle={dataModal?.subTitle} />
-                </Modal>
-            )}
-            */
-            //verificamos si res es un arreglo vacio
-            /*  if (Array.isArray(res) && res.length === 0) {
-                 setLoadingFetch(false)
-                 console.log('La lista esta vacia printear modal')
-                    setModalError(true)
-                 return
-             }
-             console.log('respuesta', res)
-             setPrizes(res)
-             //constante que almacena el nombre del premio
-             const namePrize: string[] = getNamePrize(res)
-             console.log('nombre del premio anentrega--->', namePrize[0])
-             setNamePrize(namePrize[0]) */
-            //funcion que abriria el modal para preguntar si es mayor de edad
-            //aca iria
             console.log(res)
         } catch (error) {
             console.error(error)
@@ -177,6 +148,10 @@ export function HomeDesktop({ domain }: propDomain) {
     }
     //funcion que abre el modal para confirmar el premio
     function openModal() {
+        audioRef.current?.play().catch(error => {
+            console.error('Error al reproducir el sonido ganador para el premio:', error);
+
+        })
         setModal({ boolean: true, number: 200 })
     }
     //function que cierra el modal
@@ -215,9 +190,6 @@ export function HomeDesktop({ domain }: propDomain) {
         // Cargar todas las imágenes de manera asíncrona
         await Promise.all(images.map(loadImage));
 
-        /* setImagesLoaded(true); // Indica que las imágenes han sido cargadas
-        console.log('imagenes cargadas') */
-        //aca deberia ir una funcion de timeout de 1 segundo\
         // Función de timeout de 1 segundo
         setTimeout(() => {
             console.log('Esperando 1 segundo después de cargar las imágenes...');
@@ -249,7 +221,8 @@ export function HomeDesktop({ domain }: propDomain) {
     const handleAgeConfirmation = () => {
         localStorage.setItem('isAdult', 'true');
         setShowAgeModal(false);
-        setFetchPrize(true)
+        setModalInfo(true)
+        /*  setFetchPrize(true) */
     };
 
     const handleAgeRejection = () => {
@@ -265,17 +238,30 @@ export function HomeDesktop({ domain }: propDomain) {
             setShowAgeModal(true);
             return
         }
-        setFetchPrize(true)
+        setModalInfo(true)
+        /* setFetchPrize(true) *///cambio la forma de llamada al fetch
     }
     useEffect(() => {
-        if (fetchPrize) {
-            console.log('se puede hacer la consulta a l fecth pq es mayor de edad')
+        if (fetchPrize && !modalInfo) {
+            console.log('se puede hacer la consulta a l fecth pq es mayor de edad y acepto el modal de tres chances')
             getData()
             /* setPrizes([{ descripcion_premio: '', estado: true, id_premio: 4, index_id: 5 }]) */
         }
     }, [fetchPrize])
+
+    //useEffect para cargar el sonido del win
+    useEffect(() => {
+        //preguntamos si aexiste el audio ref entonces le asociamos la ruta de donde tengo mi sounds, en prod seria con un static
+        if (audioRef.current) {
+            audioRef.current.src = '/sounds/win.mp3'
+            audioRef.current.volume = 0.2;
+        }
+    }, [])
+
     return (
         <div className="flex flex-col min-h-screen">
+            {/* agregamos la etiqueta del audio para que pueda escucharse */}
+            <audio ref={audioRef} />
             {!imagesLoaded && (
                 <FullScreeeLoader />
             )}
@@ -293,36 +279,31 @@ export function HomeDesktop({ domain }: propDomain) {
                 ) : (
 
                     domain.toUpperCase() === "SALTA" ? (
-                        <div className="relative ">
-                            <div className="grid grid-cols-2 gap-4 w-[60rem] mx-auto items-center justify-center">
+                        <div className="relative overflow-hidden">
+                            <div className="absolute right-[8dvh] top-4 h-[16dvh] w-[16dvh]  ">
+                                <img src={logoSalta} alt="" />
+                            </div>
+                            <div className="grid grid-cols-1 gap-4  mr-[14rem] items-center justify-center">
                                 <div>
                                     <img
                                         src={logoPathTitle3}
                                         alt=""
-                                        className={`w-[24rem] sm:w-[24rem] lg:w-[20rem] xl:w-[24rem] 2xl:w-[54dvh] mx-auto ${clicks > 2 ? '' : 'hidden'}`}
+                                        className={`w-[24rem] sm:w-[24rem] lg:w-[60%] xl:w-[60%] 2xl:w-[40%]  mx-auto ${clicks > 2 ? '' : 'hidden'}`}
                                     />
 
                                     <img
                                         src={logoPathTitle2}
                                         alt=""
-                                        className={`w-[24rem] sm:w-[24rem] lg:w-[20rem] xl:w-[24rem] 2xl:w-[54dvh] mx-auto ${clicks === 2 ? '' : 'hidden'}`}
+                                        className={`w-[24rem] sm:w-[24rem] lg:w-[60%] xl:w-[60%] 2xl:w-[40%]  mx-auto ${clicks === 2 ? '' : 'hidden'}`}
                                     />
 
                                     <img
                                         src={logoPathTitle1}
                                         alt=""
-                                        className={`w-[24rem] sm:w-[24rem] lg:w-[20rem] xl:w-[24rem] 2xl:w-[54dvh] mx-auto ${clicks >= 0 && clicks <= 1 ? '' : 'hidden'}`}
-                                    />
-                                </div>
-                                <div>
-                                    <img
-                                        src={logoSalta}
-                                        alt=""
-                                        className={`w-[8rem] sm:w-[10rem] lg:w-[8rem] xl:w-[12rem] 2xl:w-[16dvh] mx-auto `}
+                                        className={`w-[24rem] sm:w-[24rem] lg:w-[60%] xl:w-[60%] 2xl:w-[40%]  mx-auto ${clicks >= 0 && clicks <= 1 ? '' : 'hidden'}`}
                                     />
                                 </div>
                             </div>
-
                             {prizes && prizes.length >= 0 ? (
                                 <div className="my-[1rem]">
                                     <GameDesktop setClicks={setClicks} getPrize={openModal} prizes={prizes} />
@@ -330,7 +311,7 @@ export function HomeDesktop({ domain }: propDomain) {
                             ) : (
                                 <div className=" flex flex-col my-[1rem] text-white justify-center items-center ">
                                     <h1>CARGANDO JUEGO....</h1>
-                                    <div className="border-[2px] animate-pulse border-white bg-black bg-opacity-30 rounded-md w-[70%] h-[14rem] flex items-center justify-center">
+                                    <div className="border-[2px] animate-pulse border-white bg-black bg-opacity-30 rounded-md w-[70%] lg:max-w-xs h-[14rem] flex items-center justify-center">
                                         <FaSpinner className="text-4xl animate-spin " />
                                     </div>
                                 </div>
@@ -363,7 +344,7 @@ export function HomeDesktop({ domain }: propDomain) {
                             ) : (
                                 <div className=" flex flex-col my-[1rem] text-white justify-center items-center ">
                                     <h1>CARGANDO JUEGO....</h1>
-                                    <div className="border-[2px] animate-pulse border-white bg-black bg-opacity-30 rounded-md w-[70%] h-[14rem] flex items-center justify-center">
+                                    <div className="border-[2px] animate-pulse border-white bg-black bg-opacity-30 rounded-md w-[70%] lg:max-w-xs h-[14rem] flex items-center justify-center">
                                         <FaSpinner className="text-4xl animate-spin " />
                                     </div>
                                 </div>
@@ -372,24 +353,17 @@ export function HomeDesktop({ domain }: propDomain) {
                         </div>
                     )
                 )}
-                {domain !== 'SALTA' && (
+                {/*      {domain !== 'SALTA' && (
                     <img src={logoPath} alt="" className="w-[12rem]  sm:w-[12rem] lg:w-[11rem] xl:w-[20dvh] mx-auto" />
+                )} */}
+                {domain !== 'SALTA' && (
+                    <img src={logoPath} alt="" className={`${domain === "SALTA" ? 'animate-spin-once w-[8rem] sm:w-[10rem] lg:w-[10rem]' : 'w-[12rem] sm:w-[12rem] lg:w-[12rem]'} mx-auto`} />
                 )}
             </div>
-            {/*    ) : ( */}
-            {/*   <div className=" flex flex-col justify-center items-center ">
-                <h1>CARGANDO JUEGO....</h1>
-                <div className="border-[2px] animate-pulse border-white bg-black bg-opacity-30 rounded-md w-[80%] h-[18rem] flex items-center justify-center">
-                    <FaSpinner className="text-4xl animate-spin text-white" />
-                </div>
-            </div> */}
-            {/* IMAGE */}
-            {/*  <img src={logoPath} alt="" className={`${domain === "SALTA" ? 'w-[6rem] sm:w-[8rem] lg:w-[8rem]' : 'w-[12rem] sm:w-[12rem] lg:w-[12rem]'} mx-auto`} /> */}
             <Footer domain={domain} />
-            {/*     )} */}
             {modalError && (
                 <ModalLogic isOpen={true} onClose={closeModal}>
-                    <ModalError subTitle="lorem" title="lorem" onClose={() => navigate('/howToGet')} />
+                    <ModalError subTitle="Estaremos de vuelta pronto" title="¡Estamos mejorando nuestra plataforma!" onClose={() => navigate('/howToGet')} />
                 </ModalLogic>
             )}
             {showAgeModal && (
@@ -402,7 +376,7 @@ export function HomeDesktop({ domain }: propDomain) {
                 </ModalLogic>
             )}
             {modal?.boolean && modal.number === 200 && (
-                <ModalLogic isOpen={true} onClose={() => setModal({ boolean: false, number: 401 })}>
+                <ModalLogic isOpen={true} onClose={() => setModal({ boolean: false, number: 200 })}>
                     <ModalGetPrize prize={namePrize} onClose={closeModal} onCloseOk={closeModalOk} />
                 </ModalLogic>
             )}
@@ -411,6 +385,22 @@ export function HomeDesktop({ domain }: propDomain) {
                     <ModalOk email={email} onClose={() => { setModal({ boolean: false, number: 401 }), navigate('/howToGet') }} title={dataModal?.title} subTitle={dataModal?.subTitle} />
                 </ModalLogic>
             )}
-        </div>
+            {modal?.boolean && modal.number === 403 && (
+                <ModalLogic isOpen={true} onClose={() => setModal({ boolean: false, number: 403 })}>
+                    <ModalError onClose={() => { setModal({ boolean: false, number: 403 }), navigate('/howToGet') }} title={dataModal?.title} subTitle={dataModal?.subTitle} />
+                </ModalLogic>
+            )}
+            {modal?.boolean && modal.number === 500 && (
+                <ModalLogic isOpen={true} onClose={() => setModal({ boolean: false, number: 500 })}>
+                    <ModalError onClose={() => { setModal({ boolean: false, number: 500 }) }} title={dataModal?.title} subTitle={dataModal?.subTitle} />
+                </ModalLogic>
+            )}
+            {/* MODAL PARA LA INFO  */}
+            {modalInfo && (
+                <ModalLogic isOpen={true} onClose={() => setModalInfo(false)}>
+                    <ModalInfo onCloseOk={() => { setModalInfo(false), setFetchPrize(true) }} title="TENÉS TRES CHANCES PARA GANAR UN PREMIO" />
+                </ModalLogic>
+            )}
+        </div >
     )
 }

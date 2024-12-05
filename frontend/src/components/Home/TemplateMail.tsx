@@ -3,18 +3,18 @@ import { useEffect, useState } from "react";
 const buttonSend = `/images/${domain.toLowerCase()}/buttonEnviar.png`;
 /* const buttonSendDisabled = `/images/${domain.toLowerCase()}/buttonEnviarDisabled.png`; */
 
-import { dtoModal, ModalError } from '../../mod/ModalError';
-import { ModalLogic } from "../../logic/ModalLogic";
-import { ModalOk } from "../../mod/ModalOk";
+import { dtoModal, ModalError } from '../mod/ModalError';
+import { ModalLogic } from "../logic/ModalLogic";
+import { ModalOk } from "../mod/ModalOk";
 /* import '../../styles/slide.css' */
 import { useNavigate } from "react-router-dom";
 import {
     baseUrl,/* , domain  */
     domain
-} from "../../../content/content";
-import { FaAt } from "react-icons/fa";
-import { ModalAlreadyPlayed } from "../../mod/ModalAlreadyPlayed";
-import { ModalAssessments } from "../../mod/ModalAssessments";
+} from "../../content/content";
+/* import { FaAt } from "react-icons/fa"; */
+import { ModalAlreadyPlayed } from "../mod/ModalAlreadyPlayed";
+import { ModalAssessments } from "../mod/ModalAssessments";
 
 type dtoDataEmail = {
     nombre_apellido: string
@@ -172,31 +172,32 @@ export function TemplateMail({ stopConfetti }: propFather) {
                     </h2>
                 </div>
                 <div className="relative w-full max-w-xl  my-[4dvh] items-center">
-                    <span className="absolute inset-y-0 left-2 flex items-center pl-3 pointer-events-none">
+                {/*     <span className="absolute inset-y-0 left-2 flex items-center pl-3 pointer-events-none">
                         <FaAt size={24} className="text-fuchsia-700" />
-                    </span>
+                    </span> */}
                     <input
+                        id="inputMail-"
                         type="email"
                         value={email}
                         onChange={handleEmailChange}
-                        className=" py-3 pl-[8dvh]   text-black text-xl placeholder-gray-500 h-full w-full  rounded-full focus:outline-none shadow-sm shadow-amber-100 focus:border-indigo-500"
+                        className=" py-3 pl-[2dvh]   text-black text-xl placeholder-gray-500 h-full w-full  rounded-full focus:outline-none shadow-sm shadow-amber-100 focus:border-indigo-500"
                         placeholder="M A I L"
                     />
                 </div>
                 <div className="w-full max-w-xl  gothamItalic text-sm">
-                    <h1 style={{ textShadow: '4px 6px 6px rgba(0, 0, 0, 0.5)' }} className="text-white uppercase">VENÍ A RECLAMAR TU PREMIO SOLO DE LUNES A JUEVES</h1>
+                    <h1 style={{ textShadow: '4px 6px 6px rgba(0, 0, 0, 0.5)' }} className="text-white uppercase mb-[1dvh]">VENÍ A RECLAMAR TU PREMIO <span className="text-yellowMain">de lunes a jueves (no aplica viernes, sabados, domingos ni feriados)</span></h1>
                     <h1 style={{ textShadow: '4px 6px 6px rgba(0, 0, 0, 0.5)' }} className="text-white uppercase"> <span className="text-yellowMain">RECORDá </span>que si ya participaste previamente de raspá y ganá o girá y ganá, no vas a poder reclamar el premio.</h1>
                 </div>
                 {/* TERMINOS Y CONDICIONES */}
                 <div className="flex items-center gothamItalic text-sm uppercase  w-full max-w-xl  justify-start my-[2dvh]   ">
                     <input
                         onChange={handleCheckboxChange}
-                        id="default-checkbox"
+                        id="checkBox"
                         type="checkbox"
                         checked={isChecked}
                         className="  text-blue-600 bg-gray-100 border-gray-300 rounded-sm  focus:ring-blue-500 focus:ring-2 " required
                     />
-                    <label style={{ textShadow: '4px 6px 6px rgba(0, 0, 0, 0.5)' }} onClick={() => window.open('/terms')} className="ms-2   text-white  underline ">Acepto términos y condiciones</label>
+                    <label id="linkDomain" style={{ textShadow: '4px 6px 6px rgba(0, 0, 0, 0.5)' }} onClick={() => window.open('/terms')} className="ms-2   text-white  underline  hover:text-yellowMain cursor-pointer duration-100 ">Acepto términos y condiciones</label>
                 </div>
 
                 <div className="flex items-center w-full max-w-xl">

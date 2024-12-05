@@ -56,13 +56,13 @@ export function Terms({ domain }: propDomain) {
 
                                     </li>
                                     <li className='my-2'>
-                                        4. La vigencia de la promoción será desde el 04 de Noviembre de 2024 a las 10:00 hs hasta el 30 de Noviembre de 2024 a las 23:59 hs.
+                                        4. La vigencia de la promoción será desde el 08 de Noviembre de 2024 a las 10:00 hs hasta el 30 de Noviembre de 2024 a las 23:59 hs.
                                     </li>
                                     <li className='my-2'>
                                         5. Solamente podrán participar de la promoción las personas físicas mayores de 18 años, que haya cumplido con los requisitos* solicitados de acuerdo al sorteo que se realice. No podrán participar aquellas personas que no reúnan dichos requisitos como así tampoco personas jurídicas, empleados de Bingo Pilar SA, directivos del organizador, personal del Instituto Provincial de Loterías y Casinos y grupos de contingentes.
                                     </li>
                                     <li className='my-2'>
-                                        6. Mecánica de la promoción. El usuario accederá a marketing.bingopilar.com.ar donde encontrará el juego de “3 Para Ganar” con premios disponibles. Todas las jugadas tienen premios. Para poder hacerse beneficiario del premio el usuario debe de manera excluyente ingresar una dirección de correo electrónica válida, donde recibirá el código de su premio. Los premios deberán ser canjeados en el plazo de 4 días desde la generación del correo electrónico con el qr que le ha llegado y el dni del usuario. De lo contrario el beneficio quedará disponible para otro ganador.
+                                        6. Mecánica de la promoción. El usuario accederá a promoslot.bingopilar.com.ar donde encontrará el juego de “3 Para Ganar” con premios disponibles. Todas las jugadas tienen premios. Para poder hacerse beneficiario del premio el usuario debe de manera excluyente ingresar una dirección de correo electrónica válida, donde recibirá el código de su premio. Los premios deberán ser canjeados de lunes a jueves exclusivamente y en el plazo de 7 días desde la generación del correo electrónico con el qr que le ha llegado y el dni del usuario. No válido para canjear los días viernes, sábados, domingos y feriados, sin excepción ni posibilidad de reclamo alguno.  De lo contrario el beneficio quedará disponible para otro ganador.
                                     </li>
                                     <li className='my-2'>
                                         Para comenzar a hacer uso de su beneficio, deberá presentar el código recibido personalmente en el stand de Atención al Cliente del Bingo, donde se corroborará la validez del código y la identidad de la persona escaneando el DNI físico o desde Mi Argentina.
@@ -90,13 +90,13 @@ export function Terms({ domain }: propDomain) {
 
                                     </li>
                                     <li className='my-2'>
-                                        4. La vigencia de la promoción será desde el 04 de Noviembre de 2024 16:00 hs hasta el 30 de Noviembre de 2024 a las 23:59 hs.
+                                        4. La vigencia de la promoción será desde el 08 de Noviembre de 2024 16:00 hs hasta el 30 de Noviembre de 2024 a las 23:59 hs.
                                     </li>
                                     <li className='my-2'>
                                         5. Solamente podrán participar de la promoción las personas físicas mayores de 18 años, que haya cumplido con los requisitos* solicitados de acuerdo al sorteo que se realice. No podrán participar aquellas personas que no reúnan dichos requisitos como así tampoco personas jurídicas, empleados de Stars Game SA, directivos del organizador, personal del Instituto Provincial de Loterías y Casinos y grupos de contingentes.
                                     </li>
                                     <li className='my-2'>
-                                        6. Mecánica de la promoción. El usuario accederà a promos.oasiszarate.com.ar donde encontrará el juego de “3 Para Ganar” con premios disponibles. Todas las jugadas tienen premios. Para poder hacerse beneficiario del premio el usuario debe de manera excluyente ingresar una dirección de correo electrónica válida, donde recibirá el código de su premio. Los premios deberán ser canjeados en el plazo de 4 días desde la generación del correo electrónico con el qr que le ha llegado y el dni del usuario. De lo contrario el beneficio quedará disponible para otro ganador.
+                                        6. Mecánica de la promoción. El usuario accederà a promoslot.oasiszarate.com.ar donde encontrará el juego de “3 Para Ganar” con premios disponibles. Todas las jugadas tienen premios. Para poder hacerse beneficiario del premio el usuario debe de manera excluyente ingresar una dirección de correo electrónica válida, donde recibirá el código de su premio. Los premios deberán ser canjeados exclusivamente en el plazo de 7 días desde la generación del correo electrónico con el qr que le ha llegado y el dni del usuario. No se podrá canjear los días viernes, sábados, domingos y feriados, sin excepción ni posibilidad de reclamo alguno. De lo contrario el beneficio quedará disponible para otro ganador
                                     </li>
                                     <li className='my-2'>
                                         Para comenzar a hacer uso de su beneficio, deberá presentar el código recibido personalmente en el stand de Atención al Cliente del Bingo, donde se corroborará la validez del código y la identidad de la persona escaneando el DNI.
@@ -125,13 +125,13 @@ export function Terms({ domain }: propDomain) {
 
                                     </li>
                                     <li className='my-2'>
-                                        4. La vigencia de la promoción será desde el 04 de Noviembre de 2024 a las 10:00 hs hasta el 30 de Noviembre de 2024 a las 23:59 hs.
+                                        4. La vigencia de la promoción será desde el 08 de Noviembre de 2024 a las 10:00 hs hasta el 30 de Noviembre de 2024 a las 23:59 hs.
                                     </li>
                                     <li className='my-2'>
                                         5. Solamente podrán participar de la promoción las personas físicas mayores de 18 años, que haya cumplido con los requisitos* solicitados de acuerdo al sorteo que se realice. No podrán participar aquellas personas que no reúnan dichos requisitos como así tampoco personas jurídicas, empleados de New Gaming S.R.L, directivos del organizador, personal del Instituto Provincial de Loterías y Casinos y grupos de contingentes.
                                     </li>
                                     <li className='my-2'>
-                                        6. Mecánica de la promoción. El usuario accederá a promos.newgaming.com.ar donde encontrará el juego de “3 Para Ganar” con premios disponibles. Todas las jugadas tienen premios. Para poder hacerse beneficiario del premio el usuario debe de manera excluyente ingresar una dirección de correo electrónica válida, donde recibirá el código de su premio. Los premios deberán ser canjeados en el plazo de 4 días desde la generación del correo electrónico con el qr que le ha llegado y el dni del usuario. De lo contrario el beneficio quedará disponible para otro ganador.
+                                        6. Mecánica de la promoción. El usuario accederá a promoslot.nuevocasinoalberdi.com.ar donde encontrará el juego de “3 Para Ganar” con premios disponibles. Todas las jugadas tienen premios. Para poder hacerse beneficiario del premio el usuario debe de manera excluyente ingresar una dirección de correo electrónica válida, donde recibirá el código de su premio. Los premios deberán ser canjeados exclusivamente en el plazo de 7 días desde la generación del correo electrónico con el qr que le ha llegado y el dni del usuario. No válido para canjear los días viernes, sábados, domingos y feriados, sin excepción ni posibilidad de reclamo alguno. De lo contrario el beneficio quedará disponible para otro ganador.
                                     </li>
                                     <li className='my-2'>
                                         Para comenzar a hacer uso de su beneficio, deberá presentar el código recibido personalmente en el stand de Atención al Cliente del Casino, donde se corroborará la validez del código y la identidad de la persona escaneando el DNI.
@@ -198,15 +198,15 @@ export function Terms({ domain }: propDomain) {
                                         <span className='font-bold'>4. 1 TICKET DE $7.500:</span> Se limitará el canje a 1 ticket válido por el día del canje. No transferible.  Ticket jugable no cobrable, disponible en las máquinas slots habilitadas para tal fin.
                                     </li>
                                     <li className='my-2'>
-                                        <span className='font-bold'>6. 15 CUPONES PARA EL SORTEO DEL VIAJE A PASO DE LA PATRIA</span> No transferible.
+                                        <span className='font-bold'>5. 15 CUPONES PARA EL SORTEO DEL VIAJE A PASO DE LA PATRIA</span> No transferible.
                                     </li>
                                     <li className='my-2'>
-                                        <span className='font-bold'>7. 15 CUPONES PARA EL SORTEO DE LA MOTO</span> No transferible.
+                                        <span className='font-bold'>6. 15 CUPONES PARA EL SORTEO DE LA MOTO</span> No transferible.
                                     </li>
                                 </ol>
                             )}
                             <div className='my-8 flex justify-center'>
-                                <img src={logoPath} className={`${domain==='SALTA'?'w-[8rem] sm:w-[10rem]  2xl:w-[12rem]':'w-[12rem] sm:w-[14rem]  2xl:w-[16rem]'}`} alt="" />
+                                <img src={logoPath} className={`${domain === 'SALTA' ? 'w-[8rem] sm:w-[10rem]  2xl:w-[12rem]' : 'w-[12rem] sm:w-[14rem]  2xl:w-[16rem]'}`} alt="" />
                             </div>
                         </div>
                     </div>

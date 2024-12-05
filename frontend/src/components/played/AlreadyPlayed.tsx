@@ -53,7 +53,7 @@ export function AlreadyPlayed({ domain }: propDomain) {
                             {/* <button onClick={() => openLink(domain)} className='text-white shadow-lg uppercase mt-8 bg-gradient-to-r hover:scale-95 duration-300 from-redMain to-black border-0 py-2 mx-auto sm:mx-[4rem]  hover:bg-yellow-600 rounded-3xl items-center text-lg px-8 sm:px-12 sm:text-2xl lg:text-lg xl:text-xl'>
                                 {text}
                             </button> */}
-                            <button onClick={() => openLinkWeb(domain)} className={`    items-center `}>
+                            <button id='linkDomain' onClick={() => openLinkWeb(domain)} className={`    items-center `}>
                                 <h1 className='underline text-2xl sm:text-3xl 2xl:text-4xl' style={{ textShadow: '4px 6px 6px rgba(0, 0, 0, 0.5)' }}> {text}</h1>
                             </button>
                         </div>

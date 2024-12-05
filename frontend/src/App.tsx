@@ -5,7 +5,7 @@ import { HowToGet } from './components/howToGet/HowToGet';
 import { AlreadyPlayed } from './components/played/AlreadyPlayed';
 import { Terms } from './components/terms/Terms';
 import { RedirectByResolution } from './components/logic/RedirectWithResolution';
-import { Test } from './components/test/TemplateTest';
+/* import { Test } from './components/test/TemplateTest'; */
 function App() {
 
   return (
@@ -17,7 +17,7 @@ function App() {
           <Route path='/howToGet' element={<HowToGet domain={domain} />} />
           <Route path='/alreadyPlayed' element={<AlreadyPlayed domain={domain} />} />
           <Route path='/terms' element={<Terms domain={domain} />} />
-          <Route path='/test' element={<Test />} />
+          {/* <Route path='/test' element={<Test />} /> */}
         </Routes>
       </Router>
     </div >

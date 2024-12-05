@@ -5,7 +5,7 @@ import { getIndexPrize } from "../logic/convertValues";
 const imageButton = `/images/${domain.toLowerCase()}/spinButton.png`
 //importando image
 const imageBorder = `/images/${domain.toLowerCase()}/testDesktop.png`;
-/* import imageWin from '../../public/images/testWin.png' */
+
 //desktop
 import { useMediaQuery } from "react-responsive";
 import { domain } from "../content/content";
@@ -14,6 +14,9 @@ interface propSlot {
     getPrize: () => void
     setClicks: React.Dispatch<React.SetStateAction<number>>;
 }
+const slotSound = new Audio('/sounds/sonidoSlot5s.mp3')
+//configuramos el sonido a salir 
+slotSound.volume = 0.2; // 20% del volumen
 
 export function GameDesktop({ prizes, getPrize, setClicks }: propSlot) {
     // Define las resoluciones
@@ -29,6 +32,9 @@ export function GameDesktop({ prizes, getPrize, setClicks }: propSlot) {
 
     const handleReactButtonClick = () => {
         if (iframeRef.current) {
+            slotSound.play().catch(error => {
+                console.error('Error al reproducir el sonido:', error)
+            })
             // Envía un mensaje al iframe para que ejecute la función spinReels
             iframeRef.current.contentWindow?.postMessage({ type: 'SPIN', data: indexWin }, '*');
         }
@@ -121,10 +127,10 @@ export function GameDesktop({ prizes, getPrize, setClicks }: propSlot) {
                 {isDesktop && (
                     <div className="relative ">
                         {win ? (
-                            <img src={imageBorder} alt="Fondo" className={`${domain === "SALTA" ? 'w-[40rem]' : 'w-[46rem]'}  h-full   mx-auto object-cover relative z-10`} />
+                            <img src={imageBorder} alt="Fondo" className={`${domain === "SALTA" ? 'w-[40rem]' : 'w-[46rem]'}  h-full opacity-0   mx-auto object-cover relative z-10`} />
 
                         ) : (
-                            <img src={imageBorder} alt="Fondo" className={`${domain === "SALTA" ? 'w-[40rem]' : 'w-[46rem]'}  h-full   mx-auto object-cover relative z-10`} />
+                            <img src={imageBorder} alt="Fondo" className={`${domain === "SALTA" ? 'w-[40rem]' : 'w-[46rem]'}  h-full opacity-0   mx-auto object-cover relative z-10`} />
                         )}
                         <div className={`absolute inset-0  mx-auto   flex items-center justify-center z-0 ${domain === "SALTA" ? 'mt-[1dvh]' : ''}`}>
                             <iframe

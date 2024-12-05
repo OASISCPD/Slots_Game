@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 /* import { dto_prizes_get } from "../../data/data" */
 import { Game } from "../../Game"
 /* import { getPrize } from "../../api/getPrize" */
@@ -7,7 +7,7 @@ import {/*  codeCampaignPilar, codeCampaignZarate, codeCampaignSalta,  */propDom
 import { dto_prizes_get, /* prizesHard */ } from '../../../data/data'
 import { Footer } from "../../Footer"
 import { FullScreeeLoader } from "../../loadings/FullScreenLoader"
-import { TemplateMail } from "../mobile/TemplateMail"
+import { TemplateMail } from "../TemplateMail"
 import { ModalLogic, modalValuesDto } from "../../logic/ModalLogic"
 import { ModalGetPrize } from "../../mod/ModalGetPrize"
 import { getNamePrize } from "../../../logic/convertValues"
@@ -19,6 +19,7 @@ import { ModalAge } from "../../mod/ModalAge"
 import { fetchMailEnviado, getDomainMail } from "../../../logic/mail"
 /* import { ModalAlreadyPlayed } from "../../mod/ModalAlreadyPlayed" */
 import { ModalOk } from "../../mod/ModalOk"
+import { ModalInfo } from "../../mod/ModalInfo"
 const logoPathTitle3 = `/images/${domain.toLowerCase()}/tituloMobile3.png`;
 const logoPathTitle2 = `/images/${domain.toLowerCase()}/tituloMobile2.png`;
 const logoPathTitle1 = `/images/${domain.toLowerCase()}/tituloMobile1.png`;
@@ -50,6 +51,10 @@ export function Home({ domain }: propDomain) {
     //validacion de menor de edad agregando logica
     const [fetchPrize, setFetchPrize] = useState<boolean>(false);
     const [showAgeModal, setShowAgeModal] = useState<boolean>(false);
+    //modal que maneja info para los clientes
+    const [modalInfo, setModalInfo] = useState<boolean>(false)
+    //audio de win 
+    const audioRef = useRef<HTMLAudioElement>(null)
     /* console.log(prizes) */
     //funcion que trae el premio
     async function getData() {
@@ -71,10 +76,12 @@ export function Home({ domain }: propDomain) {
                 setLoadingFetch(false) */
         try {
             const res: any = await getPrize(campaignCode)
-            /* const res = { status_code: 401 } */
+            /*  const resTEST = { status: 402 } */
             // Handle various status codes
+
             console.log('CODIGO DE ESTADO', res.status)
             const data = await res.json()
+            console.log(res.status)
             switch (res.status) {
                 case 401:
                     const email = await fetchMailEnviado();
@@ -85,7 +92,6 @@ export function Home({ domain }: propDomain) {
                         setModal({ boolean: true, number: 401 });
                         setDataModal({ title: 'El premio ya fue enviado', subTitle: `Checkeá tu casilla de mail y buscá Promociones ${domainText}` });
                     }
-                    /*   initPrizes(); */
                     break;
                 case 402:
                     /* setModal({ boolean: true, number: 200 }); */
@@ -105,9 +111,12 @@ export function Home({ domain }: propDomain) {
                     setNamePrize(namePrize402[0])
                     break;
                 case 403:
+                    setModal({ boolean: true, number: 403 });
+                    setDataModal({ title: '¡Estamos mejorando nuestra plataforma!', subTitle: 'Estaremos de vuelta pronto' });
+                    break
                 case 404:
                 case 500:
-                    setModal({ boolean: true, number: res.status_code });
+                    setModal({ boolean: true, number: 500 });
                     setDataModal({ title: '¡Estamos mejorando nuestra plataforma!', subTitle: 'Estaremos de vuelta pronto' });
                     break;
                 case 200:
@@ -128,47 +137,10 @@ export function Home({ domain }: propDomain) {
                     break;
                 default:
                     console.error('Error desconocido');
-                    /*   setModal({ boolean: true, number: 500 });
-                      setDataModal({ title: '¡Ocurrio un error desconocido!', subTitle: 'Estaremos de vuelta pronto' }); */
+                    setModal({ boolean: true, number: 500 });
+                    setDataModal({ title: '¡Ocurrio un error desconocido!', subTitle: 'Estaremos de vuelta pronto' });
                     break;
             }
-            /* 
-             {modal?.boolean && modal.number === 401 && (
-                <Modal isOpen={true} onClose={() => setModal({ boolean: false, number: 401 })}>
-                    <ModalOk email={email} onClose={() => { setModal({ boolean: false, number: 401 }), navigate('/howToGet') }} title={dataModal?.title} subTitle={dataModal?.subTitle} />
-                </Modal>
-            )}
-            {modal?.boolean && modal.number === 403 && (
-                <Modal isOpen={true} onClose={() => setModal({ boolean: false, number: 403 })}>
-                    <ModalError buttonText='Continuar' onClose={() => { setModal({ boolean: false, number: 403 }), navigate('/howToGet') }} title={dataModal?.title} subTitle={dataModal?.subTitle} />
-                </Modal>
-            )}
-            {modal?.boolean && modal.number === 404 && (
-                <Modal isOpen={true} onClose={() => setModal({ boolean: false, number: 403 })}>
-                    <ModalError buttonText='Continuar' onClose={() => { setModal({ boolean: false, number: 403 }), navigate('/howToGet') }} title={dataModal?.title} subTitle={dataModal?.subTitle} />
-                </Modal>
-            )}
-            {modal?.boolean && modal.number === 500 && (
-                <Modal isOpen={true} onClose={() => setModal({ boolean: false, number: 500 })}>
-                    <ModalError buttonText='Continuar' onClose={() => { setModal({ boolean: false, number: 500 }), navigate('/howToGet') }} title={dataModal?.title} subTitle={dataModal?.subTitle} />
-                </Modal>
-            )}
-            */
-            //verificamos si res es un arreglo vacio
-            /*  if (Array.isArray(res) && res.length === 0) {
-                 setLoadingFetch(false)
-                 console.log('La lista esta vacia printear modal')
-                    setModalError(true)
-                 return
-             }
-             console.log('respuesta', res)
-             setPrizes(res)
-             //constante que almacena el nombre del premio
-             const namePrize: string[] = getNamePrize(res)
-             console.log('nombre del premio anentrega--->', namePrize[0])
-             setNamePrize(namePrize[0]) */
-            //funcion que abriria el modal para preguntar si es mayor de edad
-            //aca iria
             console.log(res)
         } catch (error) {
             console.error(error)
@@ -178,6 +150,12 @@ export function Home({ domain }: propDomain) {
     }
     //funcion que abre el modal para confirmar el premio
     function openModal() {
+        // Reproducir el sonido desde el elemento de audio
+        //audio de win para cuando aparece el modal en relacion 
+        console.log('ABRIENDO EL SONIDO PARA EL MODAL')
+        audioRef.current?.play().catch(error => {
+            console.error('Error al reproducir el sonido ganador para el premio:', error);
+        });
         setModal({ boolean: true, number: 200 })
     }
     //function que cierra el modal
@@ -216,9 +194,6 @@ export function Home({ domain }: propDomain) {
         // Cargar todas las imágenes de manera asíncrona
         await Promise.all(images.map(loadImage));
 
-        /* setImagesLoaded(true); // Indica que las imágenes han sido cargadas
-        console.log('imagenes cargadas') */
-        //aca deberia ir una funcion de timeout de 1 segundo\
         // Función de timeout de 1 segundo
         setTimeout(() => {
             console.log('Esperando 1 segundo después de cargar las imágenes...');
@@ -250,7 +225,8 @@ export function Home({ domain }: propDomain) {
     const handleAgeConfirmation = () => {
         localStorage.setItem('isAdult', 'true');
         setShowAgeModal(false);
-        setFetchPrize(true)
+        setModalInfo(true)
+        /*  setFetchPrize(true) */
     };
 
     const handleAgeRejection = () => {
@@ -266,18 +242,31 @@ export function Home({ domain }: propDomain) {
             setShowAgeModal(true);
             return
         }
-        setFetchPrize(true)
+        setModalInfo(true)
+        /* setFetchPrize(true) */
     }
     useEffect(() => {
-        if (fetchPrize) {
-            console.log('se puede hacer la consulta a l fecth pq es mayor de edad')
+        console.log("MODAAAl", modalInfo)
+        if (fetchPrize && !modalInfo) {
+            console.log('se puede hacer la consulta a l fecth pq es mayor de edad y acepto el modal de tres chances')
             getData()
             /* setPrizes([{ descripcion_premio: '', estado: true, id_premio: 4, index_id: 5 }]) */
         }
     }, [fetchPrize])
 
+    //useEffect para cargar el sonido de
+    useEffect(() => {
+        //al cargar y si existe el audioRef entonces asociarle el sonido ganador
+        if (audioRef.current) {
+            audioRef.current.src = '/sounds/win.mp3'
+            audioRef.current.volume = 0.2;
+        }
+    }, [])
+
     return (
         <div className="flex flex-col min-h-screen">
+            {/* agregamos la etiqueta del audio para que pueda escucharse */}
+            <audio ref={audioRef} />
             {!imagesLoaded && (
                 <FullScreeeLoader />
             )}
@@ -294,23 +283,25 @@ export function Home({ domain }: propDomain) {
                     <TemplateMail stopConfetti={() => ''} />
                 ) : (
                     <div className="relative">
-                        <img
-                            src={logoPathTitle3}
-                            alt=""
-                            className={`w-[20rem] z-30 sm:w-[24rem] lg:w-[20rem] xl:w-[24rem] 2xl:w-[28rem] mx-auto ${clicks > 2 ? '' : 'hidden'}`}
-                        />
+                        <div id="titleImage">
+                            <img
+                                src={logoPathTitle3}
+                                alt=""
+                                className={`w-[20rem] z-30 sm:w-[24rem] lg:w-[20rem] xl:w-[24rem] 2xl:w-[28rem] mx-auto ${clicks > 2 ? '' : 'hidden'}`}
+                            />
 
-                        <img
-                            src={logoPathTitle2}
-                            alt=""
-                            className={`w-[20rem] z-30 sm:w-[24rem] lg:w-[20rem] xl:w-[24rem] 2xl:w-[28rem] mx-auto ${clicks === 2 ? '' : 'hidden'}`}
-                        />
+                            <img
+                                src={logoPathTitle2}
+                                alt=""
+                                className={`w-[20rem] z-30 sm:w-[24rem] lg:w-[20rem] xl:w-[24rem] 2xl:w-[28rem] mx-auto ${clicks === 2 ? '' : 'hidden'}`}
+                            />
 
-                        <img
-                            src={logoPathTitle1}
-                            alt=""
-                            className={`w-[20rem] z-30 sm:w-[24rem] lg:w-[20rem] xl:w-[24rem] 2xl:w-[28rem] mx-auto ${clicks >= 0 && clicks <= 1 ? '' : 'hidden'}`}
-                        />
+                            <img
+                                src={logoPathTitle1}
+                                alt=""
+                                className={`w-[20rem] z-30 sm:w-[24rem] lg:w-[20rem] xl:w-[24rem] 2xl:w-[28rem] mx-auto ${clicks >= 0 && clicks <= 1 ? '' : 'hidden'}`}
+                            />
+                        </div>
                         {prizes && prizes.length >= 0 ? (
                             <div className="my-[1rem]">
                                 <Game setClicks={setClicks} getPrize={openModal} prizes={prizes} />
@@ -327,25 +318,10 @@ export function Home({ domain }: propDomain) {
                 )}
                 <img src={logoPath} alt="" className={`${domain === "SALTA" ? 'animate-spin-once w-[8rem] sm:w-[10rem] lg:w-[10rem]' : 'w-[12rem] sm:w-[12rem] lg:w-[12rem]'} mx-auto`} />
             </div>
-            {/*    ) : ( */}
-            {/*   <div className=" flex flex-col justify-center items-center ">
-                <h1>CARGANDO JUEGO....</h1>
-                <div className="border-[2px] animate-pulse border-white bg-black bg-opacity-30 rounded-md w-[80%] h-[18rem] flex items-center justify-center">
-                    <FaSpinner className="text-4xl animate-spin text-white" />
-                </div>
-            </div> */}
-            {/* IMAGE */}
-
             <Footer domain={domain} />
-            {/*     )} */}
-            {/*  {modal && (
-                <ModalLogic isOpen={true} onClose={closeModal}>
-                    <ModalGetPrize prize={namePrize} onCloseOk={closeModalOk} onClose={closeModal} />
-                </ModalLogic>
-            )} */}
             {modalError && (
                 <ModalLogic isOpen={true} onClose={closeModal}>
-                    <ModalError subTitle="lorem" title="lorem" onClose={() => navigate('/howToGet')} />
+                    <ModalError subTitle="Estaremos de vuelta pronto" title="¡Estamos mejorando nuestra plataforma!" onClose={() => navigate('/howToGet')} />
                 </ModalLogic>
             )}
             {showAgeModal && (
@@ -358,13 +334,29 @@ export function Home({ domain }: propDomain) {
                 </ModalLogic>
             )}
             {modal?.boolean && modal.number === 200 && (
-                <ModalLogic isOpen={true} onClose={() => setModal({ boolean: false, number: 401 })}>
+                <ModalLogic isOpen={true} onClose={() => setModal({ boolean: false, number: 200 })}>
                     <ModalGetPrize prize={namePrize} onClose={closeModal} onCloseOk={closeModalOk} />
                 </ModalLogic>
             )}
             {modal?.boolean && modal.number === 401 && (
                 <ModalLogic isOpen={true} onClose={() => setModal({ boolean: false, number: 401 })}>
                     <ModalOk email={email} onClose={() => { setModal({ boolean: false, number: 401 }), navigate('/howToGet') }} title={dataModal?.title} subTitle={dataModal?.subTitle} />
+                </ModalLogic>
+            )}
+            {modal?.boolean && modal.number === 403 && (
+                <ModalLogic isOpen={true} onClose={() => setModal({ boolean: false, number: 403 })}>
+                    <ModalError onClose={() => { setModal({ boolean: false, number: 403 }), navigate('/howToGet') }} title={dataModal?.title} subTitle={dataModal?.subTitle} />
+                </ModalLogic>
+            )}
+            {modal?.boolean && modal.number === 500 && (
+                <ModalLogic isOpen={true} onClose={() => setModal({ boolean: false, number: 500 })}>
+                    <ModalError onClose={() => { setModal({ boolean: false, number: 500 }) }} title={dataModal?.title} subTitle={dataModal?.subTitle} />
+                </ModalLogic>
+            )}
+            {/* MODAL PARA LA INFO  */}
+            {modalInfo && (
+                <ModalLogic isOpen={true} onClose={() => setModalInfo(false)}>
+                    <ModalInfo onCloseOk={() => { setModalInfo(false), setFetchPrize(true) }} title="TENÉS TRES CHANCES PARA GANAR UN PREMIO" />
                 </ModalLogic>
             )}
         </div>

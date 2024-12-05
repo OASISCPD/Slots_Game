@@ -1,13 +1,8 @@
 import { useEffect, useState } from "react";
-import logoLoteria from "/images/pilar/logoLoteria.png";
 import { BsInstagram, BsFacebook, BsWhatsapp } from "react-icons/bs";
-import { facebookPilar, facebookSalta, facebookZarate, instagramPilar, instagramSalta, instagramZarate, propDomain, whatsappPilar, whatsappSalta, whatsappZarate } from "../content/content";
-
-/* interface PropsLinks {
-    whatsapp: string;
-    instagram: string;
-    facebook: string;
-} */
+import { domain, facebookPilar, facebookSalta, facebookZarate, instagramPilar, instagramSalta, instagramZarate, propDomain, whatsappPilar, whatsappSalta, whatsappZarate } from "../content/content";
+//importando logo del footer
+const logoLoteria = `/images/${domain.toLowerCase()}/logoLoteria.png`
 
 export function Footer({ domain }: propDomain) {
     const [iconSize, setIconSize] = useState<number>(24);
@@ -68,7 +63,7 @@ export function Footer({ domain }: propDomain) {
             <div className="flex flex-col lg:flex lg:flex-row  w-full pr-[1rem] justify-center items-center py-2">
                 <img src={logoLoteria} className="w-[10rem] sm:w-[10rem] lg:w-[12rem] p-2 " alt="Logo Loteria" />
                 <h1 className=" text-sm sm:text-lg lg:text-sm xl:text-base  text-gray-300 mx-8 lg:mx-auto text-center bebasNeueRegular">
-                    El juego compulsivo es perjudicial para la salud.<br /> Solo para mayores de 18 años
+                    El juego compulsivo es perjudicial para la salud.<br /> Sólo para mayores de 18 años
                 </h1>
                 <div className="flex justify-center gap-4 py-4 items-center text-gray-300">
                     {/*  <BsWhatsapp className="cursor-pointer hover:text-greenMain duration-300" onClick={() => window.open(`${whatsapp}`)} size={iconSize} />

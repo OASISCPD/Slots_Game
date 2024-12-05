@@ -103,7 +103,7 @@ export function HowToGet({ domain }: propDomain) {
                         </button>
                     </div>
                     <div className='flex justify-center items-center content-center mt-48 lg:mt-[8rem]'>
-                        <img src={logoPath} alt="Logo Pilar" className={`${domain==='SALTA'?'w-[8rem] sm:w-[10rem]  2xl:w-[12rem]':'w-[12rem] sm:w-[14rem]  2xl:w-[16rem]'}`} />
+                        <img src={logoPath} alt="Logo Pilar" className={`${domain === 'SALTA' ? 'w-[8rem] sm:w-[10rem]  2xl:w-[12rem]' : 'w-[12rem] sm:w-[14rem]  2xl:w-[16rem]'}`} />
                     </div>
                 </div>
                 <Footer domain={domain} />

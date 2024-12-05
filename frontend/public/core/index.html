@@ -10,7 +10,7 @@
 
 <body>
     <div>
-        <div class="slots" id="slotsContainer">
+        <div style="z-index: auto;" class="slots" id="slotsContainer">
             <div class="reel"></div>
             <div class="reel"></div>
             <div class="reel"></div>
@@ -67,12 +67,14 @@
             if (currentOutcome) {//si es verdadero que ya puede ganar
                 const winIndexes = [index, index, index]
                 rollAll(true, winIndexes)
-                /*  rollAll(true, [0, 0, 0]) */
+                /* rollAll(true, [0, 0, 0]) */
             }
             else {
-                const nonWinningIndexes = getNonRepeatingIndexes();
-                console.log('valores erroneos para que no gane', nonWinningIndexes)
-                rollAll(false, nonWinningIndexes);
+                /* const nonWinningIndexes = getNonRepeatingIndexes();
+                console.log('valores erroneos para que no gane', nonWinningIndexes) */
+                /*   rollAll(false, nonWinningIndexes); */
+                const winIndexes = [index, index, index];
+                rollAll(true, winIndexes)
             }
         };
 
@@ -87,164 +89,41 @@
             console.log(availableIndexes)
             return availableIndexes.slice(0, 3); // Retorna los primeros tres índices aleatorios y diferentes
         }
-
-        /*    // Ejemplo de uso:
-           const outcome = randomOutcome();
-           console.log(outcome); // Puede ser true o false, pero si es false en las dos primeras, será true en la última. */
-
     </script>
-    <!-- <script>
-        const RESOLUTIONS = {
-            "304x350": 205,
-            "320x350": 205,
-            "335x350": 220,
-            "374x350": 235,
-            "350x350": 230,
-            "390x350": 250,
-            "414x896": 390,
-            "360x800": 330,
-            "390x844": 370,
-            /* TABLET */
-            "500x350": 320,
-            "728x350": 280,
-            "763x350": 280,
-            "780x350": 300,
-            "813x350": 310,
-            /* DESKTOP */
-            "984x350": 300
-        };
-
-        // Valor predeterminado para tabletas
-        const TABLET_WIDTH = 300; // Cambia este valor según tus necesidades
-
-        function getResolutionKey(width, height) {
-            console.log(`Checking resolution: ${width}x${height}`);
-
-            // Verificar si está en el rango de tabletas
-            if (width >= 768 && width <= 1024 && height >= 600 && height <= 800) {
-                console.log(`Tablet resolution detected: ${width}x${height}`);
-                return 'tablet'; // Devolvemos una clave especial para tabletas
-            }
-
-            const closestKey = Object.keys(RESOLUTIONS).find(key => {
-                const [resWidth, resHeight] = key.split('x').map(Number);
-                const widthDiff = Math.abs(resWidth - width);
-                const heightDiff = Math.abs(resHeight - height);
-                console.log(`Comparing with key: ${key} (widthDiff: ${widthDiff}, heightDiff: ${heightDiff})`);
-                return widthDiff < 10 && heightDiff < 10; // Rango de 10px
-            });
-            return closestKey;
-        }
-
-        function setSlotWidth() {
-            const width = window.innerWidth;
-            const height = window.innerHeight;
-            const resolutionKey = getResolutionKey(width, height);
-            const slotsContainer = document.getElementById('slotsContainer');
-
-            if (resolutionKey === 'tablet') {
-                slotsContainer.style.width = `${TABLET_WIDTH}px`;
-                console.log(`Matched tablet resolution, setting width to ${TABLET_WIDTH}px`);
-            } else if (resolutionKey) {
-                slotsContainer.style.width = `${RESOLUTIONS[resolutionKey]}px`;
-                console.log(`Matched resolution: ${resolutionKey}, setting width to ${RESOLUTIONS[resolutionKey]}px`);
-            } else {
-                // Establecer un valor por defecto si la resolución no coincide
-                slotsContainer.style.width = '250px'; // Valor por defecto
-                console.log(`No matching resolution found, setting default width to 200px`);
-            }
-        }
-        // Ejecutar al cargar la página y al cambiar el tamaño de la ventana
-        setSlotWidth();
-        window.addEventListener('resize', setSlotWidth);
-    </script> -->
-    <!-- <script>
-        const RESOLUTION_RANGES = {
-            "304-320": 205,
-            "321-335": 220,
-            "336-374": 235,
-            "375-390": 250,
-            "391-414": 260,
-            "415-480": 280,
-            "480-711": 320, // Este rango cubre desde 500 hasta 720px
-            "712-763": 280,
-            "764-780": 300,
-            "781-813": 310,
-            "814-7000": 270 // Puedes continuar añadiendo más rangos según lo necesites
-        };
-
-        const TABLET_WIDTH = 300; // Valor predeterminado para tabletas
-
-        function getResolutionKey(width) {
-            console.log(`Checking width: ${width}px`);
-
-            // Buscar si el ancho actual cae dentro de algún rango
-            const rangeKey = Object.keys(RESOLUTION_RANGES).find(range => {
-                const [minWidth, maxWidth] = range.split('-').map(Number);
-                return width >= minWidth && width <= maxWidth;
-            });
-
-            if (rangeKey) {
-                console.log(`Resolution in range ${rangeKey}, applying width: ${RESOLUTION_RANGES[rangeKey]}px`);
-                return RESOLUTION_RANGES[rangeKey];
-            }
-
-            return null;
-        }
-
-        function setSlotWidth() {
-            const width = window.innerWidth;
-            const slotsContainer = document.getElementById('slotsContainer');
-            const slotWidth = getResolutionKey(width);
-
-            if (slotWidth) {
-                slotsContainer.style.width = `${slotWidth}px`;
-                console.log(`Setting slot width to ${slotWidth}px`);
-            } else {
-                slotsContainer.style.width = '250px'; // Valor por defecto
-                console.log(`No matching resolution range found, setting default width to 250px`);
-            }
-        }
-
-        // Ejecutar al cargar la página y al cambiar el tamaño de la ventana
-        setSlotWidth();
-        window.addEventListener('resize', setSlotWidth);
-    </script> -->
     <script>
         const RESOLUTION_RANGES = {
-            "304-320": 205,
-            "321-335": 220,
-            "336-374": 235,
+            "304-320": 260,
+            "321-335": 260,
+            "336-374": 260,
             "375-390": 250,
             "391-414": 260,
             "415-480": 280,
             "480-520": 260, // Este rango cubre desde 500 hasta 720px
-            "521-560": 350, // Este rango cubre desde 500 hasta 720px
-            "561-590": 370, // Este rango cubre desde 500 hasta 720px
+            "521-560": 260, // Este rango cubre desde 500 hasta 720px
+            "561-590": 260, // Este rango cubre desde 500 hasta 720px
             "591-711": 260, // Este rango cubre desde 500 hasta 720px
             "712-763": 260,
             "764-780": 260,
-            "781-813": 310,
+            "781-813": 260,
             "814-889": 260, // Puedes continuar añadiendo más rangos según lo necesites //contemplar imagenes diferentes por si se tienen que minimizar
             "890-950": 280, // Puedes continuar añadiendo más rangos según lo necesites //contemplar imagenes diferentes por si se tienen que minimizar
-            "951-980": 260, 
-            "981-1000": 260, 
-            "1001-1101": 260, 
-            "1101-1200": 260, 
-            "1201-1300": 260, 
-            "1301-1500": 260, 
-            "1501-1600": 260, 
-            "1601-2030": 260, 
-            "2031-2169": 260, 
-            "2170-2445": 260, 
-            "2446-3270": 260, 
-            "3271-4922": 260, 
+            "951-980": 260,
+            "981-1000": 260,
+            "1001-1101": 260,
+            "1101-1200": 260,
+            "1201-1300": 260,
+            "1301-1500": 260,
+            "1501-1600": 260,
+            "1601-2030": 260,
+            "2031-2169": 260,
+            "2170-2445": 260,
+            "2446-3270": 260,
+            "3271-4922": 260,
         };
         const TABLET_WIDTH = 260; // Valor predeterminado para tabletas
 
         function getResolutionKey(width) {
             console.log(`Checking width: ${width}px`);
-
             // Buscar si el ancho actual cae dentro de algún rango
             const rangeKey = Object.keys(RESOLUTION_RANGES).find(range => {
                 const [minWidth, maxWidth] = range.split('-').map(Number);

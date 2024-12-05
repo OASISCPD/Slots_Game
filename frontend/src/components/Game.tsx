@@ -15,15 +15,11 @@ interface propSlot {
     getPrize: () => void
     setClicks: React.Dispatch<React.SetStateAction<number>>;
 }
-const winSound = new Audio('/sounds/sonidoSlot.mp3')
+const slotSound = new Audio('/sounds/sonidoSlot5s.mp3')
 //configuramos el sonido a salir 
-winSound.volume = 0.2; // 20% del volumen
+slotSound.volume = 0.2; // 20% del volumen
 
 export function Game({ prizes, getPrize, setClicks }: propSlot) {
-
-    //sounds
-    //audio
-
     // Define las resoluciones
     const isMobile = useMediaQuery({ query: '(max-width: 767px)' });
     const isTablet = useMediaQuery({ query: '(min-width: 768px) and (max-width: 1023px)' });
@@ -39,7 +35,7 @@ export function Game({ prizes, getPrize, setClicks }: propSlot) {
     const handleReactButtonClick = () => {
         if (iframeRef.current) {
             // Reproduce el sonido
-            winSound.play().catch(error => {
+            slotSound.play().catch(error => {
                 console.error('Error al reproducir el sonido:', error);
             });
             // Envía un mensaje al iframe para que ejecute la función spinReels
@@ -74,7 +70,7 @@ export function Game({ prizes, getPrize, setClicks }: propSlot) {
                 setWin(true)
             }
             if (event.data.type === "UPDATE_BOOLEAN") {
-                console.log('ALGO?', event.data.boolean)
+                console.log('ALGO? de update boolean', event.data.boolean)
                 setIsClicked(event.data.boolean.isClicked)
             }
         };
@@ -134,12 +130,12 @@ export function Game({ prizes, getPrize, setClicks }: propSlot) {
                 {isMobile && (
                     <div className="relative ">
                         {isMobile && (
-                            <img src={image} alt="Fondo" className="w-[100%]  h-full   mx-auto object-cover relative z-10" />
+                            <img src={image} alt="Fondo" className="w-[100%] opacity-0  h-full   mx-auto object-cover relative z-10" />
                         )}
                         {isTablet && (
-                            <img src={image} alt="Fondo" className="w-[100%]  h-full   mx-auto object-cover relative z-10" />
+                            <img src={image} alt="Fondo" className="w-[100%]  opacity-0 h-full   mx-auto object-cover relative z-10" />
                         )}
-                        <div className="absolute inset-0 pl-[0.5rem] mx-auto -mt-[1.5rem] flex items-center justify-center z-0">
+                        <div className="absolute inset-0  mx-auto  flex items-center justify-center ">
                             <iframe
                                 ref={iframeRef}
                                 src="/core/index.html"
@@ -153,10 +149,10 @@ export function Game({ prizes, getPrize, setClicks }: propSlot) {
                 {isTablet && (
                     <div className="relative ">
                         {win ? (
-                            <img src={imageTablet} alt="Fondo" className="sm:w-[60%] h-full   mx-auto object-cover relative z-10" />
+                            <img src={imageTablet} alt="Fondo" className="sm:w-[60%] h-full opacity-0    mx-auto object-cover relative z-10" />
 
                         ) : (
-                            <img src={imageTablet} alt="Fondo" className="sm:w-[60%]  h-full   mx-auto object-cover relative z-10" />
+                            <img src={imageTablet} alt="Fondo" className="sm:w-[60%]  h-full opacity-0    mx-auto object-cover relative z-10" />
                         )}
                         <div className="absolute inset-0 pl-[0.5rem] mx-auto -mt-[2rem] flex items-center justify-center z-0">
                             <iframe

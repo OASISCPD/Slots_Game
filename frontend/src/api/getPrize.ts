@@ -10,5 +10,6 @@ export async function getPrize(code: string) {
         return result
     } catch (error) {
         console.error(error)
+        return
     }
 }
