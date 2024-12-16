@@ -45,7 +45,7 @@ export function AlreadyPlayed({ domain }: propDomain) {
                 >
                     <div className="flex-grow  flex flex-col justify-center py-4 bisonBoldItallic">
                         <div className="relative z-20 mx-[2rem] lg:mx-[4rem] text-start py-8 text-white">
-                            <h1 style={{ textShadow: '2px 5px 4px rgba(0, 0, 0, 0.5)' }} className='text-3xl sm:text-4xl  lg:text-6xl  text-center uppercase  textGothamBlack tracking-wide'>Esta promo es solo para personas <br /> que no hayan participado de las versiones anteriores de Raspá y Ganá</h1>
+                            <h1 style={{ textShadow: '2px 5px 4px rgba(0, 0, 0, 0.5)' }} className='text-3xl sm:text-4xl  lg:text-6xl  text-center uppercase  textGothamBlack tracking-wide'>Esta promo es solo para personas <br /> que no hayan canjeado premios en sala</h1>
                             <div className='my-2 '></div>
                             <h1 style={{ textShadow: '2px 5px 4px rgba(0, 0, 0, 0.5)' }} className='text-xl sm:text-2xl lg:text-4xl text-center uppercase'>Pero no te preocupes entra a nuestra web y enterate de todas las cosas que tenemos para vos! </h1>
                         </div>

@@ -11,6 +11,6 @@ export function FullScreeeLoader() {
                 </div>
                 <h2 className={`text-2xl font-bold text-white`}>Cargando....</h2>
             </div>
-        </div>
+        </div>  
     )
 }

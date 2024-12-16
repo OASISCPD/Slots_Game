@@ -28,36 +28,22 @@ body {
   /* border: 2px solid 18011D; */
   border-radius: 2%;
   height: 240px;
-  background-image: url("/images/zarate/rool.jpg");
-  /* background-image: url("/images/zarate/rool.png"); */
-  /*  background-image: url("/images/pilar/rool.png"); */
+  background-image: url("/images/salta/rool.jpg");
   z-index: 0;
 }
 
 /*# sourceMappingURL=index.css.map */
 @media (min-width: 690px) and (max-width:1023px) {
-
   /* Cambia a la resolución mínima que definas para tablets */
   .slots {
     background-color: transparent;
   }
-
-  /* .slots .reel {
-    background-image: url("/images/rool.png");
-  } */
-
 }
 
 @media (min-width: 1024px) {
-
   /* Esto aplicará estilos solo a pantallas de ordenador grandes */
   .slots {
-    /* Aplica aquí tus estilos específicos para pantallas de ordenador */
-    /* background-color: #9943ff; */
     background-color: transparent;
-    /*     background-color: transparent */
-    /* opcion */
-
   }
 
 }

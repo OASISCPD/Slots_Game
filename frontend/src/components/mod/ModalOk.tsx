@@ -17,7 +17,6 @@ export interface dtoModal {
 
 
 export function ModalOk({ onClose, title, subTitle, email }: Props) {
-    /* const [loading, setLoading] = useState<boolean>(false); */
     const [showModal, setShowModal] = useState<boolean>(false);
 
     useEffect(() => {
@@ -42,17 +41,14 @@ export function ModalOk({ onClose, title, subTitle, email }: Props) {
                         </div>
                         <div className="flex flex-col justify-between items-center py-1">
                             <h2 className="text-[60%] lg:text-xs text-center tracking-wide mx-auto uppercase  text-gray-200">{subTitle}</h2>
-                            <h2 className="text-[60%] lg:text-xs text-center tracking-wide mx-auto uppercase  text-yellowMain">RECORDÁ QUE EL PREMIO SOLO SE PUEDE CANJEAR DE LUNES A JUEVES</h2>
+                            <h2 className="text-[60%] lg:text-xs text-center tracking-wide mx-auto uppercase  text-yellowMain">podes reclamar tu premio de lunes a domingos</h2>
                         </div>
                         <button id="btnReclamaTuPremio" className=" w-full rounded-full my-[1dvh]" type="button" onClick={onClose}>
                             <img src={buttonImage} alt="button" className={`shadow-2xl w-[10dvh] sm:w-[12dvh] lg:w-[12dvh] mx-auto transition-transform duration-1000 `} />
                         </button>
-                        {/*   <div className='grid grid-cols-1 my-4 items-center'>
-                            <button onClick={onClose} className='px-4 mx-auto py-1 rounded-xl min-w-[6rem] bg-gradient-to-r from-redMain tracking-wide to-black duration-300 sm:text-lg'>Cerrar</button>
-                        </div> */}
                     </div>
                 </div>
             </div>
         </div>
     )
-}
+} 

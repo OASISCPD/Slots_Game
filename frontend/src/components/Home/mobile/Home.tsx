@@ -20,9 +20,9 @@ import { fetchMailEnviado, getDomainMail } from "../../../logic/mail"
 /* import { ModalAlreadyPlayed } from "../../mod/ModalAlreadyPlayed" */
 import { ModalOk } from "../../mod/ModalOk"
 import { ModalInfo } from "../../mod/ModalInfo"
-const logoPathTitle3 = `/images/${domain.toLowerCase()}/tituloMobile3.png`;
-const logoPathTitle2 = `/images/${domain.toLowerCase()}/tituloMobile2.png`;
-const logoPathTitle1 = `/images/${domain.toLowerCase()}/tituloMobile1.png`;
+const logoPathTitle3 = `/images/${domain.toLowerCase()}/titulo3.png`;
+const logoPathTitle2 = `/images/${domain.toLowerCase()}/titulo2.png`;
+const logoPathTitle1 = `/images/${domain.toLowerCase()}/titulo.png`;
 const logoPath = `/images/${domain.toLowerCase()}/logoDominio.png`;
 
 
@@ -145,6 +145,8 @@ export function Home({ domain }: propDomain) {
         } catch (error) {
             console.error(error)
         } finally {
+            /* setModal({ boolean: true, number: 500 });
+            setDataModal({ title: '¡Estamos mejorando nuestra plataforma!', subTitle: 'Estaremos de vuelta pronto' }); */
             setLoadingFetch(false)
         }
     }

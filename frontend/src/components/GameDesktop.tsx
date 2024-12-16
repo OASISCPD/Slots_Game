@@ -122,7 +122,7 @@ export function GameDesktop({ prizes, getPrize, setClicks }: propSlot) {
 
     return (
         <div>
-            <div className="flex flex-col w-full -mt-[2rem] ">
+            <div className="flex flex-col w-full -mt-[4rem] ">
                 {/* ESTO DEBERIA CAMBIAR PARA CADA RESOLUCION */}
                 {isDesktop && (
                     <div className="relative ">
@@ -138,16 +138,16 @@ export function GameDesktop({ prizes, getPrize, setClicks }: propSlot) {
                                 src="/core/index.html"
                                 frameBorder="0"
                                 width="100%"
-                                height="350px"
+                                height="400px"
                             ></iframe>
                         </div>
                     </div>
                 )}
-                <button id="btnSpin" className="mx-auto" disabled={isClicked} onClick={isClicked ? undefined : handleReactButtonClick}>
+                <button id="btnSpin" className={`mx-auto ${domain.toLowerCase() !== 'salta' ? "-mt-8" : "-mt-4"}`} disabled={isClicked} onClick={isClicked ? undefined : handleReactButtonClick}>
                     <img
                         src={imageButton}
                         alt="button"
-                        className={`${domain.toUpperCase() === "SALTA" ? 'w-[4rem] sm:w-[8rem] lg:w-[8rem]' : 'w-[12rem] sm:w-[12rem] lg:w-[10rem] xl:w-[10rem]'} mx-auto transition-transform duration-1000 ${scaleClass}`} // Aplica la clase de escala
+                        className={`${domain.toUpperCase() === "SALTA" ? 'w-[8rem] sm:w-[10rem] lg:w-[10rem]' : 'w-[12rem] sm:w-[12rem] lg:w-[10rem] xl:w-[10rem]'} mx-auto transition-transform duration-1000 ${scaleClass}`} // Aplica la clase de escala
                     />
                 </button>
             </div>

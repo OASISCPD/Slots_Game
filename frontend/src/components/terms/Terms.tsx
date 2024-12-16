@@ -56,13 +56,13 @@ export function Terms({ domain }: propDomain) {
 
                                     </li>
                                     <li className='my-2'>
-                                        4. La vigencia de la promoción será desde el 08 de Noviembre de 2024 a las 10:00 hs hasta el 30 de Noviembre de 2024 a las 23:59 hs.
+                                        4. La vigencia de la promoción será desde el 06 de Diciembre de 2024 a las 10:00 hs hasta el 31 de Diciembre de 2024 a las 23:59 hs o hasta agotar stock, lo que ocurra primero.
                                     </li>
                                     <li className='my-2'>
                                         5. Solamente podrán participar de la promoción las personas físicas mayores de 18 años, que haya cumplido con los requisitos* solicitados de acuerdo al sorteo que se realice. No podrán participar aquellas personas que no reúnan dichos requisitos como así tampoco personas jurídicas, empleados de Bingo Pilar SA, directivos del organizador, personal del Instituto Provincial de Loterías y Casinos y grupos de contingentes.
                                     </li>
                                     <li className='my-2'>
-                                        6. Mecánica de la promoción. El usuario accederá a promoslot.bingopilar.com.ar donde encontrará el juego de “3 Para Ganar” con premios disponibles. Todas las jugadas tienen premios. Para poder hacerse beneficiario del premio el usuario debe de manera excluyente ingresar una dirección de correo electrónica válida, donde recibirá el código de su premio. Los premios deberán ser canjeados de lunes a jueves exclusivamente y en el plazo de 7 días desde la generación del correo electrónico con el qr que le ha llegado y el dni del usuario. No válido para canjear los días viernes, sábados, domingos y feriados, sin excepción ni posibilidad de reclamo alguno.  De lo contrario el beneficio quedará disponible para otro ganador.
+                                        6.  Mecánica de la promoción. El usuario accederá a marketing.bingopilar.com.ar donde encontrará el juego de “3 Para Ganar” con premios disponibles. Todas las jugadas tienen premios. Para poder hacerse beneficiario del premio el usuario debe de manera excluyente ingresar una dirección de correo electrónica válida, donde recibirá el código de su premio. Los premios deberán ser canjeados exclusivamente en el plazo de 7 días desde la generación del correo electrónico con el qr que le ha llegado y el dni del usuario. De lo contrario el beneficio quedará disponible para otro ganador.
                                     </li>
                                     <li className='my-2'>
                                         Para comenzar a hacer uso de su beneficio, deberá presentar el código recibido personalmente en el stand de Atención al Cliente del Bingo, donde se corroborará la validez del código y la identidad de la persona escaneando el DNI físico o desde Mi Argentina.
@@ -90,19 +90,19 @@ export function Terms({ domain }: propDomain) {
 
                                     </li>
                                     <li className='my-2'>
-                                        4. La vigencia de la promoción será desde el 08 de Noviembre de 2024 16:00 hs hasta el 30 de Noviembre de 2024 a las 23:59 hs.
+                                        4. La vigencia de la promoción será desde el 05 de Diciembre de 2024 16:00 hs hasta el 31 de Diciembre de 2024 a las 02:00 hs o hasta agotar stock, lo que ocurra primero.
                                     </li>
                                     <li className='my-2'>
                                         5. Solamente podrán participar de la promoción las personas físicas mayores de 18 años, que haya cumplido con los requisitos* solicitados de acuerdo al sorteo que se realice. No podrán participar aquellas personas que no reúnan dichos requisitos como así tampoco personas jurídicas, empleados de Stars Game SA, directivos del organizador, personal del Instituto Provincial de Loterías y Casinos y grupos de contingentes.
                                     </li>
                                     <li className='my-2'>
-                                        6. Mecánica de la promoción. El usuario accederà a promoslot.oasiszarate.com.ar donde encontrará el juego de “3 Para Ganar” con premios disponibles. Todas las jugadas tienen premios. Para poder hacerse beneficiario del premio el usuario debe de manera excluyente ingresar una dirección de correo electrónica válida, donde recibirá el código de su premio. Los premios deberán ser canjeados exclusivamente en el plazo de 7 días desde la generación del correo electrónico con el qr que le ha llegado y el dni del usuario. No se podrá canjear los días viernes, sábados, domingos y feriados, sin excepción ni posibilidad de reclamo alguno. De lo contrario el beneficio quedará disponible para otro ganador
+                                        6. Mecánica de la promoción. El usuario accederà a promoslot.oasiszarate.com.ar donde encontrará el juego de “3 Para Ganar” con premios disponibles. Todas las jugadas tienen premios. Para poder hacerse beneficiario del premio el usuario debe de manera excluyente ingresar una dirección de correo electrónica válida, donde recibirá el código de su premio. Los premios deberán ser canjeados exclusivamente en el plazo de 7 días desde la generación del correo electrónico con el qr que le ha llegado y el dni del usuario. De lo contrario el beneficio quedará disponible para otro ganador.
                                     </li>
                                     <li className='my-2'>
                                         Para comenzar a hacer uso de su beneficio, deberá presentar el código recibido personalmente en el stand de Atención al Cliente del Bingo, donde se corroborará la validez del código y la identidad de la persona escaneando el DNI.
                                     </li>
                                     <li className='my-2'>
-                                        Promoción válida solo para clientes que no hayan registrado el canje de algún premio en las ediciones de Raspá y Ganá o Girá y Ganá. Se limitará a un premio por DNI sin excepción.
+                                        Promoción válida solo para clientes que no hayan registrado el canje de algún premio en las ediciones de Raspá y Ganá, Girá y Ganá o 3 para ganar. Se limitará a un premio por DNI sin excepción.
                                         Los premios no incluyen viáticos ni desplazamiento hasta el establecimiento.
 
                                     </li>
@@ -118,26 +118,24 @@ export function Terms({ domain }: propDomain) {
                                     </li>
                                     <li className='my-2'>
                                         2. La sola participación en la acción promocional implica la total aceptación de las presentes “Bases y Condiciones Particulares”, de los “Términos y Condiciones Generales” y de la “Política de tratamiento de datos personales de New Gaming S.R.L.” incluida en los Términos y Condiciones disponibles en el stand de atención al cliente, lo que implica la aceptación de que las decisiones que tome New Gaming S.R.L tendrá el carácter de definitivas e inapelables, toda vez que no resulten abusivas, ni infundadas y no perjudiquen dolosamente el derecho de los Usuarios.
-
                                     </li>
                                     <li className='my-2'>
                                         3. Reserva de Derechos. New Gaming S.R.L se reserva el derecho de cancelar, suspender o modificar las presentes “Bases y Condiciones Particulares” y de tener que establecer o pronunciarse sobre aquellas situaciones no previstas en estas Bases y Condiciones Particulares. La cancelación, suspensión y/o modificación de las presentes Bases y Condiciones no dará derecho a los participantes a reclamo ni indemnización alguna.
-
                                     </li>
                                     <li className='my-2'>
-                                        4. La vigencia de la promoción será desde el 08 de Noviembre de 2024 a las 10:00 hs hasta el 30 de Noviembre de 2024 a las 23:59 hs.
+                                        4. La vigencia de la promoción será desde el 04 de Diciembre de 2024 a las 10:00 hs hasta el 31 de Diciembre de 2024 a las 23:59 hs o hasta agotar stock, lo que ocurra primero.
                                     </li>
                                     <li className='my-2'>
                                         5. Solamente podrán participar de la promoción las personas físicas mayores de 18 años, que haya cumplido con los requisitos* solicitados de acuerdo al sorteo que se realice. No podrán participar aquellas personas que no reúnan dichos requisitos como así tampoco personas jurídicas, empleados de New Gaming S.R.L, directivos del organizador, personal del Instituto Provincial de Loterías y Casinos y grupos de contingentes.
                                     </li>
                                     <li className='my-2'>
-                                        6. Mecánica de la promoción. El usuario accederá a promoslot.nuevocasinoalberdi.com.ar donde encontrará el juego de “3 Para Ganar” con premios disponibles. Todas las jugadas tienen premios. Para poder hacerse beneficiario del premio el usuario debe de manera excluyente ingresar una dirección de correo electrónica válida, donde recibirá el código de su premio. Los premios deberán ser canjeados exclusivamente en el plazo de 7 días desde la generación del correo electrónico con el qr que le ha llegado y el dni del usuario. No válido para canjear los días viernes, sábados, domingos y feriados, sin excepción ni posibilidad de reclamo alguno. De lo contrario el beneficio quedará disponible para otro ganador.
+                                        6. Mecánica de la promoción. El usuario accederá a promoslot.nuevocasinoalberdi.com.ar donde encontrará el juego de “3 Para Ganar” con premios disponibles. Todas las jugadas tienen premios. Para poder hacerse beneficiario del premio el usuario debe de manera excluyente ingresar una dirección de correo electrónica válida, donde recibirá el código de su premio. Los premios deberán ser canjeados exclusivamente en el plazo de 7 días desde la generación del correo electrónico con el qr que le ha llegado y el dni del usuario. De lo contrario el beneficio quedará disponible para otro ganador.
                                     </li>
                                     <li className='my-2'>
                                         Para comenzar a hacer uso de su beneficio, deberá presentar el código recibido personalmente en el stand de Atención al Cliente del Casino, donde se corroborará la validez del código y la identidad de la persona escaneando el DNI.
                                     </li>
                                     <li className='my-2'>
-                                        Promoción válida solo para clientes que no hayan registrado el canje de algún premio en las ediciones de Raspá y Ganá o Girá y Ganá. Se limitará a un premio por DNI sin excepción.
+                                        Promoción válida solo para clientes que no hayan registrado el canje de algún premio en las ediciones de Raspá y Ganá, Girá y Ganá o 3 Para Ganar. Se limitará a un premio por DNI sin excepción.
                                         Los premios no incluyen viáticos ni desplazamiento hasta el establecimiento.
 
                                     </li>
@@ -181,6 +179,21 @@ export function Terms({ domain }: propDomain) {
                                     <li className='my-2'>
                                         <span className='font-bold'>4. 1 TICKET DE $10.000:</span> Se limitará el canje a 1 ticket válido por el día del canje. No transferible.  Ticket jugable no cobrable, disponible en las máquinas slots habilitadas para tal fin.
                                     </li>
+                                    <li className='my-2'>
+                                        <span className='font-bold'>5. PROMO PIZZA + 2 CERVEZAS.:</span> No transferible.
+                                    </li>
+                                    <li className='my-2'>
+                                        <span className='font-bold'>6. COMBO DESAYUNO/MERIENDA CARLITOS.:</span> No transferible.
+                                    </li>
+                                    <li className='my-2'>
+                                        <span className='font-bold'>7. COMBO DESAYUNO/MERIENDA CLÁSICO.:</span> No transferible.
+                                    </li>
+                                    <li className='my-2'>
+                                        <span className='font-bold'>8. PICADA KM. 90 + 2 BEBIDAS.:</span> No transferible.
+                                    </li>
+                                    <li className='my-2'>
+                                        <span className='font-bold'>9. COMBO HAMBURGUESA COMPLETA + BEBIDA.:</span> No transferible.
+                                    </li>
                                 </ol>
                             )}
                             {domain === 'SALTA' && (
@@ -193,15 +206,6 @@ export function Terms({ domain }: propDomain) {
                                     </li>
                                     <li className='my-2'>
                                         <span className='font-bold'>3. 1 TICKET DE $10.000:</span> Se limitará el canje a 1 ticket válido por el día del canje. No transferible.  Ticket jugable no cobrable, disponible en las máquinas slots habilitadas para tal fin.
-                                    </li>
-                                    <li className='my-2'>
-                                        <span className='font-bold'>4. 1 TICKET DE $7.500:</span> Se limitará el canje a 1 ticket válido por el día del canje. No transferible.  Ticket jugable no cobrable, disponible en las máquinas slots habilitadas para tal fin.
-                                    </li>
-                                    <li className='my-2'>
-                                        <span className='font-bold'>5. 15 CUPONES PARA EL SORTEO DEL VIAJE A PASO DE LA PATRIA</span> No transferible.
-                                    </li>
-                                    <li className='my-2'>
-                                        <span className='font-bold'>6. 15 CUPONES PARA EL SORTEO DE LA MOTO</span> No transferible.
                                     </li>
                                 </ol>
                             )}

@@ -116,7 +116,7 @@ export function TemplateMail({ stopConfetti }: propFather) {
                     break;
                 case 402:
                     setModal({ boolean: true, number: 402 })
-                    setDataModal({ title: '¡Ups! Parece que ya participaste de una edición anterior', subTitle: 'Esta promo es solo para personas que no hayan participado antes' })
+                    setDataModal({ title: '¡Ups! ', subTitle: 'Detectamos que ya has recibido un premio con el mail que ingresaste' })
                     break;
                 case 401:
                     setModal({ boolean: true, number: 401 })
@@ -172,7 +172,7 @@ export function TemplateMail({ stopConfetti }: propFather) {
                     </h2>
                 </div>
                 <div className="relative w-full max-w-xl  my-[4dvh] items-center">
-                {/*     <span className="absolute inset-y-0 left-2 flex items-center pl-3 pointer-events-none">
+                    {/*     <span className="absolute inset-y-0 left-2 flex items-center pl-3 pointer-events-none">
                         <FaAt size={24} className="text-fuchsia-700" />
                     </span> */}
                     <input
@@ -185,8 +185,8 @@ export function TemplateMail({ stopConfetti }: propFather) {
                     />
                 </div>
                 <div className="w-full max-w-xl  gothamItalic text-sm">
-                    <h1 style={{ textShadow: '4px 6px 6px rgba(0, 0, 0, 0.5)' }} className="text-white uppercase mb-[1dvh]">VENÍ A RECLAMAR TU PREMIO <span className="text-yellowMain">de lunes a jueves (no aplica viernes, sabados, domingos ni feriados)</span></h1>
-                    <h1 style={{ textShadow: '4px 6px 6px rgba(0, 0, 0, 0.5)' }} className="text-white uppercase"> <span className="text-yellowMain">RECORDá </span>que si ya participaste previamente de raspá y ganá o girá y ganá, no vas a poder reclamar el premio.</h1>
+                    <h1 style={{ textShadow: '4px 6px 6px rgba(0, 0, 0, 0.5)' }} className="text-white uppercase mb-[1dvh]">Tenes 7 días para reclamar tu premio </h1>
+                    <h1 style={{ textShadow: '4px 6px 6px rgba(0, 0, 0, 0.5)' }} className="text-white uppercase"> <span className="text-yellowMain">RECORDá </span>que si ya canjeaste premios en la sala, no vas a poder reclamar este premio</h1>
                 </div>
                 {/* TERMINOS Y CONDICIONES */}
                 <div className="flex items-center gothamItalic text-sm uppercase  w-full max-w-xl  justify-start my-[2dvh]   ">

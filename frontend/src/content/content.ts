@@ -7,7 +7,7 @@ export interface propDomain {
 }
 
 //dominio que maneja el flujo de la aplicacion
-export const domain: string = 'PILAR'//puede ser SALTA O PILAR O ZARATE
+export const domain: string = 'SALTA'//puede ser SALTA O PILAR O ZARATE
 
 //PILAR
 //variables y links para el footer y links de google map
@@ -17,7 +17,7 @@ export const instagramPilar = 'https://www.instagram.com/bingooasispilar/'
 export const googleMapsPilar = 'https://maps.app.goo.gl/rgqmXwv3xqAgcqio9'
 export const urlWebPilar = 'https://bingopilar.com.ar/'
 //codigo de la campana
-export const codeCampaignPilar = '5488d6e721'//prod:886028de19
+export const codeCampaignPilar = '886028de19'//prod:886028de19
 
 //ZARATE
 export const facebookZarate = 'https://www.facebook.com/oasiszarate'
@@ -37,4 +37,4 @@ export const urlWebSalta = 'https://nuevocasinoalberdi.com.ar/'
 //codigo de la campana
 export const codeCampaignSalta = 'ef8e2923e3'//prod:ef8e2923e3
 
-//205ba1c1b4// para desarrollo
+//c0d4b09bb9// para desarrollo

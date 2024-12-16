@@ -18,11 +18,10 @@ import { ModalOk } from "../../mod/ModalOk"
 import { TemplateMail } from "../TemplateMail"
 import { ModalInfo } from "../../mod/ModalInfo"
 /* import { useNavigate } from "react-router-dom" */
-const logoPathTitle3 = `/images/${domain.toLowerCase()}/tituloDesktop3.png`;
-const logoPathTitle2 = `/images/${domain.toLowerCase()}/tituloDesktop2.png`;
-const logoPathTitle1 = `/images/${domain.toLowerCase()}/tituloDesktop1.png`;
+const logoPathTitle3 = `/images/${domain.toLowerCase()}/titulo3.png`;
+const logoPathTitle2 = `/images/${domain.toLowerCase()}/titulo2.png`;
+const logoPathTitle1 = `/images/${domain.toLowerCase()}/titulo.png`;
 const logoPath = `/images/${domain.toLowerCase()}/logoDominio.png`;
-const logoSalta = `/images/${domain.toLowerCase()}/logoDorado.png`
 
 
 export function HomeDesktop({ domain }: propDomain) {
@@ -143,6 +142,8 @@ export function HomeDesktop({ domain }: propDomain) {
         } catch (error) {
             console.error(error)
         } finally {
+            /*             setModal({ boolean: true, number: 500 });
+                        setDataModal({ title: '¡Estamos mejorando nuestra plataforma!', subTitle: 'Estaremos de vuelta pronto' }); */
             setLoadingFetch(false)
         }
     }
@@ -278,87 +279,39 @@ export function HomeDesktop({ domain }: propDomain) {
                     <TemplateMail stopConfetti={() => ''} />
                 ) : (
 
-                    domain.toUpperCase() === "SALTA" ? (
-                        <div className="relative overflow-hidden">
-                            <div className="absolute right-[8dvh] top-4 h-[16dvh] w-[16dvh]  ">
-                                <img src={logoSalta} alt="" />
+                    <div className="relative">
+                        <img
+                            src={logoPathTitle3}
+                            alt=""
+                            className={`w-[24rem] sm:w-[24rem] lg:w-[20rem] xl:w-[24rem] 2xl:w-[42dvh] mx-auto ${clicks > 2 ? '' : 'hidden'}`}
+                        />
+
+                        <img
+                            src={logoPathTitle2}
+                            alt=""
+                            className={`w-[24rem] sm:w-[24rem] lg:w-[20rem] xl:w-[24rem] 2xl:w-[42dvh] mx-auto ${clicks === 2 ? '' : 'hidden'}`}
+                        />
+
+                        <img
+                            src={logoPathTitle1}
+                            alt=""
+                            className={`w-[24rem] sm:w-[24rem] lg:w-[20rem] xl:w-[24rem] 2xl:w-[42dvh] mx-auto ${clicks >= 0 && clicks <= 1 ? '' : 'hidden'}`}
+                        />
+                        {prizes && prizes.length >= 0 ? (
+                            <div className="">
+                                <GameDesktop setClicks={setClicks} getPrize={openModal} prizes={prizes} />
                             </div>
-                            <div className="grid grid-cols-1 gap-4  mr-[14rem] items-center justify-center">
-                                <div>
-                                    <img
-                                        src={logoPathTitle3}
-                                        alt=""
-                                        className={`w-[24rem] sm:w-[24rem] lg:w-[60%] xl:w-[60%] 2xl:w-[40%]  mx-auto ${clicks > 2 ? '' : 'hidden'}`}
-                                    />
-
-                                    <img
-                                        src={logoPathTitle2}
-                                        alt=""
-                                        className={`w-[24rem] sm:w-[24rem] lg:w-[60%] xl:w-[60%] 2xl:w-[40%]  mx-auto ${clicks === 2 ? '' : 'hidden'}`}
-                                    />
-
-                                    <img
-                                        src={logoPathTitle1}
-                                        alt=""
-                                        className={`w-[24rem] sm:w-[24rem] lg:w-[60%] xl:w-[60%] 2xl:w-[40%]  mx-auto ${clicks >= 0 && clicks <= 1 ? '' : 'hidden'}`}
-                                    />
+                        ) : (
+                            <div className=" flex flex-col  text-white justify-center items-center ">
+                                <h1>CARGANDO JUEGO....</h1>
+                                <div className="border-[2px] animate-pulse border-white bg-black bg-opacity-30 rounded-md w-[70%] lg:max-w-xs h-[14rem] flex items-center justify-center">
+                                    <FaSpinner className="text-4xl animate-spin " />
                                 </div>
                             </div>
-                            {prizes && prizes.length >= 0 ? (
-                                <div className="my-[1rem]">
-                                    <GameDesktop setClicks={setClicks} getPrize={openModal} prizes={prizes} />
-                                </div>
-                            ) : (
-                                <div className=" flex flex-col my-[1rem] text-white justify-center items-center ">
-                                    <h1>CARGANDO JUEGO....</h1>
-                                    <div className="border-[2px] animate-pulse border-white bg-black bg-opacity-30 rounded-md w-[70%] lg:max-w-xs h-[14rem] flex items-center justify-center">
-                                        <FaSpinner className="text-4xl animate-spin " />
-                                    </div>
-                                </div>
-                            )}
-                            {/*   <GameDesktop setClicks={setClicks} getPrize={openModal} prizes={prizes} /> */}
-                        </div>
-                    ) : (
-                        <div className="relative">
-                            <img
-                                src={logoPathTitle3}
-                                alt=""
-                                className={`w-[24rem] sm:w-[24rem] lg:w-[20rem] xl:w-[24rem] 2xl:w-[50dvh] mx-auto ${clicks > 2 ? '' : 'hidden'}`}
-                            />
-
-                            <img
-                                src={logoPathTitle2}
-                                alt=""
-                                className={`w-[24rem] sm:w-[24rem] lg:w-[20rem] xl:w-[24rem] 2xl:w-[50dvh] mx-auto ${clicks === 2 ? '' : 'hidden'}`}
-                            />
-
-                            <img
-                                src={logoPathTitle1}
-                                alt=""
-                                className={`w-[24rem] sm:w-[24rem] lg:w-[20rem] xl:w-[24rem] 2xl:w-[50dvh] mx-auto ${clicks >= 0 && clicks <= 1 ? '' : 'hidden'}`}
-                            />
-                            {prizes && prizes.length >= 0 ? (
-                                <div className="my-[1rem]">
-                                    <GameDesktop setClicks={setClicks} getPrize={openModal} prizes={prizes} />
-                                </div>
-                            ) : (
-                                <div className=" flex flex-col my-[1rem] text-white justify-center items-center ">
-                                    <h1>CARGANDO JUEGO....</h1>
-                                    <div className="border-[2px] animate-pulse border-white bg-black bg-opacity-30 rounded-md w-[70%] lg:max-w-xs h-[14rem] flex items-center justify-center">
-                                        <FaSpinner className="text-4xl animate-spin " />
-                                    </div>
-                                </div>
-                            )}
-                            {/*   <GameDesktop setClicks={setClicks} getPrize={openModal} prizes={prizes} /> */}
-                        </div>
-                    )
+                        )}
+                    </div>
                 )}
-                {/*      {domain !== 'SALTA' && (
-                    <img src={logoPath} alt="" className="w-[12rem]  sm:w-[12rem] lg:w-[11rem] xl:w-[20dvh] mx-auto" />
-                )} */}
-                {domain !== 'SALTA' && (
-                    <img src={logoPath} alt="" className={`${domain === "SALTA" ? 'animate-spin-once w-[8rem] sm:w-[10rem] lg:w-[10rem]' : 'w-[12rem] sm:w-[12rem] lg:w-[12rem]'} mx-auto`} />
-                )}
+                <img src={logoPath} alt="" className={`${domain === "SALTA" ? 'animate-spin-once w-[8rem] sm:w-[10rem] lg:w-[10rem] mt-4' : 'w-[12rem] sm:w-[12rem] lg:w-[12rem]'} mx-auto`} />
             </div>
             <Footer domain={domain} />
             {modalError && (
@@ -392,7 +345,7 @@ export function HomeDesktop({ domain }: propDomain) {
             )}
             {modal?.boolean && modal.number === 500 && (
                 <ModalLogic isOpen={true} onClose={() => setModal({ boolean: false, number: 500 })}>
-                    <ModalError onClose={() => { setModal({ boolean: false, number: 500 }) }} title={dataModal?.title} subTitle={dataModal?.subTitle} />
+                    <ModalError onClose={() => { setModal({ boolean: false, number: 500 }), navigate('/howToGet') }} title={dataModal?.title} subTitle={dataModal?.subTitle} />
                 </ModalLogic>
             )}
             {/* MODAL PARA LA INFO  */}

@@ -170,7 +170,7 @@ export function Game({ prizes, getPrize, setClicks }: propSlot) {
 
                     </div>
                 )}
-                <button id="btnSpin" className="mx-auto" disabled={isClicked} onClick={isClicked ? undefined : handleReactButtonClick}>
+                <button id="btnSpin" className={`mx-auto ${domain.toLowerCase() !== 'salta' ? "-mt-8" : "-mt-4"}`} disabled={isClicked} onClick={isClicked ? undefined : handleReactButtonClick}>
                     <img
                         src={imageButton}
                         alt="button"
